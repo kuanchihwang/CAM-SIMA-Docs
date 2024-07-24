@@ -92,12 +92,12 @@ In plain English, a one-month run with these history configuration will result i
 ## Adding a diagnostic field to the CAM-SIMA source code
 During **init** time, fields can be added to the possible field list with a call to `history_add_field`:
 
-*history_add_field(diagnostic_name, standard_name, vdim_name, avgflag, units, gridname, flag_xyfill, mixing_ratio)*
+*history_add_field(diagnostic_name, description, vdim_name, avgflag, units, gridname, flag_xyfill, mixing_ratio)*
 
 | Field                | Optional? | Type      | Description                                    |
 |:---------------------|-----------|-----------|------------------------------------------------|
 | diagnostic_name      | No        | string    | diagnostic name for the field - will be the name in netcdf output file |
-| standard_name        | No        | string    | CCPP standard name for the variable            |
+| description          | No        | string    | Description of the variable                    |
 | vdim_name            | No        | string    | vertical dimension: 'horiz_only' for no vertical dimension; 'lev' for vertical_layer_dimension; 'ilev' for vertical_interface_dimension |
 | avgflag              | No        | string    | default average flag; options: 'avg', 'lst' (instantaneous), 'min', 'max', 'var' (standard deviation) |
 | units                | No        | string    | variable units                                 |
@@ -107,7 +107,7 @@ During **init** time, fields can be added to the possible field list with a call
 
 Example:
 ```
-call history_add_field('Q', 'water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water', 'lev', 'avg', 'kg kg-1', mixing_ratio='wet')
+call history_add_field('Q', 'water vapor mixing ratio', 'lev', 'avg', 'kg kg-1', mixing_ratio='wet')
 ```
 
 It's important to avoid adding calls to `history_add_field` to the CCPP-ized physics schemes (to keep them portable). Instead, create a new diagnostics scheme and place that in the `diagnostics` folder of the atmospheric_physics repository. The `history_add_field` call will be in the `init` phase.
