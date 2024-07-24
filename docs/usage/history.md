@@ -6,14 +6,19 @@ The syntax for updating a the configuration for a history file is:
 <namelist_option>;<volume>: <setting>
 ```
 
-Possible namelist options for your `user_nl_cam`:
+Possible namelist options for your `user_nl_cam` (fields in <span style="color:lightgrey">grey</span> have not been fully implemented):
 
-- `hist_add_avg_fields`: add average fields to a specified history file
 - `hist_add_inst_fields`: add instantaneous fields to a specified history file
-- `hist_add_min_fields`: add minimum fields to a specified history file
-- `hist_add_max_fields`: add maximum fields to a specified history file
+
+<ul style="color:lightgrey">
+<li>hist_add_avg_fields: add average fields to a specified history file</li>
+<li>hist_add_min_fields: add minimum fields to a specified history file</li>
+<li>hist_add_max_fields: add maximum fields to a specified history file</li>
+<li>hist_add_var_fields: add standard deviation fields to a specified history file</li>
+</ul>
+
 - `hist_remove_fields`: remove a given field from a specified history file
-- `hist_file_type`: type of file (options are "history", "satellite", and "initial_value") - defaults to "history"
+- `hist_file_type`: type of file (options are "history", <span style="color:lightgrey">"satellite"</span>, and <span style="color:lightgrey">"initial_value"</span>) - defaults to "history"
 - `hist_max_frames`: maximum number of samples written to a specified history file (after which a new one will be created)
 - `hist_output_frequency`: frequency with which to write samples to a specified history file (syntax is `<integer>*<multiplier>` like `3*nhours`)
 - `hist_precision`: precision of the specified history file (options are "REAL32" and "REAL64") - defaults to "REAL32"

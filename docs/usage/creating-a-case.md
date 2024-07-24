@@ -62,7 +62,7 @@ Given all that, let's say you run the following command on izumi (assuming you'r
 ```
 ./create_newcase --case /scratch/cluster/courtneyp/kessler-ne5-gnu-0722 --compset FKESSLER --res ne5_ne5_mg37 --compiler gnu --run-unsupported
 ```
-What will happen is that a new case directory will be created here: `/scratch/cluster/courtneyp/kessler-ne5-gnu-0722` that will be configured to run the FKESSLER compset (long name: `2000_CAM%KESSLER_SLND_SICE_SOCN_SROF_ SGLC_SWAV`) with the SE dycore and the ne5 grid.
+What will happen is that a new case directory will be created here: `/scratch/cluster/courtneyp/kessler-ne5-gnu-0722` that will be configured to run the FKESSLER compset (long name: `2000_CAM%KESSLER_SLND_SICE_SOCN_SROF_SGLC_SWAV`) with the SE dycore and the ne5 grid.
 
 
 ## 2. Configure the case

@@ -142,7 +142,7 @@ The *physics_state* object in CAM-SIMA contains the current values for a select 
 
 Some examples of these core "state" variables include temperature (`T`), eastward wind (`U`), and northward wind (`V`)
 
-As a rule, CAM-SIMA physics schemes do not update the state directly and instead return tendencies (see below) which are then applied to the state later in the run phase. This is called *time splitting*, which means that all physics since the last state update get the same input state. The alternative, *process splitting*, means that the output state of one scheme serves as the input state of the next.
+As a rule, CAM-SIMA physics schemes do not update the state directly and instead return tendencies (see [below](#physics-tendencies)) which are then applied to the state later in the run phase. This is called *time splitting*, which means that all physics since the last state update get the same input state. The alternative, *process splitting*, means that the output state of one scheme serves as the input state of the next.
 
 <figure markdown="span">
 ![text](figures/process-vs-time-split.PNG "Process vs Time Split"){width="70%"}
