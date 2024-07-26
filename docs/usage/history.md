@@ -110,7 +110,7 @@ Example:
 call history_add_field('Q', 'water vapor mixing ratio', 'lev', 'avg', 'kg kg-1', mixing_ratio='wet')
 ```
 
-It's important to avoid adding calls to `history_add_field` to the CCPP-ized physics schemes (to keep them portable). Instead, create a new diagnostics scheme and place that in the `diagnostics` folder of the atmospheric_physics repository. The `history_add_field` call will be in the `init` phase.
+It's important to avoid adding calls to `history_add_field` to the CCPP-ized physics schemes (to keep them portable). Instead, create a new diagnostics scheme and place that in the `cam_diagnostics` folder of the atmospheric_physics repository. The `history_add_field` call will be in the `init` phase.
 
 ## Outputting a diagnostic field to the CAM-SIMA source code
 **After init time**, a variable's current values can be captured for output with a call to `history_out_field`:
