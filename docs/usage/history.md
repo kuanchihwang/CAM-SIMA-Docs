@@ -127,7 +127,7 @@ Example:
 call history_out_field('Q', const_array(:,:,const_idx))
 ```
 
-It's important to avoid adding calls to `history_add_field` to the CCPP-ized physics schemes (to keep them portable). Instead, create a new diagnostics scheme and place that in the `diagnostics` folder of the atmospheric_physics repository. The `history_out_field` call(s) will likely be in the `run` phase.
+It's important to avoid adding calls to `history_add_field` to the CCPP-ized physics schemes (to keep them portable). Instead, create a new diagnostics scheme and place that in the `cam_diagnostics` folder of the atmospheric_physics repository. The `history_out_field` call(s) will likely be in the `run` phase.
 
 ## Using the output
 The output files can be found in your `run` directory. They are in netCDF format. 
