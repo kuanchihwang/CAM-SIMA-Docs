@@ -45,9 +45,32 @@ Debugging tips if you get build errors:
             - This tool can help you narrow down where the issue begins by printing out values at a specific index and comparing those with the "truth" (from CAM)
 
 ### TotalView
-(COURTNEY - ASK CHERYL TO HELP WITH THIS)
 
+- Grab an interactive node. You can do this by copying the following commands into a .csh script:
+
+```
+#! /bin/csh -f
+#PBS -q long
+# Number of nodes (CHANGE THIS if needed)
+# #PBS -l walltime=6:00:00,nodes=1:ppn=16
+# # output file base name
+# #PBS -N test_dr
+# # Put standard error and standard out in same file
+# #PBS -j oe
+# # Export all Environment variables
+# #PBS -V
+```
+
+then run:
+
+```
+qsub -X -I <script>.csh
+```
 - Create and configure a new case (using gnu and only 1 task)
+```
+./create_newcase --pecount 1 --case <CASEDIR> --compset <COMPSET> --res <RESOLUTION> --compiler gnu --run-unsupported
+```
+- Turn on debug in the case `./xmlchange DEBUG=True`
 - Build the case (`./case.build`)
 - Run command `bash` to change to bash (if not already)
 - Run the following commands:
