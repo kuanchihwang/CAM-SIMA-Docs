@@ -107,7 +107,7 @@ SDFs are located in the root directory of the repository and scheme source code 
 
 The `diagnostics` directory contains all diagnostic schemes (the global ones used for state and tendency output, as well as the scheme-specific diagnostic schemes).
 
-The `to_be_ccppized` directory contains physics schemes and utilties that have not been [CCPP-ized](../conversion/ccpp-conversion-guide.md), but were needed by an CCPP-ized scheme.
+The `to_be_ccppized` directory contains physics schemes and utilties that have not been [CCPP-ized](../conversion/conversion-background.md), but were needed by an CCPP-ized scheme.
 
 The `utilities` directory contains schemes that are used regularly, such as tendency applicators and state converters. See [below](#state-and-tendency-variables) for more.
 
