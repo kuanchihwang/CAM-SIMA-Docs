@@ -29,6 +29,8 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
         - If you need to create your own standard name, the current proposal for creating standard names can be found here: https://github.com/ESCOMP/CCPPStandardNames/blob/main/StandardNamesRules.rst 
         - May need to consult with WRF / MPAS scientists and other SIMA groups to coordinate StandardName usage.
         - Keep a list of StandardNames that you introduce and give them to a CAM SE for incorporation into an upcoming CCPPStandardNames PR
+!!! Warning "Updated standard names"
+    If, in the course of your implementation or during code review to the CCPPStandardNames repository, the standard name changes, please update the name in the spreadsheet to reflect the change!
 
 
 - *units*: the units can be found in the standard names spreadsheet as well (`Snapshot Units` column)
