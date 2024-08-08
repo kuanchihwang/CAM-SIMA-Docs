@@ -1,4 +1,4 @@
-# 6 - Create an SDF
+# 5 - Create an SDF
 The **Suite Definition File (SDF)** tells the CCPP-Framework which schemes will be run in what order. For more, see [CCPP in CAM-SIMA](../design/ccpp-in-cam-sima.md)
 
 - In `$CAM-SIMA/src/physics/ncar_ccpp`, create `suite_<parameterization>.xml`. This is your SDF!
@@ -27,4 +27,4 @@ For example: if your parameterization requires dry water vapor, you'll want to a
 - `<scheme>wet_to_dry_water_vapor</scheme>` before your core parameterization scheme to convert water vapor to a dry mixing ratio (CAM-SIMA has "wet")
 - `<scheme>dry_to_wet_water_vapor</scheme>` after your parameterization scheme to convert back to a wet mixing ratio to return to CAM-SIMA
 
-Once you have created your SDF, proceed to [7 - Check metadata](step7.md)
+Once you have created your SDF, proceed to [6 - Create snapshots of CAM](create-snapshots.md)

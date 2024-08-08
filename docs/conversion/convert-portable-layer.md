@@ -1,3 +1,7 @@
+---
+title: 1 - Convert the "portable" layer
+---
+
 # 1 - Convert the "portable" layer
 
 ## Move the portable layer to atmospheric_physics
@@ -20,7 +24,7 @@ Many CAM schemes have more than one "run" or "tend" method contained within them
 - If there is shared, module-level data or shared subroutines which are called internally, put these all in a <scheme_name>_common.F90 module.
 
 ## 1a - Change routine names
-Convert the original routines (except readnl - we'll get to that [later](step4.md)!) in the file(s) you copied over to $CAM-SIMA/src/physics/ncar_ccpp to one or more of the following 5 subroutines:
+Convert the original routines (except readnl - we'll get to that [later](create-namelist-xml.md)!) in the file(s) you copied over to $CAM-SIMA/src/physics/ncar_ccpp to one or more of the following 5 subroutines:
 !!! note "`<parameterization>` should be the full name of your module"
 
     For example, if you are converting the `tj2016` `precip_tend` function, then `<parameterization>` would be `tj2016_precip_tend`.
@@ -76,7 +80,7 @@ Remove all “use” statements and have the data appear in the calling list (th
 - If a use statement is bringing in an external routine (not part of the parameterization package), you have a few options (consult with the other CAM SEs on how to proceed):
     1. If the routine already exists in the core CAM-SIMA code tree (not in `ncar_ccpp`), ask another CAM SE about how and where to call the routine within the CAM-SIMA run loop and set a variable to be passed into the physics (variable will need to be added to the registry)
     1. CCPP-ize the external routine and/or module and add it to the suite definition file before or after the parameterization
-    1. Postpone CCPP-zing the external routine and add it as a dependency (we'll revisit this in [create metadata](step3.md))
+    1. Postpone CCPP-zing the external routine and add it as a dependency (we'll revisit this in [create metadata](create-metadata.md))
 - Comment out `outfld`, `addfld` use statements for now
     - Also comment out the `addfld` and `outfld` calls within the module(s)
 
@@ -167,4 +171,4 @@ print $fh "$camsrcdir/src/atmos_phys/<schemename>\n";
 - Modify code as needed until this modified code compiles and runs properly.
 - If you want to benchmark your development to this point, you will need to open PRs to both NCAR/atmospheric_physics and ESCOMP/CAM.
 
-Proceed to [2 - Create snapshots of CAM](step2.md)
+Proceed to [2 - Create metadata](create-metadata.md)

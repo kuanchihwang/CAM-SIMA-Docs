@@ -1,4 +1,4 @@
-# 4 - Create namelist XML file
+# 3 - Create namelist XML file
 If your scheme has a `readnl` scheme, create an .xml file with the same name as the scheme which uses the namelist (place it in the same location as the parameterization in `ncar_ccpp`.
 
 - The filename should be `<scheme>_namelist.xml`
@@ -54,6 +54,6 @@ The CCPP Framework will autogenerate the namelist reader based on the elements i
 </entry_id_pg>
 ```
 !!!Note "namelist values"
-    When populating the value fields, you don't need to port all of them at this time.  You need to put in the value that was used in making the snapshot file, but the rest will be ported once all schemes have been ported.
+    When populating the value fields, you don't need to port all of them at this time.  You need to put in the value that is used by default by CAM, but the rest will be ported once all schemes have been ported.
 
-Once you have made your namelist file, proceed to [5 - Interstitials](step5.md)
+Once you have made your namelist file, proceed to [4 - Interstitials](interstitials.md)

@@ -101,4 +101,4 @@ git push -u <your_github_userid> <physics_branch_name>
 - If you want to see changes in the atmospheric_physics repo, make sure you are in src/physics/ncar_ccpp before you issue the “git status” command.
 - All other git commands will be relative to your current working directory as well.
 
-Congratulations! You've set up your sandbox! Proceed to [1 - Convert the "portable" layer](./step1.md)
+Congratulations! You've set up your sandbox! Proceed to [1 - Convert the "portable" layer](convert-portable-layer.md)

@@ -1,7 +1,7 @@
-# 2 - Create snapshots of CAM
+# 6 - Create snapshots of CAM
 
 ## Configure and set-up CAM snapshot
-Make a normal CAM run using cam_snapshot to capture before and after files using a compset which exercises the parameterization being converted.
+Make a normal **CAM** (not CAM-SIMA) run using cam_snapshot to capture before and after files using a compset which exercises the parameterization being converted.
 
 - The cam_snapshot feature dumps the entire state/tend/pbuf/cnst arrays to netCDF files.
     - The variables `cam_snapshot_before_num` and `cam_snapshot_after_num` are the output file numbers (offset by 1 as they are in CAM).
@@ -120,4 +120,4 @@ On **izumi**, save your converted snapshot files in:
     - However, if you decide not to, then do make sure that all of your other CAM runs also have debug flags off, as otherwise you can get differences in the results that are solely due to compiler settings, and not your code changes.
 1. You should generate at least one set of snapshot files using GNU on derecho with DEBUG=TRUE, as these will be saved for use in the CAM-SIMA physics testbed to prevent unexpected answer changes.
 
-Once you have created your snapshot files, proceed to [3 - Create metadata](step3.md)
+Once you have created your snapshot files, proceed to [7 - Run CAM-SIMA](run-cam-sima.md)

@@ -32,9 +32,9 @@ print $fh "$camsrcdir/src/atmos_phys/<parameterization>\n";
 /glade/campaign/cesm/cesmdata/tools/cprnc/cprnc
 cprnc <file1> <file2>
 ```
-- Optional step: if want to have additional testing... Once you believe it is working, repeat the [snapshot](step2.md) section to run CAM with this modified clone, generating snapshot files.
+- Optional step: if want to have additional testing... Once you believe it is working, make a [snapshot](create-snapshots.md) to run CAM with this modified clone.
     - Use the cprnc tool to compare the resulting CAM6 “after” snapshot file with your original CAM6 “after” snapshot file (from before the port). If they differ and you changed the internal calculations during your port, you will need to determine if these changes are expected and correct.  
-        - If they are different (and the changes are correct), then you will need to repeat the steps listed in the [Run CAM-SIMA](step8.md) section with the newly generated snapshot files from the modified CAM clone.
+        - If they are different (and the changes are correct), then you will need to repeat the steps listed in the [Run CAM-SIMA](run-cam-sima.md) section with the newly generated snapshot files from the modified CAM clone.
 
 ## Committing your changes
 

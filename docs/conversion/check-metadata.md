@@ -12,7 +12,7 @@ cd <casedir>
 ```
 
 - Run `./preview_namelists` to see if the framework will generate the caps. A few possible outcomes:
-    - There are no errors and you are somehow a perfect person. Move on to the [next step](step8.md) and ultimately run the model
+    - There are no errors and you are somehow a perfect person. Move on to the [next step](run-cam-sima.md) and ultimately run the model
     - You get an error
         - Determine what the course of action should be based on the table below. Once you think you have addressed the issue, rerun `./preview_namelists` and repeat!
 
@@ -40,7 +40,7 @@ cd <casedir>
 </tr>
 <tr markdown>
    <td markdown>Variable can be traced back to a calculation in the CAM interface code</td>
-   <td markdown>Make an [interstitial](step5.md)</td>
+   <td markdown>Make an [interstitial](interstitials.md)</td>
 </tr>
 <tr markdown>
    <td markdown>None of the above criteria are met</td>
@@ -69,7 +69,7 @@ cd <casedir>
 </tbody>
 </table>
 
-Once you have validated your metadata, proceed to [8 - Run CAM-SIMA](step8.md)
+Once you have validated your metadata, proceed to [8 - Run CAM-SIMA](run-cam-sima.md)
 
 ## Procedure 1
 If the CAM variable can be traced back to a use statement, you may have to create or amend a SIMA-side metadata file.
@@ -77,7 +77,7 @@ If the CAM variable can be traced back to a use statement, you may have to creat
 - Try to find the equivalent module and the "used" variable within it in CAM-SIMA
     - If you find it the module:
         - It already has a metadata file, move the variable in the Fortran to be with the other variables that have metadata. Then, add your variable to the appropriate place in the metadata file.
-        - It doesn't have a metadata file, create one and add your variable. You'll also have to add the ["html" tags](step1.md#1b-add-required-htmlinclude-lines) and potentially rearrange module-level variables so the only variable(s) under the tags are the ones you're providing metadata for.
+        - It doesn't have a metadata file, create one and add your variable. You'll also have to add the ["html" tags](convert-portable-layer.md#1b-add-required-htmlinclude-lines) and potentially rearrange module-level variables so the only variable(s) under the tags are the ones you're providing metadata for.
            - Then add the path to the metadata file to the `metadata_file` section of `$CAM-SIMA/src/data/registry.xml`
     - If you can't find the module, consult with the other CAM SEs
 

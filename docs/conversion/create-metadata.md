@@ -1,4 +1,4 @@
-# 3 - Create metadata
+# 2 - Create metadata
 
 ## Create template
 To create a template metadata file based on the parameterization, run the following command in the directory with the routine you are converting (<parameterization>.F90):
@@ -8,7 +8,7 @@ python $CAM-SIMA/ccpp_framework/scripts/ccpp_fortran_to_metadata.py <parameteriz
 
 If you get errors:
 
-1. Confirm you included the [argtable lines](step1.md#1b-add-required-htmlinclude-lines) above each routine
+1. Confirm you included the [argtable lines](convert-portable-layer.md#1b-add-required-htmlinclude-lines) above each routine
 1. If you see a message "Missing local variables" and the variable is there, it may be missing its intent attribute
 1. Hopefully other errors will be easy to address; consult other CAM SEs if there's any remaining confusion/errors
 
@@ -71,4 +71,4 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
 - constituents: see [constituent usage](../design/constituents.md/#constituent-usage)
     - you can tell a variable is a constituent if it is in the `state%q` array in CAM (may have to trace back in the code a bit)
 
-Once you have created your metadata, proceed to [4 - Create namelist XML file](step4.md)
+Once you have created your metadata, proceed to [3 - Create namelist XML file](create-namelist-xml.md)

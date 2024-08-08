@@ -34,7 +34,7 @@ if (DEBUG)
 endif()
 ```
 
-Once you have successfully run CAM-SIMA and all answer changes have either accepted or fixed, proceed to [9 - Bring back into CAM](step9.md)
+Once you have successfully run CAM-SIMA and all answer changes have either accepted or fixed, proceed to [9 - Bring back into CAM](back-to-cam.md)
 
 ## Tips for uncovering unexpected answer changes
 

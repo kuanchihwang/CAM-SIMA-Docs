@@ -1,4 +1,4 @@
-# 5 - Interstitials
+# 4 - Interstitials
 ## Overview
 An **interstitial** is a scheme that does calculations or variable modifications to connect what the host model has to what the scheme requires and vice versa.
 
@@ -67,7 +67,7 @@ An example of how this is done can be found ~line 276 in:
 $CAM/src/physics/simple/kessler_cam.F90
 ```
 
-Proceed to [6 - Create an SDF](step6.md). 
+Proceed to [5 - Create an SDF](create-sdf.md). 
 
 !!! Warning
     You may have to revisit this step as you debug your code.

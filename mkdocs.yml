@@ -1,4 +1,37 @@
 site_name: CAM-SIMA
+nav:
+  - Home: index.md
+  - Conversion:
+    - conversion/conversion-background.md
+    - conversion/convert-portable-layer.md
+    - conversion/create-metadata.md
+    - conversion/create-namelist-xml.md
+    - conversion/interstitials.md
+    - conversion/create-sdf.md
+    - conversion/create-snapshots.md
+    - conversion/check-metadata.md
+    - conversion/run-cam-sima.md
+    - conversion/back-to-cam.md
+    - conversion/walkthrough.md
+  - Design:
+    - design/cam-build-process.md
+    - design/cam-run-process.md
+    - design/ccpp-in-cam-sima.md
+    - design/constituents.md
+    - design/history.md
+    - design/sima-design-goals.md
+  - Development:
+    - development/cam-coding-standards.md
+    - development/cam-testing.md
+    - development/debugging.md
+    - development/git-basics.md
+    - development/git-faq.md
+    - development/git-fleximod.md
+    - development/tool-recommendations.md
+  - Usage:
+    - usage/creating-a-case.md
+    - usage/history.md
+
 plugins:
   - search
 theme:
