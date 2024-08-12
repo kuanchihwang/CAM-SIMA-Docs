@@ -73,7 +73,7 @@ URL does not match (no forks allowed!):
 cice url https://github.com/peverwhee/CESM_CICE not in sync with required https://github.com/ESCOMP/CESM_CICE
 ```
 
-Tags out of sync (may need to commit the update module directory):
+Tags out of sync (may need to commit the updated module directory):
 ```
 hemco hemco-cesm2_0_hemco_3_9_0 7bd8358 is out of sync with .gitmodules hemco-cesm2_0_hemco3_9_0
 ```
