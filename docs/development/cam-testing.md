@@ -2,7 +2,10 @@
 
 This page describes the various automated and manual tests that are run for CAM-SIMA whenever the code is modified, as well as instructions for how to add new tests.
 
-## Python unit testing
+## Github continuous integration testing
+The following tests/linters are run automatically on pull requests to `develop` in github. You can see previous runs of the CI tests [here](https://github.com/ESCOMP/CAM-SIMA/actions)
+
+### Python unit testing
 CAM-SIMA supports two kinds of python unit tests, `doctest` and `unittest` tests, both of which are part of the standard python library.  
 
 All `unittest` tests should  be in:
@@ -23,9 +26,9 @@ To manually run all of the unit tests at any time, simply run the following shel
 
 Finally, when adding new tests, determine if the test can be done in only a few lines with minimal interaction with external files or variables.  If so, then it would likely be best as a `doctest`.  Otherwise it should be a `unittest` test.  Failure to follow this rule of thumb could result in test failures in the Github Actions workflow.  Also remember to add your new tests to the `run_tests.sh` script so future users can easily run the tests manually.
 
-## Static Source Code Analysis
+### Static Source Code Analysis
 
-### Python
+#### Python
 
 Any python script which is added or modified via a PR will automatically be analyzed using `pylint`, and must have a score of 9.5 or greater in order to not be marked as a test failure.  The hidden `pylintrc` file used for the analysis can be found here:
 
@@ -36,6 +39,49 @@ Users can also manually run `pylint` against the core python build scripts by ru
 `CAM-SIMA/test/pylint_test.sh`
 
 Please note that `pylint` is not part of the standard python library, and so it may need to be installed before being able to run the shell script.
+
+### git-fleximod tests
+[git-fleximod](git-fleximod.md) CI tests are run on both the oldest supported (currently 3.7) and latest versions of python to confirm:
+
+- `bin/git-fleximod update` works on the existing `.gitmodules` file
+- All module `url`s and `fxDONOTUSEurl`s match (e.g. a temporary fork was not committed)
+- All module `fxtag`s exist and in sync with submodule hashes
+    - Also confirms that no `fxtag` is a branch
+- Spare checkout files exist
+
+If a test fails:
+
+- View the run on github (either on the PR itself or in the [actions](https://github.com/ESCOMP/CAM-SIMA/actions) tab)
+- View the output under `Run $GITHUB_WORKSPACE/bin/git-fleximod update`
+    - Errors will be reported in course of the test execution 
+        - Compare with the last time the test succeeded to see what has changed
+    - Errors may also be reported at the end of the execution
+- Update the `.gitmodules` file to fix any errors and push up your changes to the branch, at which time the tests will be rerun
+
+!!! Note "Run git-fleximod tests locally"
+    You can (somewhat) reproduce the git-fleximod test locally by running the following
+
+    ```
+    bin/git-fleximod update && 
+    bin/git-fleximod test
+    ```
+
+**Some example failures:**
+
+URL does not match (no forks allowed!):
+```
+cice url https://github.com/peverwhee/CESM_CICE not in sync with required https://github.com/ESCOMP/CESM_CICE
+```
+
+Tags out of sync (may need to commit the update module directory):
+```
+hemco hemco-cesm2_0_hemco_3_9_0 7bd8358 is out of sync with .gitmodules hemco-cesm2_0_hemco3_9_0
+```
+
+Sparse checkout file missing (check the path):
+```
+mpas sparse checkout file .mpas_sparse_checkout not found
+```
 
 ## Regression Testing
 ### Running the regression tests (manual)
@@ -105,3 +151,4 @@ Here is an example test entry for a 2-timestep smoke test of kessler physics on 
     </options>
   </test>
 ```
+
