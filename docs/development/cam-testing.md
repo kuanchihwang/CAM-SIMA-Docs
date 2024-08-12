@@ -45,7 +45,7 @@ Please note that `pylint` is not part of the standard python library, and so it 
 
 - `bin/git-fleximod update` works on the existing `.gitmodules` file
 - All module `url`s and `fxDONOTUSEurl`s match (e.g. a temporary fork was not committed)
-- All module `fxtag`s exist and in sync with submodule hashes
+- All module `fxtag`s exist and are in sync with submodule hashes
     - Also confirms that no `fxtag` is a branch
 - Spare checkout files exist
 
