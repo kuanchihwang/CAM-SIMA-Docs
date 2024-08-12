@@ -41,7 +41,7 @@ Users can also manually run `pylint` against the core python build scripts by ru
 Please note that `pylint` is not part of the standard python library, and so it may need to be installed before being able to run the shell script.
 
 ### git-fleximod tests
-[git-fleximod](git-fleximod.md) CI tests are run on both the oldest supported (currently 3.7) and latest versions of python to confirm:
+[git-fleximod](git-fleximod.md) CI tests are run on both the oldest supported (currently 3.8) and latest versions of python to confirm:
 
 - `bin/git-fleximod update` works on the existing `.gitmodules` file
 - All module `url`s and `fxDONOTUSEurl`s match (e.g. a temporary fork was not committed)
