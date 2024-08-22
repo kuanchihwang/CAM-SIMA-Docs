@@ -112,8 +112,8 @@ Finally, the tests themselves are listed in `<CAM-SIMA>/cime_config/testdefs/tes
 
 The test list can be found here: `$CAM-SIMA/cime_config/testdefs/testlist_cam.xml`
 
-- If you are adding a new machine, compiler or category for an existing test, add a new `<machine>` XML entry
-- If you are adding a fully new test, add a new `<test>` XML entry with the following structure:
+- If you are adding a new machine, compiler or category for an existing test, add a new `<machine>` XML entry to that `<test>` entry
+- If you are adding a fully new test, add a *new* `<test>` XML entry with the following structure:
 ```
 <test compset="<COMPSET_NAME>" grid="<GRID_ALIAS>" name="<TEST_TYPE>_<TEST_MOD>" testmods="<RELPATH_TO_TESTMODS_DIR>">
   <machines>
@@ -128,17 +128,19 @@ The test list can be found here: `$CAM-SIMA/cime_config/testdefs/testlist_cam.xm
 
 - `<COMPSET_NAME>`: component set alias (or long name) - you can see more about compsets [here](../usage/creating-a-case.md)
 - `<GRID_ALIAS>`: model grid/resolution you'd like to run on - you can see more about grids [here](../usage/creating-a-case.md)
+    - **Try to use the lowest/coarsest resolution that will still accomplish your testing goals**
 - `<TEST_TYPE>`: type of test to be run. You can find the testing types [here](https://esmci.github.io/cime/versions/master/html/users_guide/testing.html#testtype).
 - `<TEST_MOD>`: test modifier that changes the default behavior of the test type. More [here](https://esmci.github.io/cime/versions/master/html/users_guide/testing.html#modifiers)
+    - **Unless a longer run is necessary to exercise the code you are testing, run for 9 timesteps (_Ln9)**
 - `<RELPATH_TO_TESTMODS_DIR>`: relative path to the testmods directory for this run; usually looks something like `"cam/some_directory_name/"`
     - The testmods directory will contain any namelist mods and XML configuration variable changes for the test (`user_nl_cam` and/or `shell_commands`)
     - testmods directories can be found in `$CAM-SIMA/cime_config/testdefs/testmods_dirs/cam/`
-- `<MACH_NAME>`: machine name - will almost definitely be either `derecho` or `izumi`
+- `<MACH_NAME>`: machine name (options: `derecho`, `izumi`, `casper`)
 - `<COMPILER>`: compiler to be used (options: `gnu`, `nag`, `intel`, `nvhpc`)
 - `<TEST_CATEGORY>`: group of tests that this test belongs to - the default run by `test_driver.sh` is `aux_sima` (which is run for each PR to CAM-SIMA)
 - `WALLCLOCK_TIME`: maximum amount of time that the job will be allowed to run
 
-Here is an example test entry for a 2-timestep smoke test of kessler physics on the MPAS grid, run with both intel and gnu 
+Here is an example test entry for a 2-timestep smoke test of kessler physics on a coarse MPAS grid, run with both intel and gnu 
 ```
   <test compset="FKESSLER" grid="mpasa480_mpasa480" name="SMS_Ln2" testmods="cam/outfrq_kessler_mpas_derecho_nooutput/">
     <machines>
