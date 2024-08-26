@@ -80,7 +80,11 @@ Remove all “use” statements and have the data appear in the calling list (th
 - If a use statement is bringing in an external routine (not part of the parameterization package), you have a few options (consult with the other CAM SEs on how to proceed):
     1. If the routine already exists in the core CAM-SIMA code tree (not in `ncar_ccpp`), ask another CAM SE about how and where to call the routine within the CAM-SIMA run loop and set a variable to be passed into the physics (variable will need to be added to the registry)
     1. CCPP-ize the external routine and/or module and add it to the suite definition file before or after the parameterization
-    1. Postpone CCPP-zing the external routine and add it as a dependency (we'll revisit this in [create metadata](create-metadata.md))
+    1. Postpone CCPP-zing the external routine and move the module to the `to_be_ccppized` directory in `atmospheric_physics` so it can be used as a dependency (we'll revisit this in [create metadata](create-metadata.md))
+
+        !!! Note "'init' routine in to_be_ccppized module"
+            If you are putting off ccpp-ization of a dependent module and that module has an init routine, you may have to add a call to that routine in the init phase of the `to_be_ccppized_temporary` scheme (`$atmospheric_physics/to_be_ccppized/to_be_ccppized_temporary.F90`) and ensure `to_be_ccppized_temporary` is included in your SDF
+
 - Comment out `outfld`, `addfld` use statements for now
     - Also comment out the `addfld` and `outfld` calls within the module(s)
 

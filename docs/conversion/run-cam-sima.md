@@ -2,6 +2,8 @@
 
 It's time to try to run CAM-SIMA!
 
+## Configure CAM-SIMA
+
 - Either navigate to the case you created when you were validating your metadata or [create a new case](../usage/creating-a-case.md)
 - Your `user_nl_cam` needs to contain the following (to bring in the cam_snapshot for input and to activate the validation tool):
 ```
@@ -17,22 +19,35 @@ debug_output = 0  !Turns off debug messages which interfere with the validation 
 
     where “N” is the number of vertical levels in your snapshot file (likely 32 levels for CAM6)
 
-- Run `./case.build` and `./case.submit`
-    - See [debugging tips](../development/debugging.md) for help if you're getting errors
+## Build and run
 
-- Once the model completes without error, the results from the validation tool will appear in the `atm_log` file for each timestep.
-    - The message “no differences found” should be logged for each timestep.
+- Run `./case.build` and `./case.submit`
+    - Consult the table below for common errors. Also see [debugging tips](../development/debugging.md) for help if you're getting errors
+
+| Error text  |  Description   | Possible Fix |
+|:------------|----------------|--------------|
+|`ERROR: cam_get_file: FAILED to get UNSET_PATH` | No initial data file specified (or defaulted to) | Specify `ncdata = '<file>'` in your user_nl_cam file |
+|`ERROR: read_field_3d: No variable foun din (/XXX, /)` | Variable not found when we're reading in the initial data or snapshot file | <ul><li>Double-check your standard name</li><li>Determine if CAM-SIMA needs to handle/initialize the variable. If it does, follow the procedure for the error below</li></ul> |
+|`ERROR: Cannot read XXX from file, XXX has no horizontal dimension` | Variable is a scalar; we don't have an interface to read it in from a file (and it's not likely to be present on the file) | <ul><li>If "XXX" is static during the run, add `access="protected"` to the variable's XML entry in the registry</li><li>if the variable is not static, either:<ul><li>Initialize the variable in the init phase of your scheme (`intent=out`), or</li><li>initialize "XXX" in CAM-SIMA (NOT in the physics code) and add a call to `mark_as_initialized(<standard_name>)` so CAM-SIMA doesn't try to read in the variable</li></li></ul></ul> |
+
+- Once the model completes without error, the results from the validation tool will appear in the `atm_log` file for each timestep (under the header ` ********** Physics Check Data Results **********`)
+    - The message `No differences found!` should be logged for each timestep.
     - If there are differences found, that indicates there are issues with your ported code
     - See the section on [Tips for uncovering unexpected answer changes](#tips-for-uncovering-unexpected-answer-changes) for debugging strategies
 
-- Make at least one run using the NAG compiler in debug mode and specifying “-nan” as an additional compilation option.  This option initializes all variables to NaN so that if something is uninitialized and is used, it will be trapped.  To enable this flag:
-    - After executing the ./create_newcase and ./case.setup commands and BEFORE executing the ./case.build, edit the file in your case directory `cmake_macros/nag.cmake` (- If you want to change the file so that it runs every time you execute a `./create_newcase`, you can find the file at `ccs_config/machines/cmake_macros/nag.cmake`). 
-    - Change the line Append line so that it contains ‘-nan’ and it should look like this:
-```
-if (DEBUG)
-  string(APPEND FFLAGS " -nan -C=all -g -time -f2003 -ieee=stop")
-endif()
-```
+!!! Note "Additional step for NAG compiler"
+    If we have a working NAG compiler with CAM-SIMA (not working as of 8/26/2024), perform this extra step:
+
+    - Make at least one run using the NAG compiler on izumi in debug mode and specifying “-nan” as an additional compilation option.  This option initializes all variables to NaN so that if something is uninitialized and is used, it will be trapped.  To enable this flag:
+        - After executing the ./create_newcase and ./case.setup commands and BEFORE executing the ./case.build, edit the file in your case directory `cmake_macros/nag.cmake` (- If you want to change the file so that it runs every time you execute a `./create_newcase`, you can find the file at `ccs_config/machines/cmake_macros/nag.cmake`). 
+        - Change the line Append line so that it contains ‘-nan’ and it should look like this:
+    ```
+    if (DEBUG)
+       string(APPEND FFLAGS " -nan -C=all -g -time -f2003 -ieee=stop")
+    endif()
+    ```
+
+
 
 Once you have successfully run CAM-SIMA and all answer changes have either accepted or fixed, proceed to [9 - Bring back into CAM](back-to-cam.md)
 

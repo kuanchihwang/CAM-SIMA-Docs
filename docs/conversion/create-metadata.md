@@ -68,7 +68,15 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
   dimensions = ()
   intent = out
 ```
-- constituents: see [constituent usage](../design/constituents.md/#constituent-usage)
+- **constituents**: see [constituent usage](../design/constituents.md/#constituent-usage)
     - you can tell a variable is a constituent if it is in the `state%q` array in CAM (may have to trace back in the code a bit)
+
+- **dependencies**: If your scheme has any "use" statements (helper functions, approved dependencies), add a `dependencies` field with a common-separated list of relative paths to the necessary modules to the top of your metadata file. Example:
+```
+[ccpp-table-properties]
+  name = musica_ccpp
+  type = scheme
+  dependencies = micm/musica_ccpp_micm.F90,musica_ccpp_util.F90
+```
 
 Once you have created your metadata, proceed to [3 - Create namelist XML file](create-namelist-xml.md)
