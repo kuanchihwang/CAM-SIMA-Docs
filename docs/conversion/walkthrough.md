@@ -664,7 +664,7 @@ use phys_vars_init_check, only: mark_as_initialized
 Then adds these calls after the call to `timemgr_init`:
 ```
 calendar_type = timemgr_get_calendar_cf()
-mark_as_initialized('calendar_type')
+call mark_as_initialized('calendar_type')
 ```
 
 Bug then works through any remaining errors until the `preview_namelists` command completes.
