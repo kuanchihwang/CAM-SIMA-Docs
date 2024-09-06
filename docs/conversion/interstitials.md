@@ -43,7 +43,7 @@ As mentioned, there are some calculations/conversions/translations that are perf
     - **update_dry_static_energy**: calculate dry static energy (`dry_static_energy`)
 - **qneg.F90**:
     - **qneg**: Set values for constituent variables that are less than the minimum value to the minimum value (and print out what it's doing - configurable!)
-- **physics_tendency_updaters.F90**: apply tendencies output by physics to state variables
+- **physics_tendency_updaters.F90**: apply tendencies output by physics to state variables. You'll need to include a tendency updater in your SDF for any `ptend%X` variables in the CAM-version of your code.
 
 | Scheme name | Description | Inout variable | Input variable |
 |:------------|-------------|----------------|----------------|

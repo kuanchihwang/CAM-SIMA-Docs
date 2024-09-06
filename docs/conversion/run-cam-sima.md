@@ -54,9 +54,16 @@ Once you have successfully run CAM-SIMA and all answer changes have either accep
 
 ## Tips for uncovering unexpected answer changes
 
+- Make sure that your snapshot is taken with an updated atmospheric_physics, especially if answers changed during development
 - Check all of your standard_names.  CAM-SIMA will run successfully, but if a standard_name is incorrect, you may be running with an incorrect variation of the variable that you intended
 - If comparing printed values on the physics grid between CAM and CAM-SIMA, then it might be good to turn-off chunking in CAM, which can be done by setting “-pcols” in “CAM_CONFIG_OPTS” to be a large number (e.g. >500 for the ne3 grid).
     - You can also utilize the `tools/find_max_nonzero_index.F90` tool to (more) easily compare values between CAM and CAM-SIMA at a specific rank and index that is known to be non-zero
 - Note that the way latitude in radians is calculated for the null dycore in CAM-SIMA is different (at a round-off level) to the way it is calculated in the SE dycore in CAM.  This means if you are validating a physics scheme that has latitude (in radians) as an input, then in CAM you’ll need to change the scheme interface to read in latitude in degrees, and then convert to radians by multiplying by pi/180 (which you’ll only want to do when creating the snapshot file, not when validating CAM itself).
 - Sometimes CAM-SIMA will set a state variable directly, while CAM will only set a tendency variable and then use the “physics_update” routine to update the state using the tendency.  This can result in round-off level differences.  If this happens then simply try setting the state variable directly in CAM when creating the snapshot files for CAM-SIMA testing.
+- Namelist settings may be incompatible with what is being run in CAM-SIMA with it being a single physics package versus the complete CAM code. For instance, a normal CAM run may have a default namelist setting and then a different value for "clubb_sgs=1 microphys=mg3" which is what a CAM7 run would be. To temporarily work around this, set the values which are evaluating incorrectly in your `user_nl_cam` file for CAM-SIMA to the values which match a CAM run.  The easy way to find these is to compare your `atm_in` values with your CAM and CAM-SIMA runs and add the appropriate settings.
+- Compare numbers between a run in CAM and another in CAM-SIMA. A debug run with the `--pecount 1` argument provided to create_newcase gives you an executable which works well in the [Totalview debugger](../development/debugging.md/#totalview).
+
+    !!! Warning "timestep discrepancy"
+        The cam_snapshot file will be written starting with the second timestep, so your **CAM** run will need to advance past the first timestep before you can start comparing.
+
 - If you run into a "tip" that should be added here, please confer with the other CAM SEs to get it added to the documentation!!
