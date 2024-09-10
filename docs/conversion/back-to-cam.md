@@ -40,7 +40,8 @@ cprnc <file1> <file2>
 
 - Open a PR in [ESCOMP/atmospheric_physics](https://github.com/ESCOMP/atmospheric_physics) for your parameterization and any interstitial code (including diagnostics) using the code in your sandbox
     - Make sure you include a ChangeLog and NamesNotInDictionary.txt file as specified [here](https://github.com/ESCOMP/atmospheric_physics/wiki/Development-workflow#changelog-and-namesnotindictionarytxt)
-- Open a PR in [ESCOMP/CAM](https://github.com/ESCOMP/CAM) for your changes in CAM (if calling lists changed) or it may as simple as a PR to update the atmospheric_physics tag in `.gitmodules`.  Don't forget to make a ChangeLog.
+- Open a PR in [ESCOMP/CAM](https://github.com/ESCOMP/CAM) for your changes in CAM (if calling lists changed) or it may as simple as a PR to update the atmospheric_physics tag in `.gitmodules`. Don't forget to make a ChangeLog.
+    - Be sure to include the `ccpp-conversion` label on your PR
 - If any changes were made to CAM-SIMA (more than likely, at least an update to the atmospheric_physics submodule will probably be needed), open a PR in [ESCOMP/CAM-SIMA](https://github.com/ESCOMP/CAM-SIMA).
 - Once all PRs are merged and tagged, check off the scheme as "Converted" in the [spreadsheet](https://docs.google.com/spreadsheets/d/1_1TTpnejam5jfrDqAORCCZtfkNhMRcu7cul37YTr_WM/edit?gid=0#gid=0)
 
