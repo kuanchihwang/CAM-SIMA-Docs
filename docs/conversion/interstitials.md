@@ -44,6 +44,11 @@ As mentioned, there are some calculations/conversions/translations that are perf
 - **qneg.F90**:
     - **qneg**: Set values for constituent variables that are less than the minimum value to the minimum value (and print out what it's doing - configurable!)
     - You will want to include qneg in your SDF if you are modifying constituent tendencies in your scheme. It should be after the tendencies are applied and before `geopotential_temp`
+    - If `qneg` is in your SDF, you will need to provide the output variable `scheme_name` in your physics parameterization that is modifying constituent tendencies
+
+        !!! Warning "scheme_name variable"
+            If you skip this step, you will get either `parse_source.CCPPError: Input argument for qneg_run, scheme_name, not found`, or an incorrect scheme_name from a previous routine will be used
+
 - **physics_tendency_updaters.F90**: apply tendencies output by physics to state variables. You'll need to include a tendency updater in your SDF for any `ptend%X` variables in the CAM-version of your code.
 
 | Scheme name | Description | Inout variable | Input variable |
