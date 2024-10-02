@@ -36,5 +36,5 @@ jobs:
             mkdocs-material-
 
       - name: Deploy to gh-pages
-        run: mkdocs gh-deploy -b gh-pages --force
+        run: python3 -m mkdocs gh-deploy -b gh-pages --force
 
