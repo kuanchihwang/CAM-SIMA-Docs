@@ -26,7 +26,7 @@ cd <casedir>
 </thead>
 <tbody markdown>
 <tr markdown>
-   <td markdown style="vertical-align:middle" rowspan="5">`Input agument for <scheme>_<phase>, <standard_name>, not found`</td>
+   <td markdown style="vertical-align:middle" rowspan="5">`Input argument for <scheme>_<phase>, <standard_name>, not found`</td>
    <td markdown>Standard name incorrect when compared against the spreadsheet</td>
    <td markdown>Correct standard name</td>
 </tr>
