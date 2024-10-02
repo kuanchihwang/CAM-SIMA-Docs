@@ -36,5 +36,7 @@ jobs:
             mkdocs-material-
 
       - name: Deploy to gh-pages
-        run: python3 -m mkdocs gh-deploy -b gh-pages --force
+        run: |
+             source myenv/bin/activate
+             mkdocs gh-deploy -b gh-pages --force
 
