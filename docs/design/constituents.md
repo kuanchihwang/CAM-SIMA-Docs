@@ -44,7 +44,7 @@ The registration and initializaiton of the constituent data array and the consti
 Constituent values and properties can be accessed from the host side and from the physics in the following ways:
 
 - Host side: constituents and properties can be accessed via the host model and dycore by way of the `cam_constituents.F90` module, which is an interface to the CCPP cap, which is in turn an interface to the constituents object
-- Physics: the constituent array and/or the constituent properties object are passed into a scheme via the following metadata (local name and intent may vary):
+- Physics: the constituent array and/or the constituent properties object are passed into a scheme via the following metadata (the local name and intent may vary):
 
 ```
 [ q ]
