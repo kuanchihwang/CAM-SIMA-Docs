@@ -18,6 +18,7 @@ nav:
     - design/cam-run-process.md
     - design/ccpp-in-cam-sima.md
     - design/constituents.md
+    - design/directory-structure.md
     - design/history.md
     - design/sima-design-goals.md
   - Development:
@@ -46,7 +47,7 @@ theme:
         name: Switch to light mode
       # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default 
+      scheme: default
 
 
       toggle:
