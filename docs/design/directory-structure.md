@@ -58,7 +58,7 @@ Contains the SIMA-specific python and XML configuration routines used by CIME an
 **Subdirectories/**:
 
 - testdefs - Location of the CAM-SIMA regression test list and associated files used by CIME during regression (system) testing.
-  - testmods_dirs/cam - Location of CAM-SIMA case configuration files used during CIME regression testing.
+   - testmods_dirs/cam - Location of CAM-SIMA case configuration files used during CIME regression testing.
 
 ### **docker/**
 
@@ -76,7 +76,7 @@ Contains everything needed to perform software testing and validation of CAM-SIM
 
 - system/ - Includes scripts needed to run CIME (integration) regression tests.
 - unit/   - Includes scripts and source code needed to run CAM-SIMA unit tests.
-  - sample_files/ - Contains files that are used to validate the unit test results.
+   - sample_files/ - Contains files that are used to validate the unit test results.
 
 ### **tools/**
 
@@ -109,12 +109,12 @@ Contains all of the dynamical core (dycore) source code.
 **Subdirectories**:
 
 - mpas/ - Contains all of the source code needed for SIMA to properly couple to the [MPAS dynamical core](https://github.com/MPAS-Dev/MPAS-Model).
-  - dycore/ (external) - External submodule that contains the MPAS dycore code.
+   - dycore/ (external) - External submodule that contains the MPAS dycore code.
 - none/ - Contains the "null" dycore source code, which allows physics and chemistry routines to be forced with atmospheric data coming directly from input files as opposed to dycore calculations.
 - se/ - Contains all of the source code needed for SIMA to properly couple to the [Spectral Element dynamical core](https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/dynamics.html#spectral-element-dynamical-core).
-  - dycore/ - Contains the internal SE dycore source code files.
+   - dycore/ - Contains the internal SE dycore source code files.
 - tests/ - Contains the source code needed to configure analytic initial conditions for dycores.
-  - initial_conditions/ - Contains source code needed to configure specific analytic initial conditions formulations.
+   - initial_conditions/ - Contains source code needed to configure specific analytic initial conditions formulations.
 - utils/ - Contains utility code used by all dycores in SIMA.
 
 ### **physics/**
