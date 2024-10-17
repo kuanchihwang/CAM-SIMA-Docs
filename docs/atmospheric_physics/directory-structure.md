@@ -1,6 +1,6 @@
 # atmospheric_physics directory structure
 
-This page lists out the directory structure for the atmospheric_physics repo, and what the general purpose of each directory and subdirectory is.
+This page lists out the directory structure for the [atmospheric_physics](https://github.com/ESCOMP/atmospheric_physics) repo, and what the general purpose of each directory and subdirectory is.
 
 ## Top-level directories
 
