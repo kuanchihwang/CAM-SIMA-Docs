@@ -33,7 +33,8 @@ nav:
     - usage/creating-a-case.md
     - usage/history.md
   - Atmospheric_physics:
-    - directory-structure.md
+    - Design:
+      - atmospheric_physics/design/directory-structure.md
 
 plugins:
   - search
