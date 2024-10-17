@@ -32,6 +32,8 @@ nav:
   - Usage:
     - usage/creating-a-case.md
     - usage/history.md
+  - Atmospheric_physics:
+    - directory-structure.md
 
 plugins:
   - search
