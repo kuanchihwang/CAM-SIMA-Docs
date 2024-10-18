@@ -10,7 +10,7 @@ Please note that any modifications to the source code in these directories shoul
 
 ### **bin/**
 
-Contains the `git-fleximmod` tool for downloading needed source code and software from external repositories.  More information on `git-fleximod` can be found [here](https://github.com/ESMCI/git-fleximod).
+Contains the `git-fleximod` tool for downloading needed source code and software from external repositories.  More information on `git-fleximod` can be found [here](https://github.com/ESMCI/git-fleximod).
 
 ### **ccpp_framework/**
 
@@ -22,18 +22,18 @@ Contains the configuration files used by CIME to properly configure and build a 
 
 ### **cime/**
 
-Contains the [Common Infrastructure for Modeling the Earth (CIME)](https://github.com/ESMCI/cime) tools and associated libraries.  Used by CAM-SIMA and CESM for the general configuration and building of a simulation (or "case").
+Contains the [Common Infrastructure for Modeling the Earth (CIME)](https://github.com/ESMCI/cime) tools and associated libraries.  Used by CAM-SIMA and CESM for the general configuration and building of a simulation (or "case"). See more on CIME usage in the [Creating, configuring, and running a case](../usage/creating-a-case.md) section.
 
 ### **components/**
 
 Contains the following other CESM components:
 
 - [Community Data Models for Earth Prediction Systems (CDEPS)](https://github.com/ESCOMP/CDEPS)
-- [CICE sea ice model](https://github.com/ESCOMP/CESM_CICE)
+- [Community Ice CodE sea ice model (CICE)](https://github.com/ESCOMP/CESM_CICE)
 - [Community Ice Sheet Model (CISM)](https://github.com/ESCOMP/CISM-wrapper)
 - [Community Terrestrial Systems Model (CTSM/CLM)](https://github.com/ESCOMP/CTSM)
 - [Community Mediator for Earth Prediction Systems (CMEPS)](https://github.com/ESCOMP/CMEPS)
-- [mizuRoute](https://github.com/ESCOMP/mizuRoute)
+- [Reach-based river routing model (mizuRoute)](https://github.com/ESCOMP/mizuRoute)
 - [MOdel for Scale Adaptive River Transport (MOSART)](https://github.com/ESCOMP/MOSART)
 - [River Transport Model (RTM)](https://github.com/ESCOMP/RTM)
 
@@ -68,7 +68,7 @@ Contains files needed to run certain CAM-SIMA configurations in a docker contain
 
 ### **src/**
 
-Contains all of the SIMA-specific source code needed to run the model. Additional details can be found below in the "Source directories" section.
+Contains all of the SIMA-specific source code needed to run the model. Additional details can be found below in the [Source directories](#source-src-directories) section.
 
 ### **test/**
 
@@ -110,7 +110,7 @@ Contains all of the dynamical core (dycore) source code.
 
 **Subdirectories**:
 
-- mpas/ - Contains all of the source code needed for SIMA to properly couple to the [MPAS dynamical core](https://github.com/MPAS-Dev/MPAS-Model).
+- mpas/ - Contains all of the source code needed for SIMA to properly couple to the [Model for Prediction Across Scales (MPAS) dynamical core](https://github.com/MPAS-Dev/MPAS-Model).
     - dycore/ (external) - External submodule that contains the MPAS dycore code.
 - none/ - Contains the "null" dycore source code, which allows physics and chemistry routines to be forced with atmospheric data coming directly from input files as opposed to dycore calculations.
 - se/ - Contains all of the source code needed for SIMA to properly couple to the [Spectral Element dynamical core](https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/dynamics.html#spectral-element-dynamical-core).
@@ -126,6 +126,7 @@ Contains all of the SIMA physics and chemistry source code.
 **Subdirectories**:
 
 - ncar_ccpp/ (external) - External submodule that contains all of the code in the [atmospheric_physics](https://github.com/ESCOMP/atmospheric_physics) repo.
+    - The directory structure for atmospheric_physics can be found in the [atmospheric_physics directory structure](../atmospheric_physics/directory-structure.md) section.
 - utils/ - Contains SIMA-specific utility routines for working with the CCPP-framework and CCPP-ized physics routines.
 
 ### **utils/**

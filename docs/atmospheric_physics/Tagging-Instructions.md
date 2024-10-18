@@ -3,7 +3,7 @@
 This page lists instructions for how to create a new atmospheric_physics tag.  A few rules:
 
 1.  Tags should always be annotated (no lightweight tags).
-2.  Tags should follow the naming convention listed below.
+2.  Tags should follow the naming convention listed [below](#tag-naming-conventions).
 3.  Tags should point to merge commits into the main branch.
 4.  Tags can only be created by people who have write access.
 
@@ -14,7 +14,7 @@ You can create a new atmospheric_physics tag, assuming you have git installed on
 **1.  Download the latest version of the repo:**
 
 ```
-git clone https://github.com/NCAR/atmospheric_physics.git
+git clone https://github.com/ESCOMP/atmospheric_physics.git
 cd atmospheric_physics
 ```
 
@@ -44,15 +44,15 @@ Where `<tag>` is the new tag name (which should follow the naming convention sho
 
 `git push origin <tag>`
 
-After which the new tag should now exist in the NCAR/atmospheric_physics repo.
+After which the new tag should now exist in the ESCOMP/atmospheric_physics repo.
 
 ## Tag naming conventions
 
-All NCAR/atmospheric_physics tags for the main branch should look like the following:
+All ESCOMP/atmospheric_physics tags for the main branch should look like the following:
 
 `atmos_physX_YY_ZZZ`
 
-While all tags for the development tag should be:
+While all tags for the development branch should be:
 
 `dev_atmos_physX_YY_ZZZ`
 
