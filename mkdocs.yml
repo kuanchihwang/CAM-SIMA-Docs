@@ -34,6 +34,8 @@ nav:
     - usage/history.md
   - Atmospheric_physics:
     - atmospheric_physics/directory-structure.md
+    - atmospheric_physics/development_workflow.md
+    - atmospheric_physics/Tagging-Instructions.md
 
 plugins:
   - search
