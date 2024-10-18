@@ -6,14 +6,14 @@ This page describes the general workflow for adding new developments to the [atm
 
 The general workflow for adding a feature, bug-fix, or modification to atmospheric_physics is as follows:
 
-1.  Open an issue
-2.  Add your code modifications to a branch on your fork.
-3.  Open a PR from your branch to the `development` branch.
-4.  Respond to any reviewer requests.
-5.  Fix any failing tests.
-6.  Update `doc/NamesNotInDictionary.txt` file.
-7.  If you know that this PR will need an official tag, then also add the tag name to the PR description.
-8.  Squash the commits and merge the PR (e.g. the "squash and merge" option).
+**1.  Open an issue.**
+**2.  Add your code modifications to a branch on your fork.**
+**3.  Open a PR from your branch to the `development` branch.**
+**4.  Respond to any reviewer requests.**
+**5.  Fix any failing tests.**
+**6.  Update `doc/NamesNotInDictionary.txt` file.**
+**7.  If you know that this PR will need an official tag, then also add the tag name to the PR description.**
+**8.  Squash the commits and merge the PR (e.g. the "squash and merge" option).**
 
 If you need an official tag for your new additions, then once your `development` PR has been merged you will need to do the following:
 
@@ -32,7 +32,7 @@ It is generally recommended to [open an issue](https://github.com/ESCOMP/atmosph
 
 ### 2.  Create a fork (if you haven't already).
 
-We generally recommend creating a fork of the atmospheric_physics repo, and doing all of the development there.  Instructions for how to setup a fork, and how to configure git in general, can be [found here](/docs/development/git-basics.md).
+We generally recommend creating a fork of the atmospheric_physics repo, and doing all of the development there.  Instructions for how to setup a fork, and how to configure git in general, can be [found here](https://escomp.github.io/CAM-SIMA-docs/development/git-basics/).
 
 ### 3. Update your code with changes from the official repo.
 
