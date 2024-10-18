@@ -179,7 +179,7 @@ Where `</path/to/atm_phys_repo>` is a path to the head of your atmospheric_physi
 
 `cp NamesNotInDictionary.txt </path/to/atm_phys_repo>/doc/NamesNotInDictionary.txt`
 
-Finally, once both the `ChangeLog` and `NamesNotInDictionary.txt` files have been updated, then commit and push them to your branch/fork on Github following the instructions in the section above.
+Finally, once the `NamesNotInDictionary.txt` file has been updated, then commit and push it to your branch/fork on Github following the instructions in the section above.
 
 ### Removing old branches
 
