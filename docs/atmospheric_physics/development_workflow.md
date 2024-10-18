@@ -6,21 +6,21 @@ This page describes the general workflow for adding new developments to the [atm
 
 The general workflow for adding a feature, bug-fix, or modification to atmospheric_physics is as follows:
 
-**1.  Open an issue.**
-**2.  Add your code modifications to a branch on your fork.**
-**3.  Open a PR from your branch to the `development` branch.**
-**4.  Respond to any reviewer requests.**
-**5.  Fix any failing tests.**
-**6.  Update `doc/NamesNotInDictionary.txt` file.**
-**7.  If you know that this PR will need an official tag, then also add the tag name to the PR description.**
-**8.  Squash the commits and merge the PR (e.g. the "squash and merge" option).**
+1.  **Open an issue.**
+2.  **Add your code modifications to a branch on your fork.**
+3.  **Open a PR from your branch to the `development` branch.**
+4.  **Respond to any reviewer requests.**
+5.  **Fix any failing tests.**
+6.  **Update `doc/NamesNotInDictionary.txt` file.**
+7.  **If you know that this PR will need an official tag, then also add the tag name to the PR description.**
+8.  **Squash the commits and merge the PR (e.g. the "squash and merge" option).**
 
 If you need an official tag for your new additions, then once your `development` PR has been merged you will need to do the following:
 
-1.  Open a PR that merges the atmospheric_physics `development` branch into `main`.  Ensure that the PR description lists every PR that went into `development` since the last update to `main`.
-2.  Fix any failing tests.  This includes tests on the target host models that will be using the new tag.
-3.  Merge (do not squash!) the PR.
-4.  Tag the new merge commit.
+1.  **Open a PR that merges the atmospheric_physics `development` branch into `main`.  Ensure that the PR description lists every PR that went into `development` since the last update to `main`.**
+2.  **Fix any failing tests.  This includes tests on the target host models that will be using the new tag.**
+3.  **Merge (do not squash!) the PR.**
+4.  **Tag the new merge commit.**
 
 ## Workflow details
 
