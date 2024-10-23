@@ -150,7 +150,7 @@ call mark_as_initialized('<standard name>')
 ```
 
 ## 1j - Initial standard name check
-Do a preliminary look at the variables on the calling lists and make sure that CCPP standard names and units exist for all of them, by checking for them in CAM Standard Names Spreadsheet.
+Do a preliminary look at the variables on the calling lists and make sure that CCPP standard names and units exist for all of them, by checking for them in [CAM Standard Names Spreadsheet](https://docs.google.com/spreadsheets/d/1vpQ_xDZk00Z-_3SpW5N2EF3_FY6K7opNN4cqtSMlbwU/edit?gid=0#gid=0).
 
 - If variables are not filled out in the list, highlight the entire line with yellow.  
 - If they don't exist at all in the spreadsheet, enter them into the bottom of the sheet and highlight them with yellow.  Note that physconst and diagnostic-only variables *may* not reside in the spreadsheet.

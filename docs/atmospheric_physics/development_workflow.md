@@ -32,7 +32,7 @@ It is generally recommended to [open an issue](https://github.com/ESCOMP/atmosph
 
 ### 2.  Create a fork (if you haven't already).
 
-We recommend creating a fork of the atmospheric_physics repo, and doing all of the development there.  Instructions for how to set up a fork, and how to configure git in general, can be [found here](../../development/git-basics/).
+We recommend creating a fork of the atmospheric_physics repo, and doing all of the development there.  Instructions for how to set up a fork, and how to configure git in general, can be [found here](../development/git-basics.md).
 
 ### 3. Update your code with changes from the official repo.
 
