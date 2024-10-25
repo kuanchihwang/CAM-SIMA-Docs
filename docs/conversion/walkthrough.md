@@ -416,8 +416,8 @@ Bug discovers that there are no snapshot calls around `lunar_tides_run` in `phys
 ```
 ! Lunar tides
     if (trim(cam_take_snapshot_before) == "user_set") then
-       call cam_snapshot_all_outfld_tphysac(cam_snapshot_before_num, state, tend, cam_in, cam_out, pbuf,&
-                    fh2o, surfric, obklen, flx_heat)
+       call cam_snapshot_all_outfld_tphysac(cam_snapshot_before_num, state, tend, cam_in, cam_out, pbuf, &
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
     end if
     call lunar_tides_tend( state, ptend )
     if ( (trim(cam_take_snapshot_after) == "user_set") .and.      &
@@ -432,8 +432,8 @@ Bug discovers that there are no snapshot calls around `lunar_tides_run` in `phys
     end if
     call physics_update(state, ptend, ztodt, tend)
     if (trim(cam_take_snapshot_after) == "user_set") then
-       call cam_snapshot_all_outfld_tphysac(cam_snapshot_after_num, state, tend, cam_in, cam_out, pbuf,&
-                    fh2o, surfric, obklen, flx_heat)
+       call cam_snapshot_all_outfld_tphysac(cam_snapshot_after_num, state, tend, cam_in, cam_out, pbuf, &
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
     end if
 ```
 

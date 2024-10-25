@@ -15,7 +15,7 @@ For `tphysbc` in `physics/cam7/physpkg.F90`:
 ```
 if (trim(cam_take_snapshot_before) == "user_set") then
    call cam_snapshot_all_outfld_tphysbc(cam_snapshot_before_num, state, tend, cam_in, cam_out, pbuf, &
-       cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, net_flx)
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
 end if
 
 <call to parameterization run phase>
@@ -29,7 +29,7 @@ end if
 
 if (trim(cam_take_snapshot_after) == "user_set") then
    call cam_snapshot_all_outfld_tphysbc(cam_snapshot_after_num, state, tend, cam_in, cam_out, pbuf, &
-       cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, net_flx)
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
 end if
 ```
 
@@ -37,7 +37,7 @@ For `tphysac`:
 ```
 if (trim(cam_take_snapshot_before) == "user_set") then
    call cam_snapshot_all_outfld_tphysac(cam_snapshot_before_num, state, tend, cam_in, cam_out, pbuf, &
-           fh2o, surfric, obklen, flx_heat, cmfmc, dlf, det_s, det_ice, net_flx)
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
 end if
 
 <call to parameterization run phase>
@@ -51,7 +51,7 @@ end if
 
 if (trim(cam_take_snapshot_after) == "user_set") then
    call cam_snapshot_all_outfld_tphysac(cam_snapshot_after_num, state, tend, cam_in, cam_out, pbuf, &
-            fh2o, surfric, obklen, flx_heat, cmfmc, dlf, det_s, det_ice, net_flx)
+       flx_heat, cmfmc, cmfcme, zdu, rliq, rice, dlf, dlf2, rliq2, det_s, det_ice, net_flx)
 end if
 ```
 !!! Note
