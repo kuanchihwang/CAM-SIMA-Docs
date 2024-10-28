@@ -12,7 +12,7 @@ An **interstitial** is a scheme that does calculations or variable modifications
 This section covers a few interstitial scenarios you are likely to face.
 
 ## Diagnostics interstitial
-All `addfld`/`outfld` calls will go in a `<parameterization>_diagnostic.F90` interstitial:
+All `addfld`/`outfld` calls will go in a `<parameterization>_diagnostic.F90` interstitial. You can find a template and instructions for scheme-specific diagnostics [here](https://github.com/ESCOMP/atmospheric_physics/blob/main/schemes/sima_diagnostics/scheme_diagnostics_template.F90):
 
 - `addfld` calls will go into the `<parameterization>_diagnostic_init` subroutine
 - `outfld` calls will go into the `<parameterization>_diagnostic_run` subroutine
