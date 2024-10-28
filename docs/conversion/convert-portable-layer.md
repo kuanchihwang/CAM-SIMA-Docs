@@ -159,11 +159,8 @@ Do a preliminary look at the variables on the calling lists and make sure that C
 !!! note
     This process can normally take 2-4 weeks, so a preliminary look is advisable.
 
-## 1k - Update CAM interface call(s)
-Update the calls in the CAM interface code to reflect any changes to the routine names and calling lists.
-
-## 1l - OPTIONAL: Make a CAM tag
-Make NCAR/atmospheric_physics and ESCOMP/CAM tags if substantial changes have been made up to this point.  This is also a good step to take if there is potential for others to be making modifications to the same physics module.  This will allow them to make changes which can be merged via git commands.
+## 1k - OPTIONAL: Make a CAM tag
+Make ESCOMP/atmospheric_physics and ESCOMP/CAM tags if substantial changes have been made up to this point.  This is also a good step to take if there is potential for others to be making modifications to the same physics module.  This will allow them to make changes which can be merged via git commands. More on bringing your changes back to CAM [here](back-to-cam.md).
 
 - Do at the very least a sanity compilation and run using the ESCOMP/CAM code base 
     - Delete the original module from src/physics/cam 
