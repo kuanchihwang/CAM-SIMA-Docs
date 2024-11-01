@@ -59,13 +59,14 @@ The subroutines in `cam_comp.F90` are set up to mirror the phases of the [Common
 1. `read_namelist` (`src/control/runtime_opts.F90`): Reads all namelists for the run, including auto-generated scheme namelists (see [build process](cam-build-process.md/#cam-sima-source-and-namelist-generation-buildnml-workflow))
 1. `cam_ctrl_set_physics_type` (`src/control/cam_control_mod.F90`): sets module-level configuration for variables for simple physics and moist physics schemes; logs configurations to atm log
 1. `cam_initfiles_open` (`src/control/cam_initfiles.F90`): Opens initial or restart file, and topography file if specified
+1. `phys_register` (`src/physics/utils/phys_comp.F90`): Registers physics (includes call to CCPP cap to run register phases of schemes in the Suite Definition File (SDF))
 1. `cam_register_constituents` (`src/control/cam_comp.F90`): Sets the total number and advected number of [constituents](constituents.md); currently ALWAYS adds water vapor as constituent (expected by the SE dycore)
 1. `air_composition_init` (`src/data/air_composition.F90`): Initializes air-composition-dependent model constants
 1. `model_grid_init` (`src/dynamics/<dycore>/dyn_grid.F90`): Initializes model grids and decompositions
 1. `cam_ccpp_initialize_constituents` (`$CASE/bld/atm/obj/ccpp/cam_ccpp_cap.F90`): initializes the constituent data array; after this point, we cannot add new constituents
 1. `dyn_init` (`src/dynamics/<dycore>/dyn_comp.F90`): Initializes the dynamical core
 1. `atm2hub_alloc` and `hub2atm_alloc` (`src/control/camsrfexch.F90`): Allocates and sets up surface exchange data
-1. `phys_init` (`src/physics/utils/phys_comp.F90`): Initializes physics (includes call to CCPP cap to run init phases of schemes in the Suite Definition File (SDF)
+1. `phys_init` (`src/physics/utils/phys_comp.F90`): Initializes physics (includes call to CCPP cap to run init phases of schemes in the Suite Definition File (SDF))
 1. `stepon_init` (`src/dynamics/<dycore>/stepon.F90`): Initializes dynamics <--> physics coupling
 
 ### cam_timestep_init

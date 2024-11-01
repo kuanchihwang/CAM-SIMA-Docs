@@ -29,8 +29,13 @@ Convert the original routines (except readnl - we'll get to that [later](create-
 
     For example, if you are converting the `tj2016` `precip_tend` function, then `<parameterization>` would be `tj2016_precip_tend`.
 
+- **<parameterization\>_register**
+    - Add all code that is run only during the first timestep (nstep=0) BEFORE the physics grid has been set up.
+    !!! Warning "Grid is not set up!"
+        Only scalar variables can be passed in at this time, as the grid is not set up (no horizontal or vertical dimensions are available)
+    - If your scheme has runtime constituents, this is place to add those (see [Runtime Constituent Usage](../design/constituents.md/#run-time-dynamic-constituents))
 - **<parameterization\>_init**
-    - Add all code that is run only during the first timestep (nstep=0). Typically, fold register and init routines in current CAM into this routine.
+    - Add all code that is run only during the first timestep (nstep=0) AFTER the physics grid has been set up.
 - **<parameterization\>_timestep_init**
     - Add all pre-processing code needed by the scheme at the start of each timestep. This may contain code from the CAM interface (`physpkg.F90`) routine which prepares data for the run routine at each timestep
 - **<parameterization\>_run**

@@ -41,14 +41,118 @@ The registration and initializaiton of the constituent data array and the consti
     - The array is initialized to (columns, levels, number of constituents)
 
 ### Constituent Usage
+
+#### Adding to the CCPP constituents object
+##### Build-time (static) constituents
+Build-time constituents are those that you know your scheme will always need. These constituents are treated *almost* as if they were normal arguments. To tell the CCPP Framework that a given argument is a constituent, you will add the following line to the metadata for that variable:
+```
+advected = True
+```
+This instructs the framework to handle that variable (you will not need to add it to the registry or anywhere else in the model). The framework will generate the code to allocate and initialize all constituents, and will also create and handle the associated **tendency** variable (which will be accessible via metadata with the standard name `tendency_of_<const_stdname>`)
+
+##### Run-time (dynamic) constituents
+Run-time constituents are those that are conditional on the configuration of the model. If your scheme has runtime constituents, you will instantiate them in the register phase of your scheme. Example Fortran is below:
+
+```
+!> \section arg_table_<scheme>_register Argument Table
+!! \htmlinclude <scheme>_register.html
+subroutine <scheme>_register(constituent_props, filename, errmsg, errcode)
+  use ccpp_constituent_prop_mod, only: ccpp_constituent_properties_t
+
+  type(ccpp_constituent_properties_t), allocatable, intent(out) :: constituent_props(:)
+  character(len=256),                               intent(in)  :: filename
+  character(len=512),                               intent(out) :: errmsg
+  integer,                                          intent(out) :: errcode
+
+  integer :: const_idx
+  character(len=512), allocatable :: const_names(:)
+
+  ! Read the file and determine what constituents are needed at runtime
+  ! Allocate and populate const_names with those constituents
+
+  ! Allocate the constituent properties array
+  allocate(constituent_props(size(const_names)), stat=ierr)
+  if (ierr /= 0) then
+     errcode = 1
+     errmsg = 'Failed to allocate "constituent_props"'
+     return
+  end if
+
+  ! Instantiate each constituent
+  do const_idx = 1, size(const_names)
+     ! Instantiate call may vary based on the properties of each runtime constituent
+     call constituent_props(const_idx)%instantiate( &
+             std_name = const_names(const_idx), &
+             long_name = const_names(const_idx), &
+             units = 'kg kg-1', &
+             vertical_dim = 'vertical_layer_dimension', &
+             min_value = 0.0_kind_phys, &
+             advected = .true., &
+             water_species = .true., &
+             mixing_ratio_type = 'wet', &
+             errcode = errcode, &
+             errmsg = errmsg)
+     if (errcode /= 0) then
+        return
+     end if
+  end do
+
+end subroutine <scheme>_register
+```
+
+Note that only scalar variables may be passed into the register phase as the grid has not yet been set up when the CCPP register phases are called. The metadata for the above routine is below.
+
+!!! Note "Standard name for runtime constituents variable"
+    The only requirement for this standard name is that it is unique.
+```
+[ccpp-arg-table]
+  name = <scheme>_register
+  type = scheme
+[ constituent_props ]
+  standard_name = dynamic_constituents_for_<scheme>
+  units = none
+  dimensions = (:)
+  allocatable = True
+  type = ccpp_constituent_properties_t
+  intent = out
+[ filename ]
+  standard_name = filename_for_runtime_constituents
+  units = none
+  dimensions = ()
+  type = character | kind = len=256
+  intent = in
+[ errmsg ]
+  standard_name = ccpp_error_message
+  long_name = Error message for error handling in CCPP
+  units = none
+  type = character | kind = len=512
+  dimensions = ()
+  intent = out
+[ errcode ]
+  standard_name = ccpp_error_code
+  long_name = Error flag for error handling in CCPP
+  units = 1
+  type = integer
+  dimensions = ()
+  intent = out
+
+```
+
+#### Accessing the CCPP constituent object
 Constituent values and properties can be accessed from the host side and from the physics in the following ways:
 
 - Host side: constituents and properties can be accessed via the host model and dycore by way of the `cam_constituents.F90` module, which is an interface to the CCPP cap, which is in turn an interface to the constituents object
-- Physics: the constituent array and/or the constituent properties object are passed into a scheme via the following metadata (the local name and intent may vary):
+- Physics: the constituent array, constituent tendencies, and/or the constituent properties object are passed into a scheme via the following metadata (the local name and intent may vary):
 
 ```
 [ q ]
   standard_name = ccpp_constituents
+  units = none
+  type = real | kind = kind_phys
+  dimensions = (horizontal_loop_extent,vertical_layer_dimension,number_of_ccpp_constituents)
+  intent = in
+[ qtend ]
+  standard_name = ccpp_constituent_tendencies
   units = none
   type = real | kind = kind_phys
   dimensions = (horizontal_loop_extent,vertical_layer_dimension,number_of_ccpp_constituents)
