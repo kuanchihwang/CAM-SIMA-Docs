@@ -16,12 +16,12 @@ Completion of `ccpp_fortran_to_metadata.py` will result in the creation of `<par
 
 ## Complete metadata
 
-Replace all `enter_*` sections with appropriate information (standard_name, units, dimensions, long_name)
+Replace all `enter_*` sections with appropriate information (standard_name, units, dimensions, long_name). Special handling for [error variables](#error-variables), [constituents](#constituents), and [dependencies](#dependencies) can be found below.
 
 !!! Warning "Named dimension in metadata template"
     If you have a dimension in the metadata field which is NOT of the form `enter_standard_name_X:enter_standard_name_Y` but is rather a single dimension without a :, this means that you have a named dimension in your converted routine and you should remove the name and replace it with ":"
 
-- *standard_name*: the mapping between CAM variables and standard_names can be found [here](https://docs.google.com/spreadsheets/d/1vpQ_xDZk00Z-_3SpW5N2EF3_FY6K7opNN4cqtSMlbwU/edit?gid=0#gid=0)
+- *standard_name*: the mapping between CAM variables and standard_names can be found in [this spreadsheet](https://docs.google.com/spreadsheets/d/1vpQ_xDZk00Z-_3SpW5N2EF3_FY6K7opNN4cqtSMlbwU/edit?gid=0#gid=0). All official standard names (approved by all stakeholders) can be found in the [CCPPStandardNames repo](https://github.com/ESCOMP/CCPPStandardNames/blob/main/Metadata-standard-names.md). Note that this does not yet contain all of the spreadsheet names.
     - You may have to trace the variable back through the CAM code to find the `Snapshot or Local name` to look for
     - Officially accepted standard names can be found in this [repository](https://github.com/ESCOMP/CCPPStandardNames/blob/main/Metadata-standard-names.md), but the CAM Standard Names Spreadsheet should include all of the CAM variables.
     - If a standard name is not found:
@@ -52,7 +52,11 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
 
 - *optional arguments*: If there are optional arguments, consult with a CAM SE. Optional attributes are an unsupported configuration, but are being incorporated into the framework. That said, there may be a workaround to avoid the use of optional arguments in your scheme
 - Note: Try to avoid module level allocations and/or assignments even in the init phases of the code.  If you believe you need to do this, speak with a Jesse and/or Cheryl for guidance
-- error variables: see below for error variable metadata
+
+Once you have created your metadata, proceed to [3 - Create namelist XML file](create-namelist-xml.md)
+
+### Error variables
+See below for error variable metadata
 ```
 [ errmsg ]
   standard_name = ccpp_error_message
@@ -69,15 +73,14 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
   dimensions = ()
   intent = out
 ```
-- **constituents**: see [constituent usage](../design/constituents.md/#constituent-usage)
-    - you can tell a variable is a constituent if it is in the `state%q` array in CAM (may have to trace back in the code a bit)
+### Constituents
+See [constituent usage](../design/constituents.md/#constituent-usage). You can tell a variable is a constituent if it is in the `state%q` array in CAM (may have to trace back in the code a bit)
 
-- **dependencies**: If your scheme has any "use" statements (helper functions, approved dependencies), add a `dependencies` field with a common-separated list of relative paths to the necessary modules to the top of your metadata file. Example:
+### Dependencies
+If your scheme has any "use" statements (helper functions, approved dependencies), add a `dependencies` field with a common-separated list of relative paths to the necessary modules to the top of your metadata file. Example:
 ```
 [ccpp-table-properties]
   name = musica_ccpp
   type = scheme
   dependencies = micm/musica_ccpp_micm.F90,musica_ccpp_util.F90
 ```
-
-Once you have created your metadata, proceed to [3 - Create namelist XML file](create-namelist-xml.md)
