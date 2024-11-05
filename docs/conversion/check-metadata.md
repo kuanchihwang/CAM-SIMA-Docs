@@ -102,10 +102,13 @@ If the variable in question cannot be tracked back to a “use” statement or a
 !!! Note - registry variables
     Variables in the registry are read in from the initial data file by default.
 
+!!! Note - registry or scheme?
+    **Should I add a variable to the registry or rely on CCPP to manage the variables being passed between schemes?** While declaring a variable in the scheme metadata files allows CCPP to pass this variable from a scheme and to another scheme without having to define it in the registry, it is important to note that variables not declared in the registry are not preserved between timesteps (i.e., the timestep initialization phase will reallocate these variables). Thus variables that should be preserved as part of model "state" or (formerly) physics buffer variables with time dimensions (e.g., total energy at end of previous physics timestep) should be included as part of the registry.
+
 There are two options for registry variables:
 
 1. Variable read in from the initial data file: no action required
-1. Variable not read in from the initial data file, and instead intialized during CAM-SIMA initialization. You will need to add code to do this:
+2. Variable not read in from the initial data file, and instead initialized during CAM-SIMA initialization. You will need to add code to do this:
     - Determine the best place to initialize this variable (has to occur at some point during initialization - see [CAM-SIMA run](../design/cam-run-process.md/#cam_init)
     - In the location you have chosen, add the use statements below to import the registry variable from the auto-generated fortran AND the mark_as_initialized routine
     - After adding the code to initialize the variable, add the `mark_as_initialized` call below to indicate that that variable should NOT be read in from the file.
