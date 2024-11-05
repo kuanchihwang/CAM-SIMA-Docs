@@ -102,8 +102,8 @@ If the variable in question cannot be tracked back to a “use” statement or a
 !!! Note - registry variables
     Variables in the registry are read in from the initial data file by default.
 
-!!! Note - registry or scheme?
-    **Should I add a variable to the registry or rely on CCPP to manage the variables being passed between schemes?** While declaring a variable in the scheme metadata files allows CCPP to pass this variable from a scheme and to another scheme without having to define it in the registry, it is important to note that variables not declared in the registry are not preserved between timesteps (i.e., the timestep initialization phase will reallocate these variables). Thus variables that should be preserved as part of model "state" or (formerly) physics buffer variables with time dimensions (e.g., total energy at end of previous physics timestep) should be included as part of the registry.
+!!! note "Should I add a variable to the registry or rely on CCPP to manage the variables being passed between schemes?"
+    While declaring a variable in the scheme metadata files allows CCPP to pass this variable from a scheme and to another scheme without having to define it in the registry, it is important to note that variables not declared in the registry are not preserved between timesteps (i.e., the timestep initialization phase will reallocate these variables). Thus variables that should be preserved as part of model "state" or (formerly) physics buffer variables with time dimensions (e.g., total energy at end of previous physics timestep) should be included as part of the registry.
 
 There are two options for registry variables:
 
