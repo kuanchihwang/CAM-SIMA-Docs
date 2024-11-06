@@ -131,9 +131,9 @@ Currently only certain `utilities` modules are being tested but this will expand
 If you are adding a new file, attempt to add it to the list of files being built by the `CMakeLists.txt` and if it builds successfuly, add a corresponding unit test.  The current workflow is to take your new file in `schemes/{path_to_file}/new_file.F90` and add a corresponding test file in `test/unit-test/tests/{path_to_file}/test_{new_file}.pf`.
 
 At a minimum, unit tests for ESCOMP source code should:
-1) Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert`s should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
-2) There should only be 1 block/set of `assert` statements per test.  If there are multiple sets of `assert`s with module API calls in between each set, that _probably_ would constitute a new test with a different name.
-3) Test names should be as explicit as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preferrence but the goal is to have a test name be as intuitive as possible).
+1. Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert`s should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
+2. There should only be 1 block/set of `assert` statements per test.  If there are multiple sets of `assert`s with module API calls in between each set, that _probably_ would constitute a new test with a different name.
+3. Test names should be as explicit as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preferrence but the goal is to have a test name be as intuitive as possible).
 
 
 **3.  Add all the files that you want to commit.  There are multiple ways to do this, but one of the safer ways is to first check your status:**
