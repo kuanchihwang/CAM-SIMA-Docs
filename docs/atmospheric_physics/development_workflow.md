@@ -89,11 +89,15 @@ where `cool_new_feature` is an example branch name (you can use any name you wan
 
 **2.  Apply your code modifications and/or script additions, and perform at least one test making sure that your modifications work as expected.**
 
+### 5. Unit Testing
+
 Also make sure that the unit tests all pass and verify if your changes can be unit tested and added to the test suite. 
 
-Early development has started for integration of [pFUnit](https://github.com/Goddard-Fortran-Ecosystem/pFUnit) as the toolkit for unit testing Fortran codes.  It is similar to [googletest](https://github.com/google/googletest) in providing an explicit interface/setup procedure to make it clear what you are testing and how.
+Atmospheric_physics uses [pFUnit](https://github.com/Goddard-Fortran-Ecosystem/pFUnit) as the toolkit for unit testing Fortran codes.  It is similar to [googletest](https://github.com/google/googletest) in providing an explicit interface/setup procedure to make it clear what you are testing and how.
 
-To run the tests, you will need to build pFUnit manually (see either the github workflow for atmospheric_physics or the pFUnit documentation on how to build) and then use that to build the tests:
+#### Running the unit test suite
+
+To run the tests, you will need to build pFUnit manually (see either the github workflow for atmospheric_physics or the [pFUnit documentation](https://github.com/Goddard-Fortran-Ecosystem/pFUnit?tab=readme-ov-file#building-and-installing-pfunit) on how to build) and then use that to build the tests:
 
 ```bash
 $ cmake -DCMAKE_PREFIX_PATH=<path_to_pfunit>/build/installed \
@@ -109,32 +113,43 @@ This should print something along the lines of
 
 or show an error if a test failed.
 
-For modules that are testable, it is recommended to add relevant tests that cover those new lines of code.  As unit test development is just as much an art form as source code development, we will defer a discussion on what constitutes as "good tests" to other sources such as [MS.net](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices), [abseil](https://abseil.io/resources/swe-book/html/ch12.html), [googletest](https://github.com/google/googletest/blob/main/docs/primer.md), [Martin Fowler](https://martinfowler.com/testing/), etc.  Just like with source code, philosophical/technical conventions will evolve with the code over time as well.
+#### Adding unit tests
 
-As of right now, integration is limited but expanding.  As new modules become testable, tests should be added for those modules as new modifications are developed in the source directory.
+For modules that are currently being built with CMake, independent of any external library modules, or is dependent on modules already unit tested; it is recommended to add relevant tests that cover those new lines of code.  As unit test development is just as much an art form as source code development, we will defer a discussion on what constitutes as "good tests" to other sources such as [MS.net](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices), [abseil](https://abseil.io/resources/swe-book/html/ch12.html), [googletest](https://github.com/google/googletest/blob/main/docs/primer.md), [Martin Fowler](https://martinfowler.com/testing/), etc.  Just like with source code, philosophical/technical conventions will evolve with the code over time as well.
 
 If a module is independent of any external library modules or is dependent on modules already unit tested, it is very likely that it can be added to the testing infrastructure.
 
-To add a test, you need to have a currently existing CMake infrastructure and the code being tested added to a library via `add_library(LIBNAME ...)` in a `CMakeLists.txt` file, then you can use `add_pfunit_ctest(TESTNAME TEST_SOURCES source1.pf ... LINK_LIBRARIES LIBNAME)`.  The `test_source.pf` library will contain subroutines of the form:
+#### Adding a new pFUnit test
+
+If you are adding a new file, add it to the list of files being built by the `test/unit-test/CMakeLists.txt`, and if it builds successfully, add a corresponding unit test.  The current workflow is to take your new file in `schemes/{path_to_file}/new_file.F90` and add a corresponding test file in `test/unit-test/tests/{path_to_file}/test_{new_file}.pf`.
+
+To add a test:
+
+  1.  Ensure you need to have a currently existing CMake infrastructure.
+  2.  Add the code being tested added to a library via `add_library(LIBNAME ...)` in the `test/unit-test/CMakeLists.txt` file.
+  3.  Create a new pFUnit test file to a corresponding directory matching the source file path into the unit-test directory.  For example, if adding a file to `schemes/utilities/new_file.F90`, create a new test file called `test/unit-test/tests/utilities/test_new_file.pf`.
+  3.  Add `add_pfunit_ctest(TESTNAME TEST_SOURCES test_new_file.pf LINK_LIBRARIES LIBNAME)` in the `CMakeLists.txt` file in the test directory corresponding to the new test file (ex. `test/unit-testing/tests/utilities/CMakeLists.txt` in this example).
+  4.  Add subroutines to the `test_new_file.pf` file of the form:
 ```fortran
 @test
-subroutine test_addded_element_equals_get_element()
+subroutine test_added_element_equals_get_element()
   use funit
   use module_under_test_mod
    ...
    @assertEqual(expectedValue, atualValue)
 ```
-The remaining CMake integration details as well as the different assertion methods can be found in pFUnit's [github](https://github.com/Goddard-Fortran-Ecosystem/pFUnit) documentation and the [pFUnit demo](https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos) repository as well.
+Additional CMake integration details as well as the different assertion methods can be found in pFUnit's [github](https://github.com/Goddard-Fortran-Ecosystem/pFUnit) documentation and the [pFUnit demo](https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos) repository as well.
 
-Currently only certain `utilities` modules are being tested but this will expand to the rest of atmospheric_physics so check the files being built by the `test/unit-test/CMakeLists.txt` file regularly.
+Currently, only certain `utilities` modules are being tested but this will expand to the rest of atmospheric_physics so check the files being built by the `test/unit-test/CMakeLists.txt` file regularly to see if you are modifying a file currently being tested.
 
-If you are adding a new file, attempt to add it to the list of files being built by the `CMakeLists.txt` and if it builds successfuly, add a corresponding unit test.  The current workflow is to take your new file in `schemes/{path_to_file}/new_file.F90` and add a corresponding test file in `test/unit-test/tests/{path_to_file}/test_{new_file}.pf`.
+
 
 At a minimum, unit tests for ESCOMP source code should:
 
-  1.  Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert`statements should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
+  1.  Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert` statements should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
   2.  Only be 1 block/set of `assert` statements per test.  If there are multiple sets of `assert` statements with module API calls in between each set, that _probably_ would constitute a new test with a different name.
-  3.  Have as explicit of names as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor to be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preferrence but the goal is to have a test name be as intuitive as possible).
+  3.  Have as explicit of names as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor to be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preference but the goal is to have a test name be as intuitive as possible).
+  4. Have clear and consise comments on what is being tested above each set of assert statements.
 
 **3.  Add all the files that you want to commit.  There are multiple ways to do this, but one of the safer ways is to first check your status:**
 
