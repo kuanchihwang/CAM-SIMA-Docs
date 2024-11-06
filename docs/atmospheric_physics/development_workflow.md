@@ -109,7 +109,7 @@ This should print something along the lines of
 
 or show an error if a test failed.
 
-For modules that are testable, it is recommended to add relevant tests that cover those new lines of code.  As unit test development is just as much an art form as source code development, we will deffer a discussion on what constitutes as "good tests" to other sources such as [MS.net](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices), [abseil](https://abseil.io/resources/swe-book/html/ch12.html), [googletest](https://github.com/google/googletest/blob/main/docs/primer.md), [Martin Fowler](https://martinfowler.com/testing/), etc.  Just like with source code, philosophical/technical conventions will evolve with the code over time as well.
+For modules that are testable, it is recommended to add relevant tests that cover those new lines of code.  As unit test development is just as much an art form as source code development, we will defer a discussion on what constitutes as "good tests" to other sources such as [MS.net](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices), [abseil](https://abseil.io/resources/swe-book/html/ch12.html), [googletest](https://github.com/google/googletest/blob/main/docs/primer.md), [Martin Fowler](https://martinfowler.com/testing/), etc.  Just like with source code, philosophical/technical conventions will evolve with the code over time as well.
 
 As of right now, integration is limited but expanding.  As new modules become testable, tests should be added for those modules as new modifications are developed in the source directory.
 
@@ -132,10 +132,9 @@ If you are adding a new file, attempt to add it to the list of files being built
 
 At a minimum, unit tests for ESCOMP source code should:
 
-  1.  Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert`s should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
-  2.  There should only be 1 block/set of `assert` statements per test.  If there are multiple sets of `assert`s with module API calls in between each set, that _probably_ would constitute a new test with a different name.
-  3.  Test names should be as explicit as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preferrence but the goal is to have a test name be as intuitive as possible).
-
+  1.  Keep the setup code to the absolute minimum needed to effectively assert object/state data (ie, each line before calling `assert`statements should be modifying or preparing state data/objects to be modified exactly as a client or user would do).
+  2.  Only be 1 block/set of `assert` statements per test.  If there are multiple sets of `assert` statements with module API calls in between each set, that _probably_ would constitute a new test with a different name.
+  3.  Have as explicit of names as possible.  There are going to be hundreds of names in each test report and having the ability for a reviewer/contributor to be able to look at a test and intuitively understand what said test is doing is paramount (this is obviously going to vary slightly based on preferrence but the goal is to have a test name be as intuitive as possible).
 
 **3.  Add all the files that you want to commit.  There are multiple ways to do this, but one of the safer ways is to first check your status:**
 
