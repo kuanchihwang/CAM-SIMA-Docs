@@ -399,7 +399,7 @@ Bug discovers that there are no `pbuf` variables in lunar_tides! Yay!
 There are no variables that Bug needs to mark as initialized. At least, so he thinks. He may revisit this!
 
 ### 1j - Initial standard name check
-Bug does an initial check of the [standard names spreadsheet](https://docs.google.com/spreadsheets/d/1vpQ_xDZk00Z-_3SpW5N2EF3_FY6K7opNN4cqtSMlbwU/edit?gid=0#gid=0). He is able to find standard anmes for all of the variables except the calendar type, current date and julian date info. He adds those to the spreadsheet and sends an email to the other CAM SEs about needing to decide on a standard name for these variables.
+Bug does an initial check of the [standard names spreadsheet](https://docs.google.com/spreadsheets/d/1vpQ_xDZk00Z-_3SpW5N2EF3_FY6K7opNN4cqtSMlbwU/edit?gid=0#gid=0). He is able to find standard names for all of the variables except the calendar type, current date and julian date info. He adds those to the spreadsheet and sends an email to the other CAM SEs about needing to decide on a standard name for these variables.
 
 ### 1k - Update CAM interface call(s)
 Bug updates the call in `physpkg.F90`:
@@ -680,7 +680,12 @@ ncdata_check = '/glade/campaign/cesm/community/amwg/sima_baselines/cam_sima_test
 Bug gets extremely lucky (or maybe he's just really skilled) and there are no differences found in the atm.log file!
 
 ## 9 - Bring back into CAM
-Bug moves the CCPP-ized version of lunar_tides.F90 into the CAM source tree, updates `configure`, and runs CAM. He confirms that it runs and answers haven't changed.
+
+1. Bug moves the CCPP-ized version of lunar_tides.F90 into the CAM source tree by checking out his branch's hash of the atmospheric_physics branch (NOTE: this will need to be a tag before the PR to CAM can be brought in). 
+1. He renames the old `src/physics/cam/lunar_tides.F90` file to `src/physics/cam/lunar_tides_cam.F90`
+    - He removes everything from `lunar_tides_cam.F90` except `lunar_tides_readnl`
+1. Bug updates the `lunar_tides_init` and `lunar_tides_tend` subroutine calls in `physpkg.F90` to reflect the new CCPP-ized versions (full calling list, changing `lunar_tides_tend` to `lunar_tides_run`)
+1. Bug updates `configure`, and runs CAM. He confirms that it runs and answers haven't changed.
 
 Bug commits his changes to his fork/branch of the three repos: CAM, CAM-SIMA, atmospheric_physics.
 
