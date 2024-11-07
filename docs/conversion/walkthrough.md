@@ -682,9 +682,13 @@ Bug gets extremely lucky (or maybe he's just really skilled) and there are no di
 ## 9 - Bring back into CAM
 Bug moves the CCPP-ized version of lunar_tides.F90 into the CAM source tree, updates `configure`, and runs CAM. He confirms that it runs and answers haven't changed.
 
-Bug commits his changes to his fork/branch of the three repos: CAM, CAM-SIMA, atmospheric_physics. 
+Bug commits his changes to his fork/branch of the three repos: CAM, CAM-SIMA, atmospheric_physics.
 
-- He opens a PR into atmospheric_physics (target: `development` branch), goes through the review process, adds a Changelog entry, and then commits the PR when approvals are received. He then makes a tag (incrementing the minor version).
+### Unit testing
+Bug adds PfUnit tests for his newly-created scheme per the [atmospheric_physics development workflow](../atmospheric_physics/development_workflow.md#5-unit-testing).
+
+### Pull Requests
+- He opens a PR into atmospheric_physics (target: `development` branch), goes through the review process, updates the NamesNotInDictionary.txt file, and then commits the PR when approvals are received. He then opens a PR from `development` to `main` and makes a tag (incrementing the minor version) when that is merged.
 - Once he has a tag, he opens PRs into CAM (target: `cam_development` branch) and CAM-SIMA (target: `development` branch) with the updated tag in `.gitmodules` (and code changes needed). When approvals are in and he gets the go-ahead to make a tag, he follows the procedures to make a CAM or CAM-SIMA tag.
 - Once all tags are made, he checks off "lunar tides" as completed in the [spreadsheet](https://docs.google.com/spreadsheets/d/1_1TTpnejam5jfrDqAORCCZtfkNhMRcu7cul37YTr_WM/edit#gid=0).
 
