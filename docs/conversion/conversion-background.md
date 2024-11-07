@@ -72,7 +72,7 @@ bin/git-fleximod update
 
 - Make a new directory for your parameterization within the atmospheric_physics submodule directory
 ```
-mkdir src/physics/ncar_ccpp/<parameterization_name>
+mkdir src/physics/ncar_ccpp/schemes/<parameterization_name>
 ```
 
 - Navigate into the atmospheric_physics submodule directory

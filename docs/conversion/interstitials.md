@@ -6,8 +6,8 @@ An **interstitial** is a scheme that does calculations or variable modifications
 - In CAM, interstitial code will appear as either function calls or calculations/modifications in the CAM interface just before or just after the call to the parameterization
     - If the interstitial code is a function call, that function/module should be CCPP-ized (if not already) and that scheme will be included in the SDF
     - It the interstitial code is loose in the CAM interface, it is recommended that, when possible, that code be moved into the scheme (either the beginning or end of the scheme subroutine)
-        - UNLESS: it's a common (across multiple parameterizations) calculation/translation/modification. In which case, a new scheme should be created to do that calculation (scheme will live in `$CAM-SIMA/src/physics/ncar_ccpp/utilities`)
-        - If it is absolutely necessary to create a scheme-specific interstitial, that scheme should be called `<parameterization>_pre` or `_post` (depending on where in the SDF it will be placed) and will live in the `ncar_ccpp/<parameterization>` directory
+        - UNLESS: it's a common (across multiple parameterizations) calculation/translation/modification. In which case, a new scheme should be created to do that calculation (scheme will live in `$CAM-SIMA/src/physics/ncar_ccpp/schemes/utilities`)
+        - If it is absolutely necessary to create a scheme-specific interstitial, that scheme should be called `<parameterization>_pre` or `_post` (depending on where in the SDF it will be placed) and will live in the `ncar_ccpp/schemes/<parameterization>` directory
 
 This section covers a few interstitial scenarios you are likely to face.
 
@@ -20,7 +20,7 @@ All `addfld`/`outfld` calls will go in a `<parameterization>_diagnostic.F90` int
     - See: [History Usage](../usage/history.md/#adding-a-diagnostic-field-to-the-cam-sima-source-code) for the specifications of the CAM-SIMA-versions of `addfld` and `outfld` calls
 
 ## Utilities
-As mentioned, there are some calculations/conversions/translations that are performed often throughout the physics code in CAM. These schemes are available for use in the `$CAM-SIMA/src/physics/ncar_ccpp/utilities` directory and include:
+As mentioned, there are some calculations/conversions/translations that are performed often throughout the physics code in CAM. These schemes are available for use in the `$CAM-SIMA/src/physics/ncar_ccpp/schemes/utilities` directory and include:
 
 - **state_converters.F90**: contains common conversions/calculations of [state variables](../design/ccpp-in-cam-sima.md/#state-and-tendency-variables), including these schemes:
 

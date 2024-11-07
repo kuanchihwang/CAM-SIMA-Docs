@@ -1,7 +1,7 @@
 # 5 - Create an SDF
 The **Suite Definition File (SDF)** tells the CCPP-Framework which schemes will be run in what order. For more, see [CCPP in CAM-SIMA](../design/ccpp-in-cam-sima.md)
 
-- In `$CAM-SIMA/src/physics/ncar_ccpp`, create `suite_<parameterization>.xml`. This is your SDF!
+- In `$CAM-SIMA/src/physics/ncar_ccpp/suites`, create `suite_<parameterization>.xml`. This is your SDF!
 - See the template below. You will need to select either `physics_before_coupler` or `physics_after_coupler` as your group name.
 ```
 <?xml version="1.0" encoding="UTF-8"?>

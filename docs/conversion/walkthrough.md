@@ -35,8 +35,8 @@ git branch ccppize-lunar-tides ESCOMP/development
 git checkout ccppize-lunar-tides 
 git push -u bugsy9236 ccppize-lunar-tides
 bin/git-fleximod update
-mkdir src/physics/ncar_ccpp/lunar_tides
-cp ../CAM/src/physics/cam/lunar_tides.F90 src/physics/ncar_ccpp/lunar_tides/
+mkdir src/physics/ncar_ccpp/schemes/lunar_tides
+cp ../CAM/src/physics/cam/lunar_tides.F90 src/physics/ncar_ccpp/schemes/lunar_tides/
 cd src/physics/ncar_ccpp
 git remote add bugsy9236 https://github.com/bugsy9236/atmospheric_physics
 git fetch bugsy9236
@@ -592,7 +592,7 @@ He then populates the generated metadata template (`lunar_tides.meta`) with the 
 Bug will revisit the missing standard names when he hears back from the other CAM SEs/scientists about what the names should be.
 
 ## 4 - Create namelist XML file
-Bug creates the following namelist xml file (called `lunar_tides_namelist.xml`) in the `ncar_ccpp/lunar_tides` directory. It contains one entry - for `apply_lunar_tides`
+Bug creates the following namelist xml file (called `lunar_tides_namelist.xml`) in the `ncar_ccpp/schemes/lunar_tides` directory. It contains one entry - for `apply_lunar_tides`
 ```
 <?xml version="1.0"?>
 

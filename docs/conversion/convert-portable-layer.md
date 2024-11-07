@@ -13,13 +13,13 @@ The portable module will most likely live in `$CAM/src/physics/cam` or `$CAM/src
 The driver code in each physics directory is `physpkg.F90`, which typically calls the CAM interface to the portable layer (often called `<parameterization>_cam.F90`), but also sometimes calls portable layer directly.
 Once you locate the core code that you will be converting, copy it into the new directory you created in the atmospheric_physics submodule directory:
 ```
-cp $CAM/src/physics/<physics_subdir>/<file>.F90 $CAM-SIMA/src/physics/ncar_ccpp/<parameterization_name>
+cp $CAM/src/physics/<physics_subdir>/<file>.F90 $CAM-SIMA/src/physics/ncar_ccpp/schemes/<parameterization_name>
 ```
 
 ## Optional: pre-split the module
 Many CAM schemes have more than one "run" or "tend" method contained within them.  To split them into separate files and test them, do the following:
 
-- In the atmospheric physics directory (`ncar_ccpp`), create a separate module for each piece which has a "run" or "tend" method.
+- In the atmospheric physics directory (`ncar_ccpp/schemes/<parameterization_name>`), create a separate module for each piece which has a "run" or "tend" method.
     - An easy way to see what routines need to be separated out, is to look at the "use" statement(s) in `physpkg.F90` for your parametrization's module.  If more than one routine is listed, you most likely will need to separate these out.
 - If there is shared, module-level data or shared subroutines which are called internally, put these all in a <scheme_name>_common.F90 module.
 
@@ -169,12 +169,12 @@ Make ESCOMP/atmospheric_physics and ESCOMP/CAM tags if substantial changes have 
 
 - Do at the very least a sanity compilation and run using the ESCOMP/CAM code base 
     - Delete the original module from src/physics/cam 
-    - Use  your pulled apart modules in atmos_phys/<schemename>.
+    - Use  your pulled apart modules in `atmos_phys/schemes/<parameterization_name>`.
     - In bld/configure in the ESCOMP/CAM source code, find the section "Add the CCPP'ized subdirectories".  Add following line:
 ```
-print $fh "$camsrcdir/src/atmos_phys/<schemename>\n";
+print $fh "$camsrcdir/src/atmos_phys/schemes/<parameterization_name>\n";
 ```
 - Modify code as needed until this modified code compiles and runs properly.
-- If you want to benchmark your development to this point, you will need to open PRs to both NCAR/atmospheric_physics and ESCOMP/CAM.
+- If you want to benchmark your development to this point, you will need to open PRs to both ESCOMP/atmospheric_physics and ESCOMP/CAM.
 
 Proceed to [2 - Create metadata](create-metadata.md)
