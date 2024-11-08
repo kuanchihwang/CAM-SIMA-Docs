@@ -735,22 +735,20 @@ Since the file is being built, we don't have to add to this list.
 
 Next we look for `test/unit-test/tests/utilities/CMakeLists.txt` to see if there is a matching test file:
 
-```sh
-$ ls cat test/unit-test/tests/utilities/
+```bash
+$ ls test/unit-test/tests/utilities/
 CMakeLists.txt
 test_state_converters.pf
-$
 $ cat test/unit-test/tests/utilities/CMakeLists.txt
 add_pfunit_ctest(utilities_tests
   TEST_SOURCES test_state_converters.pf
   LINK_LIBRARIES utilities
 )
-$
 ```
 
 Because there is no matching file or test, we need to create it:
 
-```sh
+```bash
 $ cat > test/unit-test/tests/utilities/test_physics_tendency_updaters.pf << EOF
 @test
 subroutine test_pressure_tendency_update()
@@ -763,7 +761,7 @@ EOF
 
 And add the ability to build/run it from the test harness by updating `test/unit-test/tests/utilities/CMakeLists.txt`:
 
-```
+```cmake
 add_pfunit_ctest(utilities_tests
   TEST_SOURCES test_state_converters.pf test_physics_tendency_updaters.pf
   LINK_LIBRARIES utilities
