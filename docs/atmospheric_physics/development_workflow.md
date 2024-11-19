@@ -9,7 +9,7 @@ The general workflow for adding a feature, bug-fix, or modification to atmospher
   1.  [**Open an issue.**](#1-open-an-issue)
   2.  **[Add your code modifications](#3-update-your-code-with-changes-from-the-official-repo) to a branch on your [fork](#2-create-a-fork-if-you-havent-already).**
   3.  **[Add/amend unit tests](#5-unit-testing)**
-  3.  **[Open a PR](#5-creating-a-pull-request-pr) from your branch to the `development` branch.**
+  3.  **[Open a PR](#6-creating-a-pull-request-pr) from your branch to the `development` branch.**
   4.  **Respond to any reviewer requests.**
   5.  **Fix any failing tests.**
   6.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
@@ -18,10 +18,10 @@ The general workflow for adding a feature, bug-fix, or modification to atmospher
 
 If you need an official tag for your new additions, then once your `development` PR has been merged you will need to do the following:
 
-  1.  **Open a PR that merges the atmospheric_physics `development` branch into `main`.  Ensure that the PR description lists every PR that went into `development` since the last update to `main`.**
+  1.  **Open a PR that merges the atmospheric_physics `development` branch into `main`.  Ensure that the PR description lists the title and number of every PR that went into `development` since the last update to `main`.**
   2.  **Fix any failing tests.  This includes tests on the target host models that will be using the new tag.**
   3.  **Merge (do not squash!) the PR.**
-  4.  **Tag the new merge commit.**
+  4.  **[Tag](Tagging-Instructions.md) the new merge commit.**
 
 ## Workflow details
 
@@ -224,7 +224,10 @@ At a minimum, unit tests for ESCOMP source code should:
 
 **11.  Update the `NamesNotInDictionary.txt` file using the instructions [below](#updating-namesnotindictionarytxt-file).**
 
-**12.  Once all reviewers sign off on your modifications, then the PR will be squashed and merged.  Congratulations!  Your code is now in atmospheric_physics!**
+**12.  Once all reviewers sign off on your modifications, then the PR can be merged.  Congratulations!  Your code is now in atmospheric_physics!**
+
+- If the PR is to `develop`, you should select "Squash and Merge"
+- If the PR is to `main`, DO NOT squash and instead select "Merge Commit"
 
 ### Updating NamesNotInDictionary.txt file
 
