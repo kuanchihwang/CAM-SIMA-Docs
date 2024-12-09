@@ -9,7 +9,7 @@ The general workflow for adding a feature, bug-fix, or modification to atmospher
   1.  [**Open an issue.**](#1-open-an-issue)
   2.  **[Add your code modifications](#3-update-your-code-with-changes-from-the-official-repo) to a branch on your [fork](#2-create-a-fork-if-you-havent-already).**
   3.  **[Add/amend unit tests](#5-unit-testing)**
-  3.  **[Open a PR](#5-creating-a-pull-request-pr) from your branch to the `development` branch.**
+  3.  **[Open a PR](#6-creating-a-pull-request-pr) from your branch to the `development` branch.**
   4.  **Respond to any reviewer requests.**
   5.  **Fix any failing tests.**
   6.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
