@@ -40,6 +40,8 @@ To do this, navigate to `$CAM-SIMA/test/system` on derecho and run:
 
 ```
 env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_cam_yyyymmddsssss CAM_FC=INTEL ./archive_baseline.sh <sima tag>
+```
+```
 env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_cam_yyyymmddsssss CAM_FC=NVHPC ./archive_baseline.sh <sima tag>
 ```
 
