@@ -39,10 +39,10 @@ After you have run the tests, merged your PR, and created a tag (see [tag workfl
 To do this, navigate to `$CAM-SIMA/test/system` on derecho and run:
 
 ```
-env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_cam_yyyymmddsssss CAM_FC=INTEL ./archive_baseline.sh <sima tag>
+env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_sima_yyyymmddsssss CAM_FC=INTEL ./archive_baseline.sh <sima tag>
 ```
 ```
-env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_cam_yyyymmddsssss CAM_FC=NVHPC ./archive_baseline.sh <sima tag>
+env CESM_TESTDIR=/glade/derecho/scratch/YourName/aux_sima_yyyymmddsssss CAM_FC=GNU ./archive_baseline.sh <sima tag>
 ```
 
 !!! Note "Baseline 'latest' symlink"

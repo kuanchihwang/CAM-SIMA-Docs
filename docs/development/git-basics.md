@@ -270,7 +270,7 @@ To see the latest tag: [https://github.com/ESCOMP/CAM-SIMA/tags](https://github.
 
 ### Creating a new tag
 
-1. Clone [https://github.com/ESSCOMP/CAM](https://github.com/ESCOMP/CAM) or update an existing clone with `git fetch <escomp_remote> development`
+1. Clone [https://github.com/ESCOMP/CAM](https://github.com/ESCOMP/CAM) or update an existing clone with `git fetch <escomp_remote> development`
 1. Find the PR merge commit (`<merge_commit>`) for the tag
     - In your up-to-date CAM clone, find the merge commit with `git log --oneline -1 <escomp_remote>/development` where the merge commit is the first field in the output.
 1. Tag the `<merge_commit>` with `git tag -a <tag> <merge_commit> -m '<commit_message>` where `<commit_message>` is the same as the message for the `<merge_commit>`
