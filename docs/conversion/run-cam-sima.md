@@ -66,4 +66,7 @@ Once you have successfully run CAM-SIMA and all answer changes have either accep
     !!! Warning "timestep discrepancy"
         The cam_snapshot file will be written starting with the second timestep, so your **CAM** run will need to advance past the first timestep before you can start comparing.
 
+- If you find that you have to comment out pieces of code in CAM to get your snapshot tests to work (not ideal, but has happened a few times!), be sure to commit your source mods to the [CAM-SIMA backups](https://github.com/NCAR/CAM-SIMA_backups) repository.
+
+
 - If you run into a "tip" that should be added here, please confer with the other CAM SEs to get it added to the documentation!!
