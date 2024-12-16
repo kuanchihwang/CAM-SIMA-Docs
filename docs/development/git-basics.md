@@ -255,8 +255,8 @@ git merge ESCOMP/development
 ## Tagging a commit
 When a PR is ready to be merged into CAM-SIMA's code base, you will need to consider whether or not a new tag is appropriate. In CAM-SIMA, the standard is whether or not the baselines have changed since the last tag. After you have run the tests (per the [regression testing workflow](cam-testing.md/#running-the-regression-tests-manual)):
 
-1. If there are no baseline differences (no tests "FAIL" or yield a "DIFF"), no tag is necessary and you can proceed to merge your PR (you will also not archive the baselines)
-1. If there are baseline differences (at least one test results in a "DIFF"), you will need to follow the procedure below to create a tag **after** you merge your PR
+1. If there are no baseline differences (no tests "FAIL" or yield a "DIFF"), no tag is necessary and you can proceed to SQUASH & MERGE your PR (you will also not archive the baselines)
+1. If there are baseline differences (at least one test results in a "DIFF"), you will need to follow the procedure below to create a tag **after** you SQUASH & MERGE your PR
 
 ### Tag syntax
 
