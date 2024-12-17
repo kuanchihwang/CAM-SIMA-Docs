@@ -27,7 +27,7 @@ debug_output = 0  !Turns off debug messages which interfere with the validation 
 | Error text  |  Description   | Possible Fix |
 |:------------|----------------|--------------|
 |`ERROR: cam_get_file: FAILED to get UNSET_PATH` | No initial data file specified (or defaulted to) | Specify `ncdata = '<file>'` in your user_nl_cam file |
-|`ERROR: read_field_3d: No variable foun din (/XXX, /)` | Variable not found when we're reading in the initial data or snapshot file | <ul><li>Double-check your standard name</li><li>Determine if CAM-SIMA needs to handle/initialize the variable. If it does, follow the procedure for the error below</li></ul> |
+|`ERROR: read_field_3d: No variable found in (/XXX, /)` | Variable not found when we're reading in the initial data or snapshot file | <ul><li>Double-check your standard name</li><li>Determine if CAM-SIMA needs to handle/initialize the variable. If it does, follow the procedure for the error below</li></ul> |
 |`ERROR: Cannot read XXX from file, XXX has no horizontal dimension` | Variable is a scalar; we don't have an interface to read it in from a file (and it's not likely to be present on the file) | <ul><li>If "XXX" is static during the run, add `access="protected"` to the variable's XML entry in the registry</li><li>if the variable is not static, either:<ul><li>Initialize the variable in the init phase of your scheme (`intent=out`), or</li><li>initialize "XXX" in CAM-SIMA (NOT in the physics code) and add a call to `mark_as_initialized(<standard_name>)` so CAM-SIMA doesn't try to read in the variable</li></li></ul></ul> |
 |`ERROR in '<path/to/cesm.exe>': corrupted size vs. prev_size: 0xXXXXXXXXXXXXXX` | Possibly an out of bounds error | <ul><li>Find the line that the stack trace is pointing to (likely in the generated code) and trace the variable in question, looking for out-of-bounds errors<ul><li>Specifically, check that the variable has the **correct dimensions** in the metadata (e.g. vertical_layer_dimension vs vertical_interface_dimension)</li></ul></li><li>Also, check the variables immediately before and after the line for out-of-bounds errors (we have seen this error reported on the line immediately before the problem line).</li><li>Try running in DEBUG mode if not already to include bounds checking</li></ul> |
 
@@ -37,7 +37,7 @@ debug_output = 0  !Turns off debug messages which interfere with the validation 
     - See the section on [Tips for uncovering unexpected answer changes](#tips-for-uncovering-unexpected-answer-changes) for debugging strategies
 
 !!! Note "Additional step for NAG compiler"
-    If we have a working NAG compiler with CAM-SIMA (not working as of 8/26/2024), perform this extra step:
+    If we have a working NAG compiler with CAM-SIMA (not working as of 12/17/2024), perform this extra step:
 
     - Make at least one run using the NAG compiler on izumi in debug mode and specifying “-nan” as an additional compilation option.  This option initializes all variables to NaN so that if something is uninitialized and is used, it will be trapped.  To enable this flag:
         - After executing the ./create_newcase and ./case.setup commands and BEFORE executing the ./case.build, edit the file in your case directory `cmake_macros/nag.cmake` (- If you want to change the file so that it runs every time you execute a `./create_newcase`, you can find the file at `ccs_config/machines/cmake_macros/nag.cmake`). 
