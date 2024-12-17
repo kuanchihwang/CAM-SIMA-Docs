@@ -8,7 +8,7 @@ It's time to try to run CAM-SIMA!
 - Your `user_nl_cam` needs to contain the following (to bring in the cam_snapshot for input and to activate the validation tool):
 ```
 ncdata='/FullPathName/your_before_snapshot_file.nc'
-ncdata_check='/FullPathName/your_output_filename.nc'
+ncdata_check='/FullPathName/your_after_snapshot_file.nc'
 debug_output = 0  !Turns off debug messages which interfere with the validation tool output
 ```
 - If the number of vertical levels in your snapshot file is something other than 30, then you will also need to add the following to your user_nl_cam:
