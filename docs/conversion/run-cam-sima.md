@@ -24,6 +24,11 @@ debug_output = 0  !Turns off debug messages which interfere with the validation 
 - Run `./case.build` and `./case.submit`
     - Consult the table below for common errors. Also see [debugging tips](../development/debugging.md) for help if you're getting errors
 
+
+!!! Warning "Rebuilding CAM-SIMA"
+    If you've modified any metadata between builds, you will need to run `./case.build --clean-all` before rebuilding.
+
+
 | Error text  |  Description   | Possible Fix |
 |:------------|----------------|--------------|
 |`ERROR: cam_get_file: FAILED to get UNSET_PATH` | No initial data file specified (or defaulted to) | Specify `ncdata = '<file>'` in your user_nl_cam file |
