@@ -34,7 +34,7 @@ Finally, the tests themselves are listed in `<CAM-SIMA>/cime_config/testdefs/tes
 *Note: you may also have to include the environment variable `CAM_ACCOUNT` on derecho, which points to your account key
 
 ### Archiving baselines
-After you have run the tests, merged your PR, and created a tag (see [tag workflow](git-basics.md#tagging-a-commit)), you will need to archive your baselines for the next person.
+If your PR changes answers, then after you have run the tests, merged your PR, and created a tag (see [tag workflow](git-basics.md#tagging-a-commit)), you will need to archive your baselines for the next person.
 
 To do this, navigate to `$CAM-SIMA/test/system` on derecho and run:
 
