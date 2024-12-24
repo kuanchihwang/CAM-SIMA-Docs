@@ -19,19 +19,34 @@ For running Intel tests*:
 env CAM_FC=intel ./test_driver.sh -f
 ```
 
+*Note: you may also have to include the environment variable `CAM_ACCOUNT` on derecho, which is your account key
+
 !!! Note "test_driver.sh default"
     By default, `test_driver.sh` will compare against the baselines in `/glade/campaign/cesm/community/amwg/sima_baselines/latest_<CAM_FC>`. If you wish to compare against different baselines, specify the path to those baselines with the environment variable `BL_TESTDIR`
 
 !!! Note "Running test_driver.sh with no baseline comparison"
     If you do not wish to compare to baselines, don't use the `BL_TESTDIR` environment variable and use the flag `--no-bl-compare`
 
+
 Running the script will produce a directory in your scratch space labeled `aux_sima_<CAM_FC>_<timestamp>`, where `<CAM_FC>` is the compiler you chose, and `<timestamp>` is the timestamp (starting with the date) of when the tests were started, along with a job submitted to the local batch system.
 
 Inside the directory you should see an executable labeled `cs.status.*`.  Running that command after the submitted job has finished will display the test results. **Everything should be labeled `PASS`.  Any other label indicates that a test may have failed, and should be investigated.** Expected failures can be found in the `$CAM-SIMA/test/existing-test-failures.txt` file.
 
-Finally, the tests themselves are listed in `<CAM-SIMA>/cime_config/testdefs/testlist_cam.xml`. Any files that need to be included in order for the tests to run properly are located in `<CAM-SIMA/cime_config/testdefs/testmods_dirs/cam/outfrq_XXX`, where `XXX` is the name of the test.  Additional information on the CIME testing system, which is what this testing infrastructure is built on, can be found [online here](https://esmci.github.io/cime/versions/master/html/users_guide/testing.html). 
+#### Inspecting test output
+If you have an unexpected FAIL or PEND or DIFF, you will want to investigate further. Start by navigating into the test directory, for example:
+```
+cd SMS_Ln9.ne5pg3_ne5pg3_mg37.FTJ16.derecho_intel.cam-outfrq_se_cslam.GC.aux_sima_intel_20241223100339
+```
 
-*Note: you may also have to include the environment variable `CAM_ACCOUNT` on derecho, which points to your account key
+If you have familiarity with CAM cases, the setup and directory structure will be familiar.
+
+- A good place to start is the `TestStatus.log` file, which will include almost all test output (including build failures and information on where to look for other failures)
+- Build logs for each component are in the `bld` directory. If you look at the filenames and one or more doesn't have the `.gz` end tag, those are likely culprits for having the error.
+- Run logs are in the `run` directory. Similar to the build logs, log files that aren't zipped up are candidates for containing errors. The `atm.log.*` and `cesm.log.*` files are likely going to contain the information about the error you're seeking.
+- Refer to the procedures for [checking metadata](../conversion/check-metadata.md) and [running CAM-SIMA](../conversion/run-cam-sima.md) for additional debugging help
+
+#### Additional test info
+The tests themselves are listed in `<CAM-SIMA>/cime_config/testdefs/testlist_cam.xml`. Any files that need to be included in order for the tests to run properly are located in `<CAM-SIMA/cime_config/testdefs/testmods_dirs/cam/outfrq_XXX`, where `XXX` is the name of the test.  Additional information on the CIME testing system, which is what this testing infrastructure is built on, can be found [online here](https://esmci.github.io/cime/versions/master/html/users_guide/testing.html). 
 
 ### Archiving baselines
 If your PR changes answers, then after you have run the tests, merged your PR, and created a tag (see [tag workflow](git-basics.md#tagging-a-commit)), you will need to archive your baselines for the next person.
