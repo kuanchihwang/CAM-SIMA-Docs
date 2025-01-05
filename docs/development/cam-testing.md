@@ -9,6 +9,9 @@ This page describes the various automated and manual tests that are run for CAM-
 
 Users can manually run regression tests on Derecho to ensure that the model builds correctly in various configurations.  The tests can be run with a local copy of CAM-SIMA by using the `test_driver.sh` script under `$CAM-SIMA/test/system`.  To run the tests associated with a particular compiler option one can do the following commands:
 
+!!! Warning "run git-fleximod"
+    Make sure you have run `bin/git-fleximod update` before you run the tests!
+
 For running GNU tests*:
 ```
 env CAM_FC=gnu ./test_driver.sh -f
@@ -49,7 +52,7 @@ If you have familiarity with CAM cases, the setup and directory structure will b
 The tests themselves are listed in `<CAM-SIMA>/cime_config/testdefs/testlist_cam.xml`. Any files that need to be included in order for the tests to run properly are located in `<CAM-SIMA/cime_config/testdefs/testmods_dirs/cam/outfrq_XXX`, where `XXX` is the name of the test.  Additional information on the CIME testing system, which is what this testing infrastructure is built on, can be found [online here](https://esmci.github.io/cime/versions/master/html/users_guide/testing.html). 
 
 ### Archiving baselines
-If your PR changes answers, then after you have run the tests, merged your PR, and created a tag (see [tag workflow](git-basics.md#tagging-a-commit)), you will need to archive your baselines for the next person.
+**If your PR changes answers**, then after you have run the tests, merged your PR, and created a tag (see [tag workflow](git-basics.md#tagging-a-commit)), you will need to archive your baselines for the next person.
 
 To do this, navigate to `$CAM-SIMA/test/system` on derecho and run:
 
@@ -129,9 +132,22 @@ All `doctest` tests are also run automatically as long as the scripts they are l
 
 To manually run all of the unit tests at any time, simply run the following shell script:
 
-`CAM-SIMA/test/run_tests.sh`
+`CAM-SIMA/test/run_unit_tests.sh`
 
 Finally, when adding new tests, determine if the test can be done in only a few lines with minimal interaction with external files or variables.  If so, then it would likely be best as a `doctest`.  Otherwise it should be a `unittest` test.  Failure to follow this rule of thumb could result in test failures in the Github Actions workflow.  Also remember to add your new tests to the `run_tests.sh` script so future users can easily run the tests manually.
+
+#### Updating sample files
+If you modified any python files in your code modifications (those in `cime_config` or in `src/data`), you may need to update the sample files to match what is now expected.
+
+1. Run the unit tests as described above
+1. If you have failures, quickly check that the diffs are expected
+
+    ```
+    diff <tmp file> <sample file>
+    ```
+
+1. Copy over the changed files from the `tmp` directory to the `sample_files` directory
+1. Rerun the tests to confirm they all pass now.
 
 ### Static Source Code Analysis
 

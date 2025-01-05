@@ -22,6 +22,7 @@ nav:
     - design/history.md
     - design/sima-design-goals.md
   - Development:
+    - development/cam-sima-workflow.md
     - development/cam-coding-standards.md
     - development/cam-testing.md
     - development/debugging.md
