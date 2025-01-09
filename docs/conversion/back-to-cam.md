@@ -7,17 +7,18 @@ Bring the CCPP version back into a new CAM clone or branch
 - Remove the non-CCPP version from your CAM source directory
 - Make a new directory in the atmosperhic_physics submodule of CAM (make sure the directory name is the one you used in step one of the conversion to CCPP):
 ```
-mkdir src/atmos_phys/<parameterization>
+mkdir src/atmos_phys/schemes/<parameterization>
 ```
 - Copy your new CCPP version files from CAM-SIMA into this new directory
 - Update the routine names to match the CCPP-ized subroutine names where the subroutines are called
 - Update the calling lists if they were changed when the CCPP-ized subroutines were made
 - If the CCPP-ized module is in a new subdirectory, you will need to add it to `bld/configure`:
 ```
-print $fh "$camsrcdir/src/atmos_phys/<parameterization>\n";
+print $fh "$camsrcdir/src/atmos_phys/schemes/<parameterization>\n";
+```
 
 ## Testing
-```
+
 - To quickly test that your code is working during development, you can create two new model cases with a compset that involves your physics scheme, and the following XML changes:
 
 ```
