@@ -33,7 +33,7 @@ print $fh "$camsrcdir/src/atmos_phys/schemes/<parameterization>\n";
     The first case will be CAM without your changes, and the second will be CAM with your new physics scheme code changes. Both simulations should produce a `<case_name>.cam.rh0.XXX` file, which you can compare by using the cprnc tool, which can be found (and used) on derecho below. Your new physics code is working correctly if the printed output from cprnc states that there are no differences in the files.
 
 ```
-/glade/campaign/cesm/cesmdata/tools/cprnc/cprnc
+/glade/campaign/cesm/cesmdata/cprnc/cprnc
 cprnc <file1> <file2>
 ```
 - Optional step: if want to have additional testing... Once you believe it is working, make a [snapshot](create-snapshots.md) to run CAM with this modified clone.

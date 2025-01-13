@@ -167,5 +167,5 @@ ncdiff -v <field_name> -o <output_file> <file1> <file2>
 
 *`cprnc` can be found:
 
-- on derecho: `/glade/p/cesmdata/cseg/tools/cime/tools/cprnc/cprnc`
+- on derecho: `/glade/campaign/cesm/cesmdata/cprnc/cprnc`
 - on izumi: `/fs/cgd/csm/tools/cime/tools/cprnc/cprnc`
