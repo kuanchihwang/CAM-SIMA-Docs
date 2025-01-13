@@ -17,6 +17,9 @@ mkdir src/atmos_phys/schemes/<parameterization>
 print $fh "$camsrcdir/src/atmos_phys/schemes/<parameterization>\n";
 ```
 
+!!!Note "Handling readnl and diagnostics in CAM"
+    The original `<parameterization>_readnl` subroutine (if there was one) must still be called in runtime_opts.F90 and all addfld/outfld calls must be preserved. If your new CCPP interfaces are called directly by physpkg, this may mean that you need to create a `<parameterization>_cam.F90` module that contains `<parameterization>_readnl`. 
+
 ## Testing
 
 - To quickly test that your code is working during development, you can create two new model cases with a compset that involves your physics scheme, and the following XML changes:
