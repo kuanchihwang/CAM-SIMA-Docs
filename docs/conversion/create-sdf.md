@@ -22,6 +22,9 @@ The **Suite Definition File (SDF)** tells the CCPP-Framework which schemes will 
 
 - Add any interstitials which you’ve created or are using in the appropriate location relative to your parameterization
 
+!!! Note "CAMX physics suite"
+    You will also need to add your same set of schemes to the appropriate larger suite (usually `suite_cam7.xml`). Use comments to delineate your set(s) of schemes to make the SDF somewhat readable.
+
 For example: if your parameterization requires dry water vapor, you'll want to add:
 
 - `<scheme>wet_to_dry_water_vapor</scheme>` before your core parameterization scheme to convert water vapor to a dry mixing ratio (CAM-SIMA has "wet")
