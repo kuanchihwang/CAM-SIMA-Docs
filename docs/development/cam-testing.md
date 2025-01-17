@@ -93,6 +93,15 @@ The test list can be found here: `$CAM-SIMA/cime_config/testdefs/testlist_cam.xm
 - `<RELPATH_TO_TESTMODS_DIR>`: relative path to the testmods directory for this run; usually looks something like `"cam/some_directory_name/"`
     - The testmods directory will contain any namelist mods and XML configuration variable changes for the test (`user_nl_cam` and/or `shell_commands`)
     - testmods directories can be found in `$CAM-SIMA/cime_config/testdefs/testmods_dirs/cam/`
+!!! Note "standard snapshot test mods"
+    All new test mod directories will likely include a mod to CAM_CONFIG_OPTS in `shell_commands` as well as the following mods to `user_nl_cam`:
+    
+      - `ncdata` (initial data file - the "before" snapshot)
+      - `ncdata_check` (check file - the "after" snapshot)
+      - `ncdata_check_err=.true.` (will cause the test to fail if the ncdata check process fails)
+      - `min_difference=<some small number>` (if your ncdata_check had roundoff errors, set this to a number slightly above your roundoff)
+      - `pver=30` (to match your snapshot file)
+      - Some relevant history fields for baseline comparisons - see [history usage](../usage/history.md)
 - `<MACH_NAME>`: machine name (options: `derecho`, `izumi`, `casper`)
 - `<COMPILER>`: compiler to be used (options: `gnu`, `nag`, `intel`, `nvhpc`)
 - `<TEST_CATEGORY>`: group of tests that this test belongs to - the default run by `test_driver.sh` is `aux_sima` (which is run for each PR to CAM-SIMA)

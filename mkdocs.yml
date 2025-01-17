@@ -12,6 +12,7 @@ nav:
     - conversion/check-metadata.md
     - conversion/run-cam-sima.md
     - conversion/back-to-cam.md
+    - conversion/final-steps.md
     - conversion/walkthrough.md
   - Design:
     - design/cam-build-process.md

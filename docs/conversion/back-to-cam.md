@@ -40,13 +40,4 @@ cprnc <file1> <file2>
     - Use the cprnc tool to compare the resulting CAM6 “after” snapshot file with your original CAM6 “after” snapshot file (from before the port). If they differ and you changed the internal calculations during your port, you will need to determine if these changes are expected and correct.  
         - If they are different (and the changes are correct), then you will need to repeat the steps listed in the [Run CAM-SIMA](run-cam-sima.md) section with the newly generated snapshot files from the modified CAM clone.
 
-## Committing your changes
-
-- Open a PR in [ESCOMP/atmospheric_physics](https://github.com/ESCOMP/atmospheric_physics) for your parameterization and any interstitial code (including diagnostics) using the code in your sandbox
-    - Be sure to follow the workflow (including adding unit tests and updating the NamesNotInDictionary.txt file) described in the atmospheric_physics [development workflow](../atmospheric_physics/development_workflow.md)
-- Open a PR in [ESCOMP/CAM](https://github.com/ESCOMP/CAM) for your changes in CAM (if calling lists changed) or it may as simple as a PR to update the atmospheric_physics tag in `.gitmodules`. Don't forget to make a ChangeLog.
-    - Be sure to include the `ccpp-conversion` label on your PR
-- If any changes were made to CAM-SIMA (more than likely, at least an update to the atmospheric_physics submodule will probably be needed), open a PR in [ESCOMP/CAM-SIMA](https://github.com/ESCOMP/CAM-SIMA).
-- Once all PRs are merged and tagged, check off the scheme as "Converted" in the [spreadsheet](https://docs.google.com/spreadsheets/d/1_1TTpnejam5jfrDqAORCCZtfkNhMRcu7cul37YTr_WM/edit?gid=0#gid=0)
-
-[Details on opening PR’s](https://github.com/ESCOMP/CAM/wiki/CAM-Development-Workflow-in-GitHub#how-to-submit-code-changes-to-be-included-in-escompcam)
+Proceed to [Step 10 - Final Steps](final-steps.md)
