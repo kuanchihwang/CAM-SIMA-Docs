@@ -1,6 +1,8 @@
 # 10 - Final steps
 
-Open PRs to the relevant repositories.
+Open PRs to the relevant repositories. The order specified here (atmospheric_physics, CAM, then CAM-SIMA) is the preferred ordering of PRs/testing/merging. The reason for this is that atmospheric_physics has to go first to get a tag for both CAM and CAM-SIMA. Then the robust testing within CAM will validate the physics, resulting in increased confidence for bringing it into CAM-SIMA.
+
+It is also good practice to not let there be too much time between merging your atmospheric_physics PR and your CAM-SIMA PR, as the CAM-SIMA registry and the physics metadata are very closely linked and can cause problems for other developers if they are out of sync.
 
 ## atmospheric_physics
 Follow the [atmospheric_physics workflow](../atmospheric_physics/development_workflow.md) to open a PR, respond to review requests, and populate the `NamesNotInDictionary.txt` file.
