@@ -7,14 +7,15 @@ This page describes the general workflow for adding new developments to the [atm
 The general workflow for adding a feature, bug-fix, or modification to atmospheric_physics is as follows:
 
   1.  [**Open an issue.**](#1-open-an-issue)
-  2.  **[Add your code modifications](#3-update-your-code-with-changes-from-the-official-repo) to a branch on your [fork](#2-create-a-fork-if-you-havent-already).**
-  3.  **[Add/amend unit tests](#5-unit-testing)**
-  3.  **[Open a PR](#6-creating-a-pull-request-pr) from your branch to the `development` branch.**
-  4.  **Respond to any reviewer requests.**
-  5.  **Fix any failing tests.**
-  6.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
-  7.  **If you know that this PR will need an official tag, then also add the [tag name](Tagging-Instructions.md/#tag-naming-conventions) to the PR description.**
-  8.  **Squash the commits and merge the PR (e.g. the "squash and merge" option).**
+  1.  **[Add your code modifications](#3-update-your-code-with-changes-from-the-official-repo) to a branch on your [fork](#2-create-a-fork-if-you-havent-already).**
+  1.  **[Add/amend unit tests](#5-unit-testing)**
+  1.  **[Open a PR](#6-creating-a-pull-request-pr) from your branch to the `development` branch.**
+  1.  **Respond to any reviewer requests.**
+  1.  **Fix any failing automated Github tests.**
+  1.  **RECOMMENDED: Rerun [CAM](https://github.com/ESCOMP/CAM/wiki/CAM-SE-Workflows#run-cam-tests) and/or [CAM-SIMA](../development/cam-testing.md#regression-testing) regression tests to ensure your updates haven't broken anything.**
+  1.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
+  1.  **If you know that this PR will need an official tag, then also add the [tag name](Tagging-Instructions.md/#tag-naming-conventions) to the PR description.**
+  1.  **Squash the commits and merge the PR (e.g. the "squash and merge" option).**
 
 If you need an official tag for your new additions, then once your `development` PR has been merged you will need to do the following:
 
