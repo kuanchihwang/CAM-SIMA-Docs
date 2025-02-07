@@ -111,14 +111,14 @@ The job will be submitted to the system's queue. You can see the status of your 
 
 [Debugging tips](../development/debugging.md#run-time-errors)
 
-## Current CAN_CONFIG_OPTS options in CAM-SIMA
+## Current CAM_CONFIG_OPTS options in CAM-SIMA
 
-The following is a list of all the allowed options that can be included in `CAM_CONFIG_OPTS`, what each option does, whether or not they are required (and if not what the dfault value is), and what config variable it maps to in the `ConfigCAM` code.
+The following is a list of all the allowed options that can be included in `CAM_CONFIG_OPTS`, what each option does, whether or not they are required (and if not what the default value is), and what config variable it maps to in the `ConfigCAM` code.
 
 - **physics-suites** (required)
     - usage example: `--physics-suites cam7`
     - purpose:  Specifies what CCPP physics suite(s) will be built and made available for the given case.  More than one suite can be specified using a semi-colon, e.g. `cam4;cam7`.
-    - configCAM variable:  `physics_suites`
+    - ConfigCAM variable:  `physics_suites`
 - **dyn** (required)
     - usage example: `--dyn mpas`
     - purpose:  Specifies what dynamical core will be built and made available for the given case.
