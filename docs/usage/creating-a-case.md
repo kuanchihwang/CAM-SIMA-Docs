@@ -76,7 +76,7 @@ Many configurable settings can be found within the env_*.xml files in your case 
 - `CAM_CONFIG_OPTS`: This is where we tell CAM-SIMA what physics scheme(s) we wish to run, as well as if we wish to run the `null` dycore.
     - FKESSLER will default to `--physics-suites kessler --analytic_ic`, which means we're running the `suite_kessler.xml` SDF with the SE dycore (with analytic initial conditions - no need to supply an ncdata initial conditions file)
     - If you instead want to run a test with the null dycore, you'll want to change this with `./xmlchange CAM_CONFIG_OPTS = "--physics-suites kessler --dyn none"`
-    - A list of all possible configuration options can be found at the bottom of this page, or [here](#current-can_config_opts-options-in-cam-sima)
+    - A list of all possible configuration options can be found at the bottom of this page, or [here](#current-cam_config_opts-options-in-cam-sima)
 - `CAM_LINKED_LIBS`: Hopefully, you won't have to change this often; however, if you are getting linking errors during your build, try turning off the linked libraries (`./xmlchange CAM_LINKED_LIBS=''`)
 - `DOUT_S`: This is the flag to archive log files of successful runs. During development, we advise turning this off so your log files don't disappear on you (`./xmlchange DOUT_S=False`)
 - `STOP_OPTION` & `STOP_N`: How long you are going to run the model. If `STOP_N` is 8 and `STOP_OPTION` is "ndays", you are setting the model up to run for 8 days.
