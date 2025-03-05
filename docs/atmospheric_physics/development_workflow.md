@@ -15,7 +15,9 @@ The general workflow for adding a feature, bug-fix, or modification to atmospher
   1.  **RECOMMENDED: Rerun [CAM](https://github.com/ESCOMP/CAM/wiki/CAM-SE-Workflows#run-cam-tests) and/or [CAM-SIMA](../development/cam-testing.md#regression-testing) regression tests to ensure your updates haven't broken anything.**
   1.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
   1.  **If you know that this PR will need an official tag, then also add the [tag name](Tagging-Instructions.md/#tag-naming-conventions) to the PR description.**
-  1.  **Squash the commits and merge the PR (e.g. the "squash and merge" option).**
+  1.  **If this PR contains updates that will impact CAM, DO NOT MERGE the PR until you have been assigned a CAM tag by the CAM gatekeeper**
+      - If there are associated changes to CAM-SIMA, it is also good practice to get those changes approved before merging the atmospheric_physics PR.
+  1.  **Once you're ready to merge, squash the commits and merge the PR (e.g. the "squash and merge" option).**
 
 If you need an official tag for your new additions, then once your `development` PR has been merged you will need to do the following:
 
