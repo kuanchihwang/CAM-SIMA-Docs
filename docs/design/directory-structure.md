@@ -2,6 +2,60 @@
 
 This page lists out the directory structure for CAM-SIMA, and what the general purpose of each directory and subdirectory is.
 
+## Overview
+Linked directories represent externals submodules (except .lib/git-fleximod, which is not a submodule but instead code copied from the external repository)
+<small><pre>
+CAM-SIMA
+|-- .github
+|-- [.lib/git-fleximod](https://github.com/ESMCI/git-fleximod)
+|-- bin
+|-- [ccpp_framework](https://github.com/NCAR/ccpp-framework)
+|-- [ccs_config](https://github.com/ESMCI/ccs_config_cesm)
+|-- [cime](https://github.com/ESMCI/cime)
+|-- cime_config
+|-- components
+|   |-- [cdeps](https://github.com/ESCOMP/CDEPS)
+|   |-- [cice](https://github.com/ESCOMP/CESM_CICE)
+|   |-- [cism](https://github.com/ESCOMP/CISM-wrapper)
+|   |-- [clm](https://github.com/ESCOMP/CTSM)
+|   |-- [cmeps](https://github.com/ESCOMP/CMEPS)
+|   |-- [mizuRoute](https://github.com/ESCOMP/mizuRoute)
+|   |-- [mosart](https://github.com/ESCOMP/MOSART)
+|   |-- [rtm](https://github.com/ESCOMP/RTM)
+|-- docker
+|-- libraries
+|   |-- [FMS](https://github.com/ESCOMP/FMS_interface)
+|   |-- [parallelio](https://github.com/NCAR/ParallelIO)
+|-- [share](https://github.com/ESCOMP/CESM_share)
+|-- src
+|   |-- control
+|   |-- core_utils
+|   |-- cpl
+|   |   |-- nuopc
+|   |-- data
+|   |-- dynamics
+|   |   |-- mpas
+|   |   |   |-- assets
+|   |   |   |-- driver
+|   |   |   |-- [dycore](https://github.com/MPAS-Dev/MPAS-Model)
+|   |   |-- none
+|   |   |-- se
+|   |   |   |-- dycore
+|   |   |-- tests
+|   |   |   |-- initial_conditions
+|   |   |-- utils
+|   |-- history
+|   |-- physics
+|   |   |-- [ncar_ccpp](https://github.com/ESCOMP/atmospheric_physics)
+|   |   |-- utils
+|   |-- utils
+|-- test
+|   |-- system
+|   |-- unit
+|   |   |-- sample_files
+|-- tools
+</pre></small>
+
 ## Top-level external directories
 
 These directories contain external repository source code, libraries, or tools, and usually are only present after `bin/git-fleximod update` has been run.
