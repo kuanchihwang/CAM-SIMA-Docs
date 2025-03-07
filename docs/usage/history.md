@@ -99,7 +99,7 @@ During **init** time, fields can be added to the possible field list with a call
 | diagnostic_name      | No        | string    | diagnostic name for the field - will be the name in netcdf output file |
 | description          | No        | string    | Description of the variable                    |
 | vdim_name            | No        | string    | vertical dimension: `horiz_only` for no vertical dimension (see note below this table); 'lev' for vertical_layer_dimension; 'ilev' for vertical_interface_dimension|
-| avgflag              | No        | string    | default average flag; options: 'avg', 'lst' (instantaneous), 'min', 'max', 'var' (standard deviation) |
+| avgflag              | No        | string    | default average flag; options: 'avg', 'inst', 'min', 'max', 'var' (standard deviation) |
 | units                | No        | string    | variable units                                 |
 | gridname             | Yes       | string    | gridname on which the variable's data is mapped (defaults to the physics grid) |
 | flag_xyfill          | Yes       | string    | fill value for variable values                 |
