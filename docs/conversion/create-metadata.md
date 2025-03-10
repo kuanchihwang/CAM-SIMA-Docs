@@ -35,6 +35,7 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
 
 
 - *units*: the units can be found in the standard names spreadsheet as well (`Snapshot Units` column)
+    - You can find additional rules for units in the [ESMStandardNames repository](https://github.com/ESCOMP/ESMStandardNames/blob/main/StandardNamesRules.rst#units)
 - *dimensions*: Refer to the table below
     - If you have module level variables (variables above the "contains" line in a module file) which are declared with dimension `pver` or `pverp`, then you need to make this variable be allocatable and allocate the variable in the init routine.  This is due to the fact that pver is not known at compilation time, but is rather a run-time option in CAM-SIMA
     - Note for pcols inside parameterizations:  As only active columns will be passed to the parameterizations, there is no need for a maximum size variable anymore

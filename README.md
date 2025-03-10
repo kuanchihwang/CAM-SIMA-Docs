@@ -8,6 +8,8 @@ Required python libraries (pip install):
 
 - mkdocs
 - mkdocs-material
+- mkdocs-git-committers-plugin
+- mkdocs-git-revision-date-localized-plugin
 
 # Pushing updates
 1. Clone the repository and checkout `main`
