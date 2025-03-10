@@ -47,9 +47,11 @@ plugins:
   # Date plugin requires fetch-depth: 0
   - git-revision-date-localized:
       enable_creation_date: true
+      enabled: !ENV [CI, false]
   - git-committers:
       repository: ESCOMP/CAM-SIMA-docs
       branch: main
+      enabled: !ENV [CI, false]
 
 theme:
   icon:
