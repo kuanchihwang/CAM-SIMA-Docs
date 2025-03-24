@@ -35,7 +35,7 @@ The CCPP Framework will autogenerate the namelist reader based on the elements i
 <entry_id_pg version="2.0">
 
 
-<entry id="cldfrc_premit">
+  <entry id="cldfrc_premit">
     <type>real</type>
     <category>cldfrc</category>
     <group>cldfrc_nl</group>
