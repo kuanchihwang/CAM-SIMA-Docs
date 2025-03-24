@@ -35,25 +35,27 @@ The CCPP Framework will autogenerate the namelist reader based on the elements i
 <entry_id_pg version="2.0">
 
 
-<entry id="rayk0">
-    <type>integer</type>
-    <category>rayleigh_friction</category>
-    <group>rayleigh_friction_nl</group>
-    <standard_name>rayleigh_friction_center_vertical_index</standard_name>
-    <units>1</units>
+<entry id="cldfrc_premit">
+    <type>real</type>
+    <category>cldfrc</category>
+    <group>cldfrc_nl</group>
+    <standard_name>tunable_parameter_for_top_pressure_bound_for_mid_level_clouds_for_cloud_fraction</standard_name>
+    <units>Pa</units>
     <desc>
-      Variable to specify the vertical index at which the
-      Rayleigh friction term is centered (the peak value).
+      Top pressure bound for mid level cloud.
     </desc>
     <values>
-      <value>2</value>
+      <value dyn="mpas">75000.0D0</value>
+      <value dyn="se">40000.0D0</value>
+      <value>40000.0D0</value>
     </values>
-</entry>
+  </entry>
 
 
 </entry_id_pg>
 ```
 !!!Note "namelist values"
-    When populating the value fields, you don't need to port all of them at this time.  You need to put in the value that is used by default by CAM, but the rest will be ported once all schemes have been ported.
+    When porting namelist values from CAM namelist defaults, the attributes supported in CAM-SIMA can be retrieved by printing out `cam_nml_dict` in `cime_config/buildnml` [at the end of the function call](https://github.com/ESCOMP/CAM-SIMA/blob/3699359ebfe81b00273a9815d128cae903a26208/cime_config/buildnml#L355). An example list of supported attributes (as of March 2025) are: `{'ic_ymd': '10101', 'debug': '0', 'pcols': '16', 'psubcols': '1', 'dyn': 'se', 'hgrid': 'ne3np4', 'csne': '3', 'npg': '3', 'analytic_ic': '1', 'ocn': 'socn', 'phys_suite': 'cam4', 'nlev': '26'}`.
+
 
 Once you have made your namelist file, proceed to [4 - Interstitials](interstitials.md)
