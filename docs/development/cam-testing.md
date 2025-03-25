@@ -129,11 +129,11 @@ CAM-SIMA supports two kinds of python unit tests, `doctest` and `unittest` tests
 
 All `unittest` tests should  be in:
 
-`CAM-SIMA/test/unit`
+`CAM-SIMA/test/unit/python`
 
 while all files used by the tests should be in:
 
-`CAM-SIMA/test/unit/sample_files`
+`CAM-SIMA/test/unit/python/sample_files`
 
 All `unittest` tests are automatically run via Github Actions whenever a Pull Request (PR) is opened, modified, or merged.  
 
@@ -141,9 +141,9 @@ All `doctest` tests are also run automatically as long as the scripts they are l
 
 To manually run all of the unit tests at any time, simply run the following shell script:
 
-`CAM-SIMA/test/run_unit_tests.sh`
+`CAM-SIMA/test/run_python_unit_tests.sh`
 
-Finally, when adding new tests, determine if the test can be done in only a few lines with minimal interaction with external files or variables.  If so, then it would likely be best as a `doctest`.  Otherwise it should be a `unittest` test.  Failure to follow this rule of thumb could result in test failures in the Github Actions workflow.  Also remember to add your new tests to the `run_tests.sh` script so future users can easily run the tests manually.
+Finally, when adding new tests, determine if the test can be done in only a few lines with minimal interaction with external files or variables.  If so, then it would likely be best as a `doctest`.  Otherwise it should be a `unittest` test.  Failure to follow this rule of thumb could result in test failures in the Github Actions workflow.  Also remember to add your new tests to the `run_python_unit_tests.sh` script so future users can easily run the tests manually.
 
 #### Updating sample files
 If you modified any python files in your code modifications (those in `cime_config` or in `src/data`), you may need to update the sample files to match what is now expected.
