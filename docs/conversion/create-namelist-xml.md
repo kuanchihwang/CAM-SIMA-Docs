@@ -55,7 +55,7 @@ The CCPP Framework will autogenerate the namelist reader based on the elements i
 </entry_id_pg>
 ```
 !!!Note "namelist values"
-    When porting namelist values from CAM namelist defaults, the attributes supported in CAM-SIMA can be retrieved by printing out `cam_nml_dict` in `cime_config/buildnml` [at the end of the function call](https://github.com/ESCOMP/CAM-SIMA/blob/3699359ebfe81b00273a9815d128cae903a26208/cime_config/buildnml#L355). An example list of supported attributes (as of March 2025) are: `{'ic_ymd': '10101', 'debug': '0', 'pcols': '16', 'psubcols': '1', 'dyn': 'se', 'hgrid': 'ne3np4', 'csne': '3', 'npg': '3', 'analytic_ic': '1', 'ocn': 'socn', 'phys_suite': 'cam4', 'nlev': '26'}`.
+    When porting namelist values from CAM namelist defaults, the attributes supported in CAM-SIMA can be retrieved by printing out `cam_nml_dict` (or `cam_nml_dict.keys()`) in `cime_config/buildnml` [at the end of the function call](https://github.com/ESCOMP/CAM-SIMA/blob/3699359ebfe81b00273a9815d128cae903a26208/cime_config/buildnml#L355). An example of supported attributes that may be commonly used are: `phys_suite`, `ic_ymd`, `dyn`, `hgrid`, `analytic_ic`, `ocn`.
 
 
 Once you have made your namelist file, proceed to [4 - Interstitials](interstitials.md)
