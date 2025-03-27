@@ -93,4 +93,28 @@ export OMP_NUM_THREADS=$nthreads
 totalview ${EXEROOT}/cesm.exe
 ```
 
-- `exit` to exit the totalview window and give up the node 
+- `exit` to exit the totalview window and give up the node
+
+### gdb
+
+- `gdb` may be useful if you prefer a command-line interface for debugging.
+- Similarly to TotalView, here are some basic set up tips for debugging:
+    - Use `DEBUG=true`.
+    - Build using `NTASKS=1` and `NTHRDS=1`, so you do not have to debug in parallel.
+    - To more easily compare against CAM-SIMA, you can turn off chunking by specifying `-pcols <number>` in `CAM_CONFIG_OPTS` to be large enough to cover all columns.
+    - Use an interactive node; the environment can be set up by `source .env_mach_specific.sh` from the case directory.
+    - Run `gdb ../bld/cesm.exe` from the case run directory.
+- If comparing against CAM-SIMA:
+    - Generate the snapshots CAM-SIMA will run on by running CAM first; then, disable snapshot output in CAM when running CAM in the debugger. If CAM is writing the snapshots at the same time CAM-SIMA is attempting to read them, you will get cryptic `NaN` in file read errors in CAM-SIMA.
+    - Remember that CAM snapshots start from the **second** timestep, so you have to skip the first set of whatever breakpoints you set in CAM to get to the first timestep CAM-SIMA runs.
+- Tips for `gdb`:
+    - Set breakpoints using `break file_name.F90:line`
+        - Conditional breakpoints are useful if you want to break inside a loop; e.g., `break file_name.F90:123 if k == 26`.
+        - Save breakpoints using `save breakpoints <file>` and load them using `source <file>` when restarting `gdb`.
+        - Best locations for breakpoints for inspecting both CAM and CAM-SIMA are probably within the scheme itself; there you can inspect if the input variables coming into the scheme actually match each other (if not, then you may have to walk back to the previous scheme in the SDF to see where divergence started.)
+        - While it may be easy to inspect physics state in CAM (in a `_tend` subroutine or directly in `tphysbc`/`tphysac`) finding the equivalent location in the CCPP cap may not be easy.
+        - You can `info breakpoints` to see a list of breakpoints set, and show a count of how many # of times the breakpoints were triggered.
+        - If your breakpoints are hitting more often than expected but the timestep is not advancing, maybe it was accidentally set in a loop, or chunking was not disabled (for CAM).
+    - Inspect variables using the `print` command; if differences are isolated in some columns, you can consult the results of "Physics check data" from CAM-SIMA or `cprnc` output of history files to find where the values are different; then you can print the variable at these columns (Fortran syntax will work, i.e., `print zi(2:5,25:26)`)
+    - A combination of breakpoints and watchpoints will help isolate where the CAM and CAM-SIMA runs diverge, then you can `backtrace` the exact call stack that lead to a specific variable diverging.
+    - If you need to "go back in time", Totalview on Izumi will be helpful!
