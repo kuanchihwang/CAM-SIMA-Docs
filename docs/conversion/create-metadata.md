@@ -47,7 +47,7 @@ Replace all `enter_*` sections with appropriate information (standard_name, unit
 | pver          | all        | vertical_layer_dimension |
 | pverp (or pver+1) | all    | vertical_interface_dimension |
 | ncols or pcols| non-run phase | horizontal_dimension |
-| ncols or pcols| run phase  | horizonal_loop_extent OR horizontal_loop_begin:horizontal_loop_end|
+| ncols or pcols| run phase  | horizonal_loop_extent |
 | pcnst         | all        | number_of_ccpp_constituents |
 </div>
 
