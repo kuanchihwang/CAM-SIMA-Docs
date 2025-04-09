@@ -66,12 +66,16 @@ Make sure no input/output variables have named dimensions in their declaration i
     - for example: `real(r8), intent(in) :: zm(pcols, pver)` will become `real(r8), intent(in) :: zm(:,:)`
 1. If a named dimension is no longer used, it may be removed from the calling list (i.e. pcols, etc)
 1. On the CAM interface side, any variables dimensioned by `pcols` in CAM will need to be subsetted to `1:ncol` in the call to the CCPP-ized routine so that only the active columns are passed
-1. All `intent(out)` variables which are dimensioned pcols` should be initialized to zero right before being called in the main CAM physics calling routine to prevent extraneous values from existing in a pcols-dimensioned array.
+1. All `intent(out)` variables which are dimensioned `pcols` should be initialized to zero right before being called in the main CAM physics calling routine to prevent extraneous values from existing in a pcols-dimensioned array.
     - Put `!REMOVECAM/!REMOVECAM_END` labels around these initializations as any which remain after CAM is retired no longer need this precautionary step.
 1. Repeat #1-4 with any routines which are called internally
 1. Search through the code and make sure that all locations which call these updated routines have been modified correctly
     - Use the subsetted 1:ncol arrays when calling the updated routine 
     - Initialize all intent(out) arrays to zero before making the call
+
+!!! note
+    When calling CCPPized subroutines from CAM, only the active columns (`1:ncol`) should be passed in. Because CAM distinguishes between `ncols` and `pcols`, output variables sized `pcols` must be initialized to zero, because the CCPPized subroutines will only be able to modify the active columns `1:ncol`.
+
 
 ## 1d - Use kind_phys instead of r8
 1. Remove `use shr_kind_mod, only: r8=> shr_kind_r8`
