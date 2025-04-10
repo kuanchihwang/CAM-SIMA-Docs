@@ -7,6 +7,9 @@ It is also good practice to not let there be too much time between merging your 
 ## atmospheric_physics
 Follow the [atmospheric_physics workflow](../atmospheric_physics/development_workflow.md) to open a PR, respond to review requests, and populate the `NamesNotInDictionary.txt` file.
 
+!!! Note - verify changes in CAM
+    Before finalizing the atmospheric_physics pull request, compare the latest CAM tag with the CAM tag you started with when moving code from CAM to atmospheric_physics to check if any changes to moved code was introduced in CAM.
+
 ## CAM
 Follow the [CAM workflow](https://github.com/ESCOMP/CAM/wiki/CAM-SE-Workflows) to open a PR and respond to review requests. Be sure to include the `ccpp-conversion` label on your PR. Once you are assigned a tag by the gatekeeper, run the tests, update the Changelog, then make the tag and archive the baselines.
 

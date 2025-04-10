@@ -12,6 +12,7 @@ The general workflow for adding a feature, bug-fix, or modification to atmospher
   1.  **[Open a PR](#6-creating-a-pull-request-pr) from your branch to the `development` branch.**
   1.  **Respond to any reviewer requests.**
   1.  **Fix any failing automated Github tests.**
+  1.  **If moving code from CAM to atmospheric_physics, diff CAM between the latest tag and the tag where work was branched off from to verify that the moved code did not have any changes while work was being done.** For example, `git diff --name-status cam6_4_xxx...cam6_4_yyy` and check if any files related to the atmospheric_physics PR have (unexpectedly) changed.
   1.  **RECOMMENDED: Rerun [CAM](https://github.com/ESCOMP/CAM/wiki/CAM-SE-Workflows#run-cam-tests) and/or [CAM-SIMA](../development/cam-testing.md#regression-testing) regression tests to ensure your updates haven't broken anything.**
   1.  **[Update `doc/NamesNotInDictionary.txt` file.](#updating-namesnotindictionarytxt-file)**
   1.  **If you know that this PR will need an official tag, then also add the [tag name](Tagging-Instructions.md/#tag-naming-conventions) to the PR description.**
