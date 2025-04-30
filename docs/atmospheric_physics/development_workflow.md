@@ -140,10 +140,11 @@ To run the tests, you will need to build pFUnit manually (see either the github 
 
 ```bash
 $ cmake -DCMAKE_PREFIX_PATH=<path_to_pfunit>/build/installed \
+        -DATMOSPHERIC_PHYSICS_ENABLE_TESTS=ON \
         -S./test/unit-test \
         -B./build
 $ cd build && make
-$ ctest
+$ ctest -V --output-on-failure
 ```
 This should print something along the lines of
 ```bash
@@ -164,7 +165,7 @@ If you are adding a new file, add it to the list of files being built by the `te
 
 To add a test:
 
-  1.  Ensure you need to have a currently existing CMake infrastructure.
+  1.  Ensure the existing CMakeLists hierarchy covers the code you want to test (e.g. does the current directory have a CMakeList.txt file? If not, add one. Do you need other dependencies, and if so, are they CMake-ified and can be pulled in via a `find_package()` call? If you're unsure about the CMake requirements, please contact an AMP SE.
   2.  Add the code being tested added to a library via `add_library(LIBNAME ...)` in the `test/unit-test/CMakeLists.txt` file.
   3.  Create a new pFUnit test file to a corresponding directory matching the source file path into the unit-test directory.  For example, if your update added the file `schemes/utilities/new_file.F90`, create a new test file called `test/unit-test/tests/utilities/test_new_file.pf`.
   3.  Add `add_pfunit_ctest(TESTNAME TEST_SOURCES test_new_file.pf LINK_LIBRARIES LIBNAME)` in the `CMakeLists.txt` file in the test directory corresponding to the new test file (ex. `test/unit-testing/tests/utilities/CMakeLists.txt` in this example).
