@@ -70,9 +70,9 @@ The standards described in this section represent the CAM Fortran standards. Oth
 
 ### Indentation and style
 
-* *Scoping*: Indentation should follow scope. That is, whenever entering a new scope (e.g., `module`, `subroutine`, `if`, `do`), indent that scope relative to the scoping statement (recommended 3 spaces but each module should at least be self consistent).
+* *Scoping*: Indentation should follow scope. That is, whenever entering a new scope (e.g., `module`, `subroutine`, `if`, `do`), indent that scope relative to the scoping statement (recommended 2 spaces but each module should at least be self consistent).
 * A single line should be less than 133 characters long.
-* *Continue lines*: Indent continue lines 5 spaces or align with similar lines in statement.
+* *Continue lines*: Indent continue lines 4 spaces or align with similar lines in statement.
 * Use spaces to ease reading statements (e.g., before and after operators, after commas except in a dimensions list)
 * Include a space after `if`, `else`, `end`, `do`, and `while`.
 * Include a space before and after `::`
