@@ -1,0 +1,566 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="MPAS dynamical core solves the fully compressible non-hydrostatic equations of atmospheric motion.">
+    <meta name="author" content="CAM-SIMA & MPAS Developers">
+    <link href="../favicon.png" rel="icon">
+
+    <title>init_physics_grid – MPAS Dynamical Core</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    ></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      async
+      crossorigin="anonymous"
+      integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw="
+    ></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html"
+            >MPAS Dynamical Core </a
+          >
+          <button
+            class="navbar-toggler"
+            data-bs-target="#navbar"
+            data-bs-toggle="collapse"
+            type="button"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbar">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>
+      init_physics_grid
+      <small
+        >Subroutine</small
+      >
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 1.6% of total for procedures.">60 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/dyn_grid.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/dyn_grid.f90.html'>dyn_grid.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/dyn_grid.html'>dyn_grid</a></li>
+            <li class="breadcrumb-item active" aria-current="page">init_physics_grid</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">  <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-areacell">areacell</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-dyn_attribute_name">dyn_attribute_name</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-dyn_column">dyn_column</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-hdim1_d">hdim1_d</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-hdim2_d">hdim2_d</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-i~15">i</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-ierr~15">ierr</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-indextocellid~2">indextocellid</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-latcell">latcell</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-loncell">loncell</a>
+            <a class="list-group-item" href="../proc/init_physics_grid.html#variable-subname~32">subname</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/init_physics_grid.html#src">init_physics_grid</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+    <div class="col-md-9" id="text">
+      <h2>private  subroutine init_physics_grid()  
+</h2>
+          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item">cam_abortutils</li>
+                  <li class="list-inline-item">spmd_utils</li>
+                  <li class="list-inline-item">cam_logfile</li>
+                  <li class="list-inline-item">dynconst</li>
+                  <li class="list-inline-item"><a href='../module/dyn_comp.html'>dyn_comp</a></li>
+                  <li class="list-inline-item">shr_kind_mod</li>
+                  <li class="list-inline-item"><a href='../module/dyn_mpas_subdriver.html'>dyn_mpas_subdriver</a></li>
+                  <li class="list-inline-item">physics_column_type</li>
+                  <li class="list-inline-item">string_utils</li>
+                  <li class="list-inline-item">physics_grid</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+        <p>Initialize physics grid in terms of dynamics decomposition.
+Provide grid and mapping information between global and local indexes to physics by calling <code>phys_grid_init</code>.
+(KCW, 2024-03-27)</p>
+
+
+      <h3>Arguments</h3>
+        <em>None</em>
+        <br>
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-areacell"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>areacell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dyn_attribute_name"></span>
+              character(len=max_hcoordname_len),
+            </td>
+              <td>private,</td>
+            <td>
+              allocatable
+            </td>
+            <td>::</td>
+            <td><strong>dyn_attribute_name</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dyn_column"></span>
+              type(physics_column_t),
+            </td>
+              <td>private,</td>
+            <td>
+              allocatable
+            </td>
+            <td>::</td>
+            <td><strong>dyn_column</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-hdim1_d"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hdim1_d</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-hdim2_d"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hdim2_d</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-i~15"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ierr~15"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ierr</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-indextocellid~2"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>indextocellid</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-latcell"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>latcell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-loncell"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>loncell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~32"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;dyn_grid::init_physics_grid&#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+
+
+
+
+        <section>
+          <h2><span class="anchor" id="src"></span>Source Code</h2>
+          <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">init_physics_grid</span><span class="p">()</span>
+<span class="w">        </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">check_allocate</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_debug</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dyn_debug_print</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="n">sphere_radius</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dynconst</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">constant_pi</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">rad_to_deg</span>
+<span class="w">        </span><span class="k">use </span><span class="n">physics_column_type</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">,</span><span class="w"> </span><span class="n">physics_column_t</span>
+<span class="w">        </span><span class="k">use </span><span class="n">physics_grid</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">phys_grid_init</span>
+<span class="w">        </span><span class="k">use </span><span class="n">spmd_utils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">iam</span>
+<span class="w">        </span><span class="k">use </span><span class="n">string_utils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">stringify</span>
+<span class="w">        </span><span class="c">! Module(s) from CESM Share.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">shr_kind_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_r8</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shr_kind_r8</span>
+<span class="w">        </span><span class="c">! Module(s) from MPAS.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_mpas_subdriver</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">mpas_dynamical_core_real_kind</span>
+
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_grid::init_physics_grid&#39;</span>
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="n">max_hcoordname_len</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dyn_attribute_name</span><span class="p">(:)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">hdim1_d</span><span class="p">,</span><span class="w"> </span><span class="n">hdim2_d</span><span class="w"> </span><span class="c">! First and second horizontal dimensions of physics grid.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">indextocellid</span><span class="p">(:)</span><span class="w">        </span><span class="c">! Global indexes of cell centers.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">areacell</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Cell areas (m2).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">latcell</span><span class="p">(:)</span><span class="w">  </span><span class="c">! Cell center latitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">loncell</span><span class="p">(:)</span><span class="w">  </span><span class="c">! Cell center longitudes (rad).</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">physics_column_t</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dyn_column</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Grid and mapping information between global and local indexes.</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; entered&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">areacell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latcell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">loncell</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">hdim1_d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncells_global</span>
+
+<span class="w">        </span><span class="c">! Setting `hdim2_d` to `1` indicates unstructured grid.</span>
+<span class="w">        </span><span class="n">hdim2_d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">areacell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;areaCell&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;indexToCellID&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latCell&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">loncell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;lonCell&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">dyn_column</span><span class="p">(</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_column(ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">            </span><span class="c">! Column information.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">lat_rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">latcell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">lon_rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">loncell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">lat_deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">latcell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">lon_deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">loncell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! Cell areas normalized to unit sphere.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">area</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">areacell</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">sphere_radius</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! Cell weights normalized to unity.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">weight</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="kt">real</span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">areacell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">4.0_kind_r8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">constant_pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">sphere_radius</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">kind_pcol</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! File decomposition.</span>
+<span class="w">            </span><span class="c">! For unstructured grid, `coord_indices` is not used by `phys_grid_init`.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">coord_indices</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">            </span><span class="c">! In this case, `global_col_num` is used instead.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">global_col_num</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">indextocellid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Dynamics decomposition.</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dyn_task</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">iam</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">global_dyn_block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indextocellid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">local_dyn_block</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">            </span><span class="c">! `dyn_block_index` is not used due to no dynamics block offset, but it still needs to be allocated.</span>
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">dyn_column</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dyn_block_index</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_column(&#39;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">stringify</span><span class="p">([</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39;) % dyn_block_index(0)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+
+<span class="k">        nullify</span><span class="p">(</span><span class="n">areacell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latcell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">loncell</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! `phys_grid_init` expects to receive the `area` attribute from dynamics.</span>
+<span class="w">        </span><span class="c">! However, do not let it because dynamics grid is different from physics grid.</span>
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">dyn_attribute_name</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_attribute_name(0)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">phys_grid_init</span><span class="p">(</span><span class="n">hdim1_d</span><span class="p">,</span><span class="w"> </span><span class="n">hdim2_d</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mpas&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_column</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_attribute_name</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">dyn_column</span><span class="p">)</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">dyn_attribute_name</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; completed&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">init_physics_grid</span>
+</pre></div>
+
+        </section>
+        <br>
+    </div>
+  </div>
+      <hr>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              MPAS Dynamical Core
+was developed by CAM-SIMA & MPAS Developers<br>              © 2025 
+            </p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+    </footer>
+  </body>
+</html>
