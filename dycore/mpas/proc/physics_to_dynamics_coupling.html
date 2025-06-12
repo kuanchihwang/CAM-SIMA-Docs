@@ -1,0 +1,959 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="MPAS dynamical core solves the fully compressible non-hydrostatic equations of atmospheric motion.">
+    <meta name="author" content="CAM-SIMA & MPAS Developers">
+    <link href="../favicon.png" rel="icon">
+
+    <title>physics_to_dynamics_coupling – MPAS Dynamical Core</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    ></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      async
+      crossorigin="anonymous"
+      integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw="
+    ></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html"
+            >MPAS Dynamical Core </a
+          >
+          <button
+            class="navbar-toggler"
+            data-bs-target="#navbar"
+            data-bs-toggle="collapse"
+            type="button"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbar">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>
+      physics_to_dynamics_coupling
+      <small
+        >Subroutine</small
+      >
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 3.9% of total for procedures.">148 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/dyn_coupling.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/dyn_coupling.f90.html'>dyn_coupling.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/dyn_coupling.html'>dyn_coupling</a></li>
+            <li class="breadcrumb-item active" aria-current="page">physics_to_dynamics_coupling</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">  <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-index_qv~3">index_qv</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-qv_prev">qv_prev</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-rho_zz~2">rho_zz</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-scalars~2">scalars</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-subname~54">subname</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#variable-zz~2">zz</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#funcs-0"
+         aria-expanded="false" aria-controls="funcs-0">
+         <h4 class="card-header bg-primary text-white">Functions</h4>
+      </a>
+      <div id="funcs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-t_of_theta_rhod_qv">t_of_theta_rhod_qv</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-theta_of_t_rhod_qv">theta_of_t_rhod_qv</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-final_shared_variables~2">final_shared_variables</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-init_shared_variables~2">init_shared_variables</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_rho">set_mpas_physics_tendency_rho</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_rtheta">set_mpas_physics_tendency_rtheta</a>
+            <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_ru">set_mpas_physics_tendency_ru</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/physics_to_dynamics_coupling.html#src">physics_to_dynamics_coupling</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+    <div class="col-md-9" id="text">
+      <h2>public  subroutine physics_to_dynamics_coupling()  
+</h2>
+          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='../module/dyn_mpas_subdriver.html'>dyn_mpas_subdriver</a></li>
+                  <li class="list-inline-item"><a href='../module/dyn_comp.html'>dyn_comp</a></li>
+                  <li class="list-inline-item">shr_kind_mod</li>
+                  <li class="list-inline-item">cam_logfile</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+        <p>Perform one-way coupling from the physics output states to the dynamics input states.
+The other coupling direction is implemented by its counterpart, <code>dynamics_to_physics_coupling</code>.
+(KCW, 2024-09-20)</p>
+
+
+      <h3>Arguments</h3>
+        <em>None</em>
+        <br>
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-index_qv~3"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>index_qv</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qv_prev"></span>
+              real(kind=kind_r8),
+            </td>
+              <td>private,</td>
+            <td>
+              allocatable
+            </td>
+            <td>::</td>
+            <td><strong>qv_prev</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho_zz~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>rho_zz</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-scalars~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>scalars</strong>(:,:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~54"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;dyn_coupling::physics_to_dynamics_coupling&#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-zz~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>zz</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+
+        <section>
+          <h2>Functions</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-t_of_theta_rhod_qv"></span> <h3>pure elemental function <a href='physics_to_dynamics_coupling.html#proc-t_of_theta_rhod_qv'>t_of_theta_rhod_qv</a>(theta, rhod, qv) result(t)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Compute temperature <code>t</code> as a function of potential temperature <code>theta</code>, dry air density <code>rhod</code> and water vapor
+mixing ratio <code>qv</code>. Essentially,
+<script type="math/tex"> T = \theta^{\frac{C_p}{C_v}} [\frac{\rho_d R_d (1 + \frac{R_v}{R_d} q_v)}{P_0}]^{\frac{R_d}{C_v}} </script>.
+The formulation comes from Poisson equation with equation of state plugged in and arranging
+for temperature. This function is the exact inverse of <code>theta_of_t_rhod_qv</code>, which means that:
+<code>t == t_of_theta_rhod_qv(theta_of_t_rhod_qv(t, rhod, qv), rhod, qv)</code>.
+(KCW, 2024-09-13)</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-theta"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>theta</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rhod"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rhod</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qv"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qv</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=kind_r8)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-theta_of_t_rhod_qv"></span> <h3>pure elemental function <a href='physics_to_dynamics_coupling.html#proc-theta_of_t_rhod_qv'>theta_of_t_rhod_qv</a>(t, rhod, qv) result(theta)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Compute potential temperature <code>theta</code> as a function of temperature <code>t</code>, dry air density <code>rhod</code> and water vapor
+mixing ratio <code>qv</code>. Essentially,
+<script type="math/tex"> \theta = T^{\frac{C_v}{C_p}} [\frac{P_0}{\rho_d R_d (1 + \frac{R_v}{R_d} q_v)}]^{\frac{R_d}{C_p}} </script>.
+The formulation comes from Poisson equation with equation of state plugged in and arranging
+for potential temperature. This function is the exact inverse of <code>t_of_theta_rhod_qv</code>, which means that:
+<code>theta == theta_of_t_rhod_qv(t_of_theta_rhod_qv(theta, rhod, qv), rhod, qv)</code>.
+(KCW, 2024-09-13)</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-t~2"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>t</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rhod~2"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rhod</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qv~2"></span>
+              real(kind=kind_r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qv</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=kind_r8)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-final_shared_variables~2"></span> <h3> subroutine <a href='physics_to_dynamics_coupling.html#proc-final_shared_variables~2'>final_shared_variables</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Finalize variables that are shared and repeatedly used by the <code>set_mpas_physics_tendency_*</code> internal subroutines.
+(KCW, 2024-09-13)</p>
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-init_shared_variables~2"></span> <h3> subroutine <a href='physics_to_dynamics_coupling.html#proc-init_shared_variables~2'>init_shared_variables</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Initialize variables that are shared and repeatedly used by the <code>set_mpas_physics_tendency_*</code> internal subroutines.
+(KCW, 2024-09-13)</p>
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-set_mpas_physics_tendency_rho"></span> <h3> subroutine <a href='physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_rho'>set_mpas_physics_tendency_rho</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Set MPAS physics tendency <code>tend_rho_physics</code> (i.e., "coupled" tendency of dry air density due to physics).
+In MPAS, a "coupled" variable means that it is multiplied by a vertical metric term, <code>rho_zz</code>.
+(KCW, 2024-09-11)</p>
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-set_mpas_physics_tendency_rtheta"></span> <h3> subroutine <a href='physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_rtheta'>set_mpas_physics_tendency_rtheta</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Set MPAS physics tendency <code>tend_rtheta_physics</code> (i.e., "coupled" tendency of modified "moist" potential temperature
+due to physics). In MPAS, a "coupled" variable means that it is multiplied by a vertical metric term, <code>rho_zz</code>.
+(KCW, 2024-09-19)</p>
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-set_mpas_physics_tendency_ru"></span> <h3> subroutine <a href='physics_to_dynamics_coupling.html#proc-set_mpas_physics_tendency_ru'>set_mpas_physics_tendency_ru</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Set MPAS physics tendency <code>tend_ru_physics</code> (i.e., "coupled" tendency of horizontal velocity at edge interfaces
+due to physics). In MPAS, a "coupled" variable means that it is multiplied by a vertical metric term, <code>rho_zz</code>.
+(KCW, 2024-09-11)</p>
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+        </section>
+
+
+        <section>
+          <h2><span class="anchor" id="src"></span>Source Code</h2>
+          <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">physics_to_dynamics_coupling</span><span class="p">()</span>
+<span class="w">        </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_debug</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dyn_debug_print</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_exchange_constituent_states</span>
+<span class="w">        </span><span class="c">! Module(s) from CESM Share.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">shr_kind_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_r8</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shr_kind_r8</span>
+<span class="w">        </span><span class="c">! Module(s) from MPAS.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_mpas_subdriver</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">mpas_dynamical_core_real_kind</span>
+
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling&#39;</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">index_qv</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qv_prev</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="c">! Water vapor mixing ratio (kg kg-1)</span>
+<span class="w">                                                    </span><span class="c">! before being updated by physics.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rho_zz</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">scalars</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">zz</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; entered&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">init_shared_variables</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_exchange_constituent_states</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">exchange</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="w"> </span><span class="n">conversion</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">set_mpas_physics_tendency_ru</span><span class="p">()</span>
+<span class="w">        </span><span class="k">call </span><span class="n">set_mpas_physics_tendency_rho</span><span class="p">()</span>
+<span class="w">        </span><span class="k">call </span><span class="n">set_mpas_physics_tendency_rtheta</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">final_shared_variables</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; completed&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">contains</span>
+<span class="w">        </span><span class="c">!&gt; Initialize variables that are shared and repeatedly used by the `set_mpas_physics_tendency_*` internal subroutines.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-13)</span>
+<span class="w">        </span><span class="k">subroutine </span><span class="n">init_shared_variables</span><span class="p">()</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">check_allocate</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_info</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">            </span><span class="k">use </span><span class="n">vert_coord</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">pver</span>
+
+<span class="w">            </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling::init_shared_variables&#39;</span>
+<span class="w">            </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Preparing for physics-dynamics coupling&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">index_qv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">zz</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">index_qv</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dim&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;index_qv&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rho_zz&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">time_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;scalars&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">time_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">zz</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;zz&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">qv_prev</span><span class="p">(</span><span class="n">pver</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;qv_prev(pver, ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Save water vapor mixing ratio before being updated by physics because `set_mpas_physics_tendency_rtheta`</span>
+<span class="w">            </span><span class="c">! needs it. This must be done before calling `dyn_exchange_constituent_states`.</span>
+<span class="w">            </span><span class="n">qv_prev</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">scalars</span><span class="p">(</span><span class="n">index_qv</span><span class="p">,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">init_shared_variables</span>
+
+<span class="w">        </span><span class="c">!&gt; Finalize variables that are shared and repeatedly used by the `set_mpas_physics_tendency_*` internal subroutines.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-13)</span>
+<span class="w">        </span><span class="k">subroutine </span><span class="n">final_shared_variables</span><span class="p">()</span>
+<span class="w">            </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling::final_shared_variables&#39;</span>
+
+<span class="w">            </span><span class="k">deallocate</span><span class="p">(</span><span class="n">qv_prev</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">index_qv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">zz</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">final_shared_variables</span>
+
+<span class="w">        </span><span class="c">!&gt; Set MPAS physics tendency `tend_ru_physics` (i.e., &quot;coupled&quot; tendency of horizontal velocity at edge interfaces</span>
+<span class="w">        </span><span class="c">!&gt; due to physics). In MPAS, a &quot;coupled&quot; variable means that it is multiplied by a vertical metric term, `rho_zz`.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-11)</span>
+<span class="w">        </span><span class="k">subroutine </span><span class="n">set_mpas_physics_tendency_ru</span><span class="p">()</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_info</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">reverse</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">            </span><span class="k">use </span><span class="n">physics_types</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">phys_tend</span>
+
+<span class="w">            </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling::set_mpas_physics_tendency_ru&#39;</span>
+<span class="w">            </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">u_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="p">:),</span><span class="w"> </span><span class="n">v_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Setting MPAS physics tendency &quot;tend_ru_physics&quot;&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">u_tendency</span><span class="p">,</span><span class="w"> </span><span class="n">v_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">u_tendency</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_uzonal&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">v_tendency</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_umerid&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Vertical index order is reversed between CAM-SIMA and MPAS.</span>
+<span class="w">            </span><span class="c">! Always call `reverse` when assigning anything to/from the `physics_tend` derived type.</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">                </span><span class="n">u_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="n">phys_tend</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dudt_total</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">:))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="p">)</span>
+<span class="w">                </span><span class="n">v_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="n">phys_tend</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dvdt_total</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">:))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end do</span>
+
+<span class="k">            nullify</span><span class="p">(</span><span class="n">u_tendency</span><span class="p">,</span><span class="w"> </span><span class="n">v_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">compute_edge_wind</span><span class="p">(</span><span class="n">wind_tendency</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">set_mpas_physics_tendency_ru</span>
+
+<span class="w">        </span><span class="c">!&gt; Set MPAS physics tendency `tend_rho_physics` (i.e., &quot;coupled&quot; tendency of dry air density due to physics).</span>
+<span class="w">        </span><span class="c">!&gt; In MPAS, a &quot;coupled&quot; variable means that it is multiplied by a vertical metric term, `rho_zz`.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-11)</span>
+<span class="w">        </span><span class="k">subroutine </span><span class="n">set_mpas_physics_tendency_rho</span><span class="p">()</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_info</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+
+<span class="w">            </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling::set_mpas_physics_tendency_rho&#39;</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rho_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Setting MPAS physics tendency &quot;tend_rho_physics&quot;&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">rho_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">rho_tendency</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_rho_physics&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! The material derivative of `rho` (i.e., dry air density) is zero for incompressible fluid.</span>
+<span class="w">            </span><span class="n">rho_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">ncells_solve</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_kind_dyn_mpas</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">rho_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Because we are injecting data directly into MPAS memory, halo layers need to be updated manually.</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">exchange_halo</span><span class="p">(</span><span class="s1">&#39;tend_rho_physics&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">set_mpas_physics_tendency_rho</span>
+
+<span class="w">        </span><span class="c">!&gt; Set MPAS physics tendency `tend_rtheta_physics` (i.e., &quot;coupled&quot; tendency of modified &quot;moist&quot; potential temperature</span>
+<span class="w">        </span><span class="c">!&gt; due to physics). In MPAS, a &quot;coupled&quot; variable means that it is multiplied by a vertical metric term, `rho_zz`.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-19)</span>
+<span class="w">        </span><span class="k">subroutine </span><span class="n">set_mpas_physics_tendency_rtheta</span><span class="p">()</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">check_allocate</span>
+<span class="w">            </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_info</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">reverse</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dynconst</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rair</span><span class="p">,</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rh2o</span>
+<span class="w">            </span><span class="k">use </span><span class="n">physics_types</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dtime_phys</span><span class="p">,</span><span class="w"> </span><span class="n">phys_tend</span>
+<span class="w">            </span><span class="k">use </span><span class="n">vert_coord</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">pver</span>
+
+<span class="w">            </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_coupling::physics_to_dynamics_coupling::set_mpas_physics_tendency_rtheta&#39;</span>
+<span class="w">            </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<span class="w">            </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">            </span><span class="c">! Variable name suffixes have the following meanings:</span>
+<span class="w">            </span><span class="c">! `*_col`: Variable is of each column.</span>
+<span class="w">            </span><span class="c">! `*_prev`: Variable is before being updated by physics.</span>
+<span class="w">            </span><span class="c">! `*_curr`: Variable is after being updated by physics.</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qv_col_prev</span><span class="p">(:),</span><span class="w"> </span><span class="n">qv_col_curr</span><span class="p">(:)</span><span class="w">         </span><span class="c">! Water vapor mixing ratio (kg kg-1).</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rhod_col</span><span class="p">(:)</span><span class="w">                            </span><span class="c">! Dry air density (kg m-3).</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">t_col_prev</span><span class="p">(:),</span><span class="w"> </span><span class="n">t_col_curr</span><span class="p">(:)</span><span class="w">           </span><span class="c">! Temperature (K).</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta_col_prev</span><span class="p">(:),</span><span class="w"> </span><span class="n">theta_col_curr</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Potential temperature (K).</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">thetam_col_prev</span><span class="p">(:),</span><span class="w"> </span><span class="n">thetam_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Modified &quot;moist&quot; potential temperature (K).</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta_m</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta_m_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Setting MPAS physics tendency &quot;tend_rtheta_physics&quot;&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">theta_m</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">theta_m_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">qv_col_prev</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">qv_col_curr</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;qv_col_prev(pver), qv_col_curr(pver)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">rhod_col</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;rhod_col(pver)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">t_col_prev</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">t_col_curr</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;t_col_prev(pver), t_col_curr(pver)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">theta_col_prev</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">theta_col_curr</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;theta_col_prev(pver), theta_col_curr(pver)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">allocate</span><span class="p">(</span><span class="n">thetam_col_prev</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">thetam_col_curr</span><span class="p">(</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;thetam_col_prev(pver), thetam_col_curr(pver)&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="s1">&#39;dyn_coupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">theta_m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;theta_m&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">time_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">theta_m_tendency</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_rtheta_physics&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Set `theta_m_tendency` column by column. This way, peak memory usage can be reduced.</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">                </span><span class="n">qv_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">scalars</span><span class="p">(</span><span class="n">index_qv</span><span class="p">,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span>
+<span class="w">                </span><span class="n">qv_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qv_prev</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
+<span class="w">                </span><span class="n">rhod_col</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">zz</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">thetam_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">theta_m</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span>
+<span class="w">                </span><span class="n">theta_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thetam_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0_kind_r8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">qv_col_prev</span><span class="p">(:))</span>
+<span class="w">                </span><span class="n">t_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t_of_theta_rhod_qv</span><span class="p">(</span><span class="n">theta_col_prev</span><span class="p">,</span><span class="w"> </span><span class="n">rhod_col</span><span class="p">,</span><span class="w"> </span><span class="n">qv_col_prev</span><span class="p">)</span>
+
+<span class="w">                </span><span class="c">! Vertical index order is reversed between CAM-SIMA and MPAS.</span>
+<span class="w">                </span><span class="c">! Always call `reverse` when assigning anything to/from the `physics_tend` derived type.</span>
+<span class="w">                </span><span class="n">t_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t_col_prev</span><span class="p">(:)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">phys_tend</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dtdt_total</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">:))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dtime_phys</span>
+<span class="w">                </span><span class="n">theta_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_of_t_rhod_qv</span><span class="p">(</span><span class="n">t_col_curr</span><span class="p">,</span><span class="w"> </span><span class="n">rhod_col</span><span class="p">,</span><span class="w"> </span><span class="n">qv_col_curr</span><span class="p">)</span>
+<span class="w">                </span><span class="n">thetam_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0_kind_r8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">qv_col_curr</span><span class="p">(:))</span>
+
+<span class="w">                </span><span class="n">theta_m_tendency</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="kt">real</span><span class="p">((</span><span class="n">thetam_col_curr</span><span class="p">(:)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">thetam_col_prev</span><span class="p">(:))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">rho_zz</span><span class="p">(:,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dtime_phys</span><span class="p">,</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end do</span>
+
+<span class="k">            deallocate</span><span class="p">(</span><span class="n">qv_col_prev</span><span class="p">,</span><span class="w"> </span><span class="n">qv_col_curr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">deallocate</span><span class="p">(</span><span class="n">rhod_col</span><span class="p">)</span>
+<span class="w">            </span><span class="k">deallocate</span><span class="p">(</span><span class="n">t_col_prev</span><span class="p">,</span><span class="w"> </span><span class="n">t_col_curr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">deallocate</span><span class="p">(</span><span class="n">theta_col_prev</span><span class="p">,</span><span class="w"> </span><span class="n">theta_col_curr</span><span class="p">)</span>
+<span class="w">            </span><span class="k">deallocate</span><span class="p">(</span><span class="n">thetam_col_prev</span><span class="p">,</span><span class="w"> </span><span class="n">thetam_col_curr</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">theta_m</span><span class="p">)</span>
+<span class="w">            </span><span class="k">nullify</span><span class="p">(</span><span class="n">theta_m_tendency</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c">! Because we are injecting data directly into MPAS memory, halo layers need to be updated manually.</span>
+<span class="w">            </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">exchange_halo</span><span class="p">(</span><span class="s1">&#39;tend_rtheta_physics&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">set_mpas_physics_tendency_rtheta</span>
+
+<span class="w">        </span><span class="c">!&gt; Compute temperature `t` as a function of potential temperature `theta`, dry air density `rhod` and water vapor</span>
+<span class="w">        </span><span class="c">!&gt; mixing ratio `qv`. Essentially,</span>
+<span class="w">        </span><span class="c">!&gt; \( T = \theta^{\frac{C_p}{C_v}} [\frac{\rho_d R_d (1 + \frac{R_v}{R_d} q_v)}{P_0}]^{\frac{R_d}{C_v}} \).</span>
+<span class="w">        </span><span class="c">!&gt; The formulation comes from Poisson equation with equation of state plugged in and arranging</span>
+<span class="w">        </span><span class="c">!&gt; for temperature. This function is the exact inverse of `theta_of_t_rhod_qv`, which means that:</span>
+<span class="w">        </span><span class="c">!&gt; `t == t_of_theta_rhod_qv(theta_of_t_rhod_qv(t, rhod, qv), rhod, qv)`.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-13)</span>
+<span class="w">        </span><span class="k">pure elemental function </span><span class="n">t_of_theta_rhod_qv</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">rhod</span><span class="p">,</span><span class="w"> </span><span class="n">qv</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dynconst</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">constant_cpd</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">cpair</span><span class="p">,</span><span class="w"> </span><span class="n">constant_p0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pref</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rair</span><span class="p">,</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rh2o</span>
+
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">rhod</span><span class="p">,</span><span class="w"> </span><span class="n">qv</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">t</span>
+
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">constant_cvd</span><span class="w"> </span><span class="c">! Specific heat of dry air at constant volume.</span>
+
+<span class="w">            </span><span class="c">! Mayer&#39;s relation.</span>
+<span class="w">            </span><span class="n">constant_cvd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constant_cpd</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">constant_rd</span>
+
+<span class="w">            </span><span class="c">! Poisson equation with equation of state plugged in and arranging for temperature. For equation of state,</span>
+<span class="w">            </span><span class="c">! it can be shown that the effect of water vapor can be passed on to the temperature term entirely such that</span>
+<span class="w">            </span><span class="c">! dry air density and dry air gas constant can be used at all times. This modified &quot;moist&quot; temperature is</span>
+<span class="w">            </span><span class="c">! described herein:</span>
+<span class="w">            </span><span class="c">! The paragraph below equation 2.7 in doi:10.5065/1DFH-6P97.</span>
+<span class="w">            </span><span class="c">! The paragraph below equation 2 in doi:10.1175/MWR-D-11-00215.1.</span>
+<span class="w">            </span><span class="c">!</span>
+<span class="w">            </span><span class="c">! In all, solve the below equation set for $T$ in terms of $\theta$, $\rho_d$ and $q_v$:</span>
+<span class="w">            </span><span class="c">! \begin{equation*}</span>
+<span class="w">            </span><span class="c">!     \begin{cases}</span>
+<span class="w">            </span><span class="c">!         \theta &amp;= T (\frac{P_0}{P})^{\frac{R_d}{C_p}} \\</span>
+<span class="w">            </span><span class="c">!         P &amp;= \rho_d R_d T_m \\</span>
+<span class="w">            </span><span class="c">!         T_m &amp;= T (1 + \frac{R_v}{R_d} q_v)</span>
+<span class="w">            </span><span class="c">!     \end{cases}</span>
+<span class="w">            </span><span class="c">! \end{equation*}</span>
+<span class="w">            </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">theta</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="p">(</span><span class="n">constant_cpd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_cvd</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="p">(((</span><span class="n">rhod</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0_kind_r8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">qv</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_p0</span><span class="p">)</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="p">(</span><span class="n">constant_rd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_cvd</span><span class="p">))</span>
+<span class="w">        </span><span class="k">end function </span><span class="n">t_of_theta_rhod_qv</span>
+
+<span class="w">        </span><span class="c">!&gt; Compute potential temperature `theta` as a function of temperature `t`, dry air density `rhod` and water vapor</span>
+<span class="w">        </span><span class="c">!&gt; mixing ratio `qv`. Essentially,</span>
+<span class="w">        </span><span class="c">!&gt; \( \theta = T^{\frac{C_v}{C_p}} [\frac{P_0}{\rho_d R_d (1 + \frac{R_v}{R_d} q_v)}]^{\frac{R_d}{C_p}} \).</span>
+<span class="w">        </span><span class="c">!&gt; The formulation comes from Poisson equation with equation of state plugged in and arranging</span>
+<span class="w">        </span><span class="c">!&gt; for potential temperature. This function is the exact inverse of `t_of_theta_rhod_qv`, which means that:</span>
+<span class="w">        </span><span class="c">!&gt; `theta == theta_of_t_rhod_qv(t_of_theta_rhod_qv(theta, rhod, qv), rhod, qv)`.</span>
+<span class="w">        </span><span class="c">!&gt; (KCW, 2024-09-13)</span>
+<span class="w">        </span><span class="k">pure elemental function </span><span class="n">theta_of_t_rhod_qv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">rhod</span><span class="p">,</span><span class="w"> </span><span class="n">qv</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">            </span><span class="k">use </span><span class="n">dynconst</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">constant_cpd</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">cpair</span><span class="p">,</span><span class="w"> </span><span class="n">constant_p0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pref</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rair</span><span class="p">,</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rh2o</span>
+
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">rhod</span><span class="p">,</span><span class="w"> </span><span class="n">qv</span>
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta</span>
+
+<span class="w">            </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">constant_cvd</span><span class="w"> </span><span class="c">! Specific heat of dry air at constant volume.</span>
+
+<span class="w">            </span><span class="c">! Mayer&#39;s relation.</span>
+<span class="w">            </span><span class="n">constant_cvd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constant_cpd</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">constant_rd</span>
+
+<span class="w">            </span><span class="c">! Poisson equation with equation of state plugged in and arranging for potential temperature. For equation of state,</span>
+<span class="w">            </span><span class="c">! it can be shown that the effect of water vapor can be passed on to the temperature term entirely such that</span>
+<span class="w">            </span><span class="c">! dry air density and dry air gas constant can be used at all times. This modified &quot;moist&quot; temperature is</span>
+<span class="w">            </span><span class="c">! described herein:</span>
+<span class="w">            </span><span class="c">! The paragraph below equation 2.7 in doi:10.5065/1DFH-6P97.</span>
+<span class="w">            </span><span class="c">! The paragraph below equation 2 in doi:10.1175/MWR-D-11-00215.1.</span>
+<span class="w">            </span><span class="c">!</span>
+<span class="w">            </span><span class="c">! In all, solve the below equation set for $\theta$ in terms of $T$, $\rho_d$ and $q_v$:</span>
+<span class="w">            </span><span class="c">! \begin{equation*}</span>
+<span class="w">            </span><span class="c">!     \begin{cases}</span>
+<span class="w">            </span><span class="c">!         \theta &amp;= T (\frac{P_0}{P})^{\frac{R_d}{C_p}} \\</span>
+<span class="w">            </span><span class="c">!         P &amp;= \rho_d R_d T_m \\</span>
+<span class="w">            </span><span class="c">!         T_m &amp;= T (1 + \frac{R_v}{R_d} q_v)</span>
+<span class="w">            </span><span class="c">!     \end{cases}</span>
+<span class="w">            </span><span class="c">! \end{equation*}</span>
+<span class="w">            </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="p">(</span><span class="n">constant_cvd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_cpd</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="p">((</span><span class="n">constant_p0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">rhod</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0_kind_r8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_rv</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_rd</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">qv</span><span class="p">)))</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="p">(</span><span class="n">constant_rd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">constant_cpd</span><span class="p">))</span>
+<span class="w">        </span><span class="k">end function </span><span class="n">theta_of_t_rhod_qv</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">physics_to_dynamics_coupling</span>
+</pre></div>
+
+        </section>
+        <br>
+    </div>
+  </div>
+      <hr>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              MPAS Dynamical Core
+was developed by CAM-SIMA & MPAS Developers<br>              © 2025 
+            </p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+    </footer>
+  </body>
+</html>

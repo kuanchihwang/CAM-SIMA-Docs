@@ -1,0 +1,836 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="MPAS dynamical core solves the fully compressible non-hydrostatic equations of atmospheric motion.">
+    <meta name="author" content="CAM-SIMA & MPAS Developers">
+    <link href="../favicon.png" rel="icon">
+
+    <title>define_cam_grid – MPAS Dynamical Core</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    ></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      async
+      crossorigin="anonymous"
+      integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw="
+    ></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html"
+            >MPAS Dynamical Core </a
+          >
+          <button
+            class="navbar-toggler"
+            data-bs-target="#navbar"
+            data-bs-toggle="collapse"
+            type="button"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbar">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>
+      define_cam_grid
+      <small
+        >Subroutine</small
+      >
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 3.2% of total for procedures.">122 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/dyn_grid.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/dyn_grid.f90.html'>dyn_grid.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/dyn_grid.html'>dyn_grid</a></li>
+            <li class="breadcrumb-item active" aria-current="page">define_cam_grid</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">  <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-areacell~2">areacell</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-cell_area">cell_area</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-cell_weight">cell_weight</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-global_grid_index">global_grid_index</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-global_grid_map">global_grid_map</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-i~2">i</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-ierr~3">ierr</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-indextocellid~2">indextocellid</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-indextoedgeid">indextoedgeid</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-indextovertexid">indextovertexid</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-lat_coord">lat_coord</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-latcell~2">latcell</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-latedge">latedge</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-latvertex">latvertex</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-lon_coord">lon_coord</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-loncell~2">loncell</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-lonedge">lonedge</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-lonvertex">lonvertex</a>
+            <a class="list-group-item" href="../proc/define_cam_grid.html#variable-subname~4">subname</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/define_cam_grid.html#src">define_cam_grid</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+    <div class="col-md-9" id="text">
+      <h2>private  subroutine define_cam_grid()  
+</h2>
+          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item">cam_grid_support</li>
+                  <li class="list-inline-item">cam_map_utils</li>
+                  <li class="list-inline-item">cam_logfile</li>
+                  <li class="list-inline-item"><a href='../module/dyn_mpas_subdriver.html'>dyn_mpas_subdriver</a></li>
+                  <li class="list-inline-item"><a href='../module/dyn_comp.html'>dyn_comp</a></li>
+                  <li class="list-inline-item">shr_kind_mod</li>
+                  <li class="list-inline-item">cam_abortutils</li>
+                  <li class="list-inline-item">dynconst</li>
+                  <li class="list-inline-item">string_utils</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+        <p>This subroutine defines and registers four variants of dynamics grids in terms of dynamics decomposition.
+Their names are listed in <code>dyn_grid_name</code> and their corresponding ids can be determined by calling <code>dyn_grid_id</code>.
+* "mpas_cell": Grid that is centered at MPAS "cell" points.
+* "cam_cell": Grid that is also centered at MPAS "cell" points but uses standard CAM-SIMA coordinate and dimension names.
+* "mpas_edge": Grid that is centered at MPAS "edge" points.
+* "mpas_vertex": Grid that is centered at MPAS "vertex" points.
+(KCW, 2024-03-28)</p>
+
+
+      <h3>Arguments</h3>
+        <em>None</em>
+        <br>
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-areacell~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>areacell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cell_area"></span>
+              real(kind=kind_r8),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>cell_area</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cell_weight"></span>
+              real(kind=kind_r8),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>cell_weight</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-global_grid_index"></span>
+              integer(kind=kind_imap),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>global_grid_index</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-global_grid_map"></span>
+              integer(kind=kind_imap),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>global_grid_map</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-i~2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ierr~3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ierr</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-indextocellid~2"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>indextocellid</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-indextoedgeid"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>indextoedgeid</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-indextovertexid"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>indextovertexid</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lat_coord"></span>
+              type(horiz_coord_t),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>lat_coord</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-latcell~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>latcell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-latedge"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>latedge</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-latvertex"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>latvertex</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lon_coord"></span>
+              type(horiz_coord_t),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>lon_coord</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-loncell~2"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>loncell</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lonedge"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>lonedge</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lonvertex"></span>
+              real(kind=kind_dyn_mpas),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>lonvertex</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~4"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;dyn_grid::define_cam_grid&#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+
+
+
+
+        <section>
+          <h2><span class="anchor" id="src"></span>Source Code</h2>
+          <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">define_cam_grid</span><span class="p">()</span>
+<span class="w">        </span><span class="c">! Module(s) from CAM-SIMA.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">check_allocate</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_grid_support</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">cam_grid_attribute_register</span><span class="p">,</span><span class="w"> </span><span class="n">cam_grid_register</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                    </span><span class="n">horiz_coord_create</span><span class="p">,</span><span class="w"> </span><span class="n">horiz_coord_t</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">debugout_verbose</span>
+<span class="w">        </span><span class="k">use </span><span class="n">cam_map_utils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_imap</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">imap</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_comp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dyn_debug_print</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_dynamical_core</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                            </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_global</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_global</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                            </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_solve</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_solve</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                            </span><span class="n">sphere_radius</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dynconst</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">constant_pi</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">rad_to_deg</span>
+<span class="w">        </span><span class="k">use </span><span class="n">string_utils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">stringify</span>
+<span class="w">        </span><span class="c">! Module(s) from CESM Share.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">shr_kind_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_r8</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shr_kind_r8</span>
+<span class="w">        </span><span class="c">! Module(s) from MPAS.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">dyn_mpas_subdriver</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">kind_dyn_mpas</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">mpas_dynamical_core_real_kind</span>
+
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_grid::define_cam_grid&#39;</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">indextocellid</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Global indexes of cell centers.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">indextoedgeid</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Global indexes of edge nodes.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">indextovertexid</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Global indexes of vertex nodes.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">areacell</span><span class="p">(:)</span><span class="w">  </span><span class="c">! Cell areas (m2).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">latcell</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Cell center latitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">latedge</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Edge node latitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">latvertex</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Vertex node latitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">loncell</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Cell center longitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">lonedge</span><span class="p">(:)</span><span class="w">   </span><span class="c">! Edge node longitudes (rad).</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_dyn_mpas</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">lonvertex</span><span class="p">(:)</span><span class="w"> </span><span class="c">! Vertex node longitudes (rad).</span>
+
+<span class="w">        </span><span class="c">! Global grid indexes. CAN be safely deallocated because its values are copied internally by</span>
+<span class="w">        </span><span class="c">! `cam_grid_attribute_register` and `horiz_coord_create`.</span>
+<span class="w">        </span><span class="c">! `kind_imap` is an integer kind of `PIO_OFFSET_KIND`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">(</span><span class="n">kind_imap</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">global_grid_index</span><span class="p">(:)</span>
+<span class="w">        </span><span class="c">! Global grid maps. CANNOT be safely deallocated because `cam_grid_register`</span>
+<span class="w">        </span><span class="c">! just uses pointers to point at it internally.</span>
+<span class="w">        </span><span class="c">! `kind_imap` is an integer kind of `PIO_OFFSET_KIND`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">(</span><span class="n">kind_imap</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">        </span><span class="c">! Cell areas (m2). CANNOT be safely deallocated because `cam_grid_attribute_register`</span>
+<span class="w">        </span><span class="c">! just uses pointers to point at it internally.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cell_area</span><span class="p">(:)</span>
+<span class="w">        </span><span class="c">! Cell weights normalized to unity. CANNOT be safely deallocated because `cam_grid_attribute_register`</span>
+<span class="w">        </span><span class="c">! just uses pointers to point at it internally.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">kind_r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cell_weight</span><span class="p">(:)</span>
+<span class="w">        </span><span class="c">! Latitude coordinates. CANNOT be safely deallocated because `cam_grid_register`</span>
+<span class="w">        </span><span class="c">! just uses pointers to point at it internally.</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">horiz_coord_t</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">lat_coord</span>
+<span class="w">        </span><span class="c">! Longitude coordinates. CANNOT be safely deallocated because `cam_grid_register`</span>
+<span class="w">        </span><span class="c">! just uses pointers to point at it internally.</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">horiz_coord_t</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">lon_coord</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; entered&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">,</span><span class="w"> </span><span class="n">indextoedgeid</span><span class="p">,</span><span class="w"> </span><span class="n">indextovertexid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">areacell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="n">loncell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latedge</span><span class="p">,</span><span class="w"> </span><span class="n">lonedge</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latvertex</span><span class="p">,</span><span class="w"> </span><span class="n">lonvertex</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">cell_area</span><span class="p">,</span><span class="w"> </span><span class="n">cell_weight</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Construct coordinate and grid objects for cell center grid (i.e., &quot;mpas_cell&quot;).</span>
+<span class="w">        </span><span class="c">! Standard MPAS coordinate and dimension names are used.</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">areacell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;areaCell&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;indexToCellID&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latCell&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">loncell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;lonCell&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_index(ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">global_grid_index</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">lat_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;latCell&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nCells&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_north&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="n">lon_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;lonCell&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nCells&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_east&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">loncell</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">cell_area</span><span class="p">(</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cell_area(ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">cell_weight</span><span class="p">(</span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cell_weight(ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_map(3, ncells_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span>
+<span class="w">            </span><span class="n">cell_area</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">areacell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span>
+<span class="w">            </span><span class="n">cell_weight</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">areacell</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">4.0_kind_r8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">constant_pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">sphere_radius</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+
+<span class="k">        call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_verbose</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Registering dynamics grid &quot;mpas_cell&quot; with id &#39;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">stringify</span><span class="p">([</span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">)]))</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_register</span><span class="p">(</span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">unstruct</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="w"> </span><span class="n">block_indexed</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_attribute_register</span><span class="p">(</span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cell_area&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MPAS cell area&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nCells&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cell_area</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_attribute_register</span><span class="p">(</span><span class="s1">&#39;mpas_cell&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cell_weight&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MPAS cell weight&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nCells&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cell_weight</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">areacell</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">cell_area</span><span class="p">,</span><span class="w"> </span><span class="n">cell_weight</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Construct coordinate and grid objects for cell center grid (i.e., &quot;cam_cell&quot;).</span>
+<span class="w">        </span><span class="c">! Standard CAM-SIMA coordinate and dimension names are used.</span>
+
+<span class="w">        </span><span class="n">lat_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ncol&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_north&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="n">lon_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ncol&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_east&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncells_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">loncell</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_verbose</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Registering dynamics grid &quot;cam_cell&quot; with id &#39;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">stringify</span><span class="p">([</span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;cam_cell&#39;</span><span class="p">)]))</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_register</span><span class="p">(</span><span class="s1">&#39;cam_cell&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;cam_cell&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">unstruct</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="w"> </span><span class="n">block_indexed</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextocellid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latcell</span><span class="p">,</span><span class="w"> </span><span class="n">loncell</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Construct coordinate and grid objects for edge node grid (i.e., &quot;mpas_edge&quot;).</span>
+<span class="w">        </span><span class="c">! Standard MPAS coordinate and dimension names are used.</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">indextoedgeid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;indexToEdgeID&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">latedge</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latEdge&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">lonedge</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;lonEdge&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">nedges_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_index(nedges_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">global_grid_index</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">indextoedgeid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">nedges_solve</span><span class="p">),</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">lat_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;latEdge&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nEdges&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_north&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">latedge</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="n">lon_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;lonEdge&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nEdges&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_east&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">lonedge</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_map(3, nedges_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nedges_solve</span>
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">            </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+
+<span class="k">        call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_verbose</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Registering dynamics grid &quot;mpas_edge&quot; with id &#39;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">stringify</span><span class="p">([</span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_edge&#39;</span><span class="p">)]))</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_register</span><span class="p">(</span><span class="s1">&#39;mpas_edge&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_edge&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">unstruct</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="w"> </span><span class="n">block_indexed</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextoedgeid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latedge</span><span class="p">,</span><span class="w"> </span><span class="n">lonedge</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Construct coordinate and grid objects for vertex node grid (i.e., &quot;mpas_vertex&quot;).</span>
+<span class="w">        </span><span class="c">! Standard MPAS coordinate and dimension names are used.</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">indextovertexid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;indexToVertexID&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">latvertex</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latVertex&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_dynamical_core</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">get_variable_pointer</span><span class="p">(</span><span class="n">lonvertex</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;lonVertex&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">nvertices_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_index(nvertices_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">global_grid_index</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">indextovertexid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">nvertices_solve</span><span class="p">),</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">lat_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;latVertex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nVertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_north&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">latvertex</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="n">lon_coord</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">horiz_coord_create</span><span class="p">(</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nVertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_global</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;degrees_east&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_solve</span><span class="p">,</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">lonvertex</span><span class="p">,</span><span class="w"> </span><span class="n">kind_r8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rad_to_deg</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="o">=</span><span class="n">global_grid_index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">allocate</span><span class="p">(</span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_solve</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">check_allocate</span><span class="p">(</span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global_grid_map(3, nvertices_solve)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dyn_grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nvertices_solve</span>
+<span class="w">           </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">           </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">kind_imap</span><span class="p">)</span>
+<span class="w">           </span><span class="n">global_grid_map</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_grid_index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+
+<span class="k">        call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_verbose</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Registering dynamics grid &quot;mpas_vertex&quot; with id &#39;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">stringify</span><span class="p">([</span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_vertex&#39;</span><span class="p">)]))</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">cam_grid_register</span><span class="p">(</span><span class="s1">&#39;mpas_vertex&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dyn_grid_id</span><span class="p">(</span><span class="s1">&#39;mpas_vertex&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">            </span><span class="n">unstruct</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="w"> </span><span class="n">block_indexed</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">indextovertexid</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">latvertex</span><span class="p">,</span><span class="w"> </span><span class="n">lonvertex</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">global_grid_index</span><span class="p">,</span><span class="w"> </span><span class="n">global_grid_map</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">lat_coord</span><span class="p">,</span><span class="w"> </span><span class="n">lon_coord</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">dyn_debug_print</span><span class="p">(</span><span class="n">debugout_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; completed&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">define_cam_grid</span>
+</pre></div>
+
+        </section>
+        <br>
+    </div>
+  </div>
+      <hr>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              MPAS Dynamical Core
+was developed by CAM-SIMA & MPAS Developers<br>              © 2025 
+            </p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+    </footer>
+  </body>
+</html>
