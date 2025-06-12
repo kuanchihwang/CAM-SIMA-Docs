@@ -1,0 +1,497 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="MPAS dynamical core solves the fully compressible non-hydrostatic equations of atmospheric motion.">
+    <meta name="author" content="CAM-SIMA & MPAS Developers">
+    <link href="../favicon.png" rel="icon">
+
+    <title>dyn_mpas_final – MPAS Dynamical Core</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    ></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      async
+      crossorigin="anonymous"
+      integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw="
+    ></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html"
+            >MPAS Dynamical Core </a
+          >
+          <button
+            class="navbar-toggler"
+            data-bs-target="#navbar"
+            data-bs-toggle="collapse"
+            type="button"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbar">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>
+      dyn_mpas_final
+      <small
+        >Subroutine</small
+      >
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline">
+            <li class="list-inline-item" id="meta-author"><i class="fa fa-pencil"></i> Michael Duda</li>
+            <li class="list-inline-item" id="meta-date"><i class="fa fa-calendar-o"></i> 29 February 2020</li>
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 1.9% of total for procedures.">74 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/dyn_mpas_subdriver.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/dyn_mpas_subdriver.f90.html'>dyn_mpas_subdriver.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/dyn_mpas_subdriver.html'>dyn_mpas_subdriver</a></li>
+            <li class="breadcrumb-item active" aria-current="page">dyn_mpas_final</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">  <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/dyn_mpas_final.html#variable-field_2d_real~5">field_2d_real</a>
+            <a class="list-group-item" href="../proc/dyn_mpas_final.html#variable-ierr~10">ierr</a>
+            <a class="list-group-item" href="../proc/dyn_mpas_final.html#variable-subname~14">subname</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/dyn_mpas_final.html#src">dyn_mpas_final</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+    <div class="col-md-9" id="text">
+      <h2>private  subroutine dyn_mpas_final(self)  
+</h2>
+          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item">mpas_pool_routines</li>
+                  <li class="list-inline-item">mpas_log</li>
+                  <li class="list-inline-item">mpas_framework</li>
+                  <li class="list-inline-item">mpas_atm_halos</li>
+                  <li class="list-inline-item">mpas_derived_types</li>
+                  <li class="list-inline-item">mpas_field_routines</li>
+                  <li class="list-inline-item">mpas_atm_threading</li>
+                  <li class="list-inline-item">mpas_timer</li>
+                  <li class="list-inline-item">mpas_timekeeping</li>
+                  <li class="list-inline-item">mpas_decomp</li>
+                  <li class="list-inline-item">atm_time_integration</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+        <p>This subroutine finalizes and cleans up MPAS dynamical core as well as its
+framework that was set up during initialization. Finalization happens in
+reverse chronological order.
+Essentially, it closely follows what is done in <code>atm_core_finalize</code> and
+<code>mpas_finalize</code>, except that here, there is no need to call MPAS diagnostics
+manager or MPAS stream manager.
+Ported and refactored for CAM-SIMA. (KCW, 2024-10-10)</p>
+
+        <h3>Type Bound</h3>
+        <p><a href='../type/mpas_dynamical_core_type.html'>mpas_dynamical_core_type</a></p>
+
+      <h3>Arguments</h3>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~15"></span>
+              class(<a href='../type/mpas_dynamical_core_type.html'>mpas_dynamical_core_type</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-field_2d_real~5"></span>
+              type(field2dreal),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>field_2d_real</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ierr~10"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ierr</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~14"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;dyn_mpas_subdriver::dyn_mpas_final&#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+
+
+
+
+        <section>
+          <h2><span class="anchor" id="src"></span>Source Code</h2>
+          <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">dyn_mpas_final</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+<span class="w">        </span><span class="c">! Module(s) from MPAS.</span>
+<span class="w">        </span><span class="k">use </span><span class="n">atm_time_integration</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_atm_dynamics_finalize</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_atm_halos</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">atm_destroy_halo_groups</span><span class="p">,</span><span class="w"> </span><span class="n">exchange_halo_group</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_atm_threading</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_atm_threading_finalize</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_decomp</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_decomp_destroy_decomp_list</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_derived_types</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">field2dreal</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_field_routines</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_deallocate_scratch_field</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_framework</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_framework_finalize</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_log</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_log_finalize</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_pool_routines</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_pool_get_field</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_timekeeping</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_destroy_clock</span>
+<span class="w">        </span><span class="k">use </span><span class="n">mpas_timer</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">mpas_timer_write_header</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_timer_write</span><span class="p">,</span><span class="w"> </span><span class="n">mpas_timer_finalize</span>
+
+<span class="w">        </span><span class="k">class</span><span class="p">(</span><span class="n">mpas_dynamical_core_type</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dyn_mpas_subdriver::dyn_mpas_final&#39;</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">field2dreal</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">field_2d_real</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; entered&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">field_2d_real</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! First, wind down MPAS dynamical core by calling its own finalization procedures.</span>
+
+<span class="w">        </span><span class="c">! Some additional &quot;scratch&quot; fields are needed for interoperability with CAM-SIMA, but they are not finalized by</span>
+<span class="w">        </span><span class="c">! `mpas_atm_dynamics_finalize`. Finalize them below.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_pool_get_field</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">blocklist</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">allfields</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_uzonal&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">field_2d_real</span><span class="p">,</span><span class="w"> </span><span class="n">timelevel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_deallocate_scratch_field</span><span class="p">(</span><span class="n">field_2d_real</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">field_2d_real</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_pool_get_field</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">blocklist</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">allfields</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tend_umerid&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">field_2d_real</span><span class="p">,</span><span class="w"> </span><span class="n">timelevel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_deallocate_scratch_field</span><span class="p">(</span><span class="n">field_2d_real</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">field_2d_real</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finalizing dynamics&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_atm_dynamics_init`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_atm_dynamics_finalize</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `atm_build_halo_groups`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">atm_destroy_halo_groups</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">model_error</span><span class="p">(</span><span class="s1">&#39;Failed to destroy halo exchange groups&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+
+<span class="k">        nullify</span><span class="p">(</span><span class="n">exchange_halo_group</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cleaning up OpenMP threading&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_atm_threading_init`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_atm_threading_finalize</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">blocklist</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">model_error</span><span class="p">(</span><span class="s1">&#39;Failed to clean up OpenMP threading&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+
+<span class="k">        call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cleaning up clock&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_create_clock`, which was called by `atm_simulation_clock_init`, then `atm_setup_clock`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_destroy_clock</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">clock</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">model_error</span><span class="p">(</span><span class="s1">&#39;Failed to clean up clock&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+
+<span class="k">        call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cleaning up decompositions&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_decomp_create_decomp_list`, which was called by `atm_setup_decompositions`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_decomp_destroy_decomp_list</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">decompositions</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">streaminfo</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Write timing information to log.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_timer_write_header</span><span class="p">()</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_timer_write</span><span class="p">()</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_timer_init`, which was called by `mpas_framework_init_phase2`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_timer_finalize</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cleaning up log&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_log_init`, which was called by `atm_setup_log`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_log_finalize</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">model_error</span><span class="p">(</span><span class="s1">&#39;Failed to clean up log&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="p">,</span><span class="w"> </span><span class="err">__</span><span class="n">LINE__</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+
+<span class="k">        call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finalizing MPAS framework&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Opposite to `mpas_framework_init_phase1` and `mpas_framework_init_phase2`.</span>
+<span class="w">        </span><span class="k">call </span><span class="n">mpas_framework_finalize</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">dminfo</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_debug</span><span class="p">,</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39; completed&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">call </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">debug_print</span><span class="p">(</span><span class="n">log_level_info</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Successful finalization of MPAS dynamical core&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Second, clean up this MPAS dynamical core instance.</span>
+
+<span class="w">        </span><span class="c">! Initialized by `dyn_mpas_init_phase4`.</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">coupling_time_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">number_of_time_steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">        </span><span class="c">! Initialized by `dyn_mpas_define_scalar`.</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">constituent_name</span><span class="p">)</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">index_constituent_to_mpas_scalar</span><span class="p">)</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">index_mpas_scalar_to_constituent</span><span class="p">)</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">is_water_species</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">! Initialized by `dyn_mpas_init_phase3`.</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">number_of_constituents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">        </span><span class="c">! Initialized by `dyn_mpas_init_phase1`.</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log_level_quiet</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">log_unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output_unit</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">mpi_comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mpi_comm_null</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">mpi_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">mpi_rank_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">model_error</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">corelist</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domainlist</span><span class="p">)</span>
+<span class="w">        </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">corelist</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">corelist</span><span class="p">)</span>
+<span class="w">        </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">domain_ptr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">dyn_mpas_final</span>
+</pre></div>
+
+        </section>
+        <br>
+    </div>
+  </div>
+      <hr>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              MPAS Dynamical Core
+was developed by CAM-SIMA & MPAS Developers<br>              © 2025 
+            </p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+    </footer>
+  </body>
+</html>
