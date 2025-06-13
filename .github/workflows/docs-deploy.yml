@@ -22,12 +22,12 @@ jobs:
 
       - name: Setup Python
         run: |
-             sudo apt update
-             sudo apt install -y python3 python3-venv python3-pip
-             python3 -m venv myenv
-             source myenv/bin/activate
-             pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2
-             echo "cache_id=$(date --utc '+%F')" >> $GITHUB_ENV
+          sudo apt update
+          sudo apt install -y python3 python3-venv python3-pip
+          python3 -m venv myenv
+          source myenv/bin/activate
+          pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2
+          echo "cache_id=$(date --utc '+%F')" >> $GITHUB_ENV
 
       - name: Configure cache
         uses: actions/cache@v4
@@ -39,6 +39,5 @@ jobs:
 
       - name: Deploy to gh-pages
         run: |
-             source myenv/bin/activate
-             mkdocs gh-deploy -b gh-pages --force
-
+          source myenv/bin/activate
+          mkdocs gh-deploy -b gh-pages --force
