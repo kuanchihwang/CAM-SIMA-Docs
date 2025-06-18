@@ -60,7 +60,7 @@ jobs:
         run: |
           source venv-ford/bin/activate
           cd CAM-SIMA
-          ford src/dynamics/mpas/assets/ford-config.md
+          ford src/dynamics/mpas/assets/ford_config.md
           mkdir -pv ../docs/dycore/mpas
           cp -afv src/dynamics/mpas/assets/ford/* ../docs/dycore/mpas
 
