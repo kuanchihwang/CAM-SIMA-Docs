@@ -7,11 +7,11 @@ Some definitions to start (as written by a non-scientist, so there is more nuanc
 - A constituent can be **advected**, which means it is moved through the atmosphere by some sort of dynamical method
     - The **dynamical core** (dycore) is the part of an atmosphere model (like CAM-SIMA) that advects the quantities over the underlying grid. Dynamical cores include:
         - *null/none* - the null dycore does nothing and is used in CAM-SIMA to validate physics schemes
-        - *spectral element (SE)*: the only dycore currently implemented in CAM-SIMA
-        - *finite-volume cubed-sphere (FV3)*: not currently implemented in CAM-SIMA
-        - *model for prediction across scales (MPAS)*: in progress
+        - *spectral element (SE)*: a dycore that is currently implemented in CAM-SIMA
+        - *finite-volume cubed-sphere (FV3)*: not yet implemented in CAM-SIMA
+        - *model for prediction across scales (MPAS)*: another dycore that is currently implemented in CAM-SIMA
 - A constituent had additional properties, such as:
-    - **water type**: can be "dry", "wet", or "moist" (we can convert between any of these quantities - "dry" means that it's the "amount" of that constituent with respect to dry air
+    - **water type**: can be "dry", "wet", or "moist" (we can convert between any of these quantities - "dry" means that it's the "amount" of that constituent with respect to dry air)
     - **mixing ratio type**: can be "volume" or "mass"
         - volume mixing ratio: constituent values are a ratio of how much of the constituent exists per mole of air (units = mol mol-1)
         - mass mixing ratio: constituent values are the mass of the constituent per unit volume (kg m-3)

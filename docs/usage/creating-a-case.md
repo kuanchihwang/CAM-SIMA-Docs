@@ -37,9 +37,9 @@ To break that down piece by piece:
 - `--res <RESOLUTION>` (required): the resolution specifies both the dycore being run and the grid.
     - The structure of the resolution argument is: `<atmosphere>_<ocean>_<mask>`
     - The resolution determines the dycore:
-        - A grid resolution that looks like "ne*" indicates that this is spectral element (SE) cube sphere grid (SE dycore)
+        - A grid resolution that looks like "ne*" indicates that this is a spectral element (SE) cubed sphere grid (i.e., SE dycore)
         - A grid resolution that looks like "C*" indicates that this is the FV3 (finite volume cubed sphere) dycore [not yet implemented in CAM-SIMA]
-        - A grid resolution that looks like "mpasa*" indicates that this is an MPAS (Model for Prediction Across Scales) grid (MPAS dycore) [work-in-progress in CAM-SIMA]
+        - A grid resolution that looks like "mpasa*" indicates that this is a Model for Prediction Across Scales (MPAS) grid (i.e., MPAS dycore)
     - You can find the options for these model grid aliases in `$CAM-SIMA/ccs_config/modelgrid_aliases_nuopc.xml`
     - Most often, for testing CAM-SIMA, we use a coarse SE grid like `ne3pg3_ne3pg3_mg37` or `ne5_ne5_mg37`
 - `--compiler <COMPILER>` (optional): the compiler you wish to use
